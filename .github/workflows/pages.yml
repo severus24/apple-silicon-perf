@@ -25,6 +25,7 @@ jobs:
           cp mac-perf.html _site/index.html
           cp *.html _site/
           cp *.js _site/ 2>/dev/null || true
+          cp *.jpg _site/ 2>/dev/null || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
