@@ -1,32 +1,34 @@
-# Apple Silicon 性能排行
+# Apple Silicon Performance Rankings
 
-基于 Geekbench 公开成绩的 Mac 芯片性能对比页面，覆盖 Apple Silicon 与部分 Intel Mac，支持单核、多核、OpenCL、Metal 四个维度。
+Interactive Mac chip performance rankings built on public Geekbench scores, covering Apple Silicon and Intel Macs across single-core, multi-core, OpenCL, and Metal.
 
-## 功能
+[中文版](README.zh-CN.md)
 
-- 四种计分模式：单核、多核、OpenCL、Metal
-- 按芯片名称或机型搜索，例如 `M4 Pro`
-- 按机型家族筛选：MacBook、Mac mini、iMac、Mac Studio、Mac Pro
-- 调整排行显示数量（10 到 75 款芯片配置）
-- 点击排行行加入对比面板，支持多款芯片横向比较
-- 一键将当前排行导出为 PNG 图片
+## Features
 
-## 使用
+- Four scoring modes: Single-Core, Multi-Core, OpenCL, Metal
+- Search by chip name or device model, e.g. `M4 Pro`
+- Filter by device family: MacBook, Mac mini, iMac, Mac Studio, Mac Pro
+- Adjust how many entries to show (10 to 75 chip configurations)
+- Click a ranking row to add chips to the comparison panel
+- Export the current ranking as a PNG image
 
-直接用浏览器打开 `mac-perf.html` 即可，不需要构建工具或本地服务器。
+## Usage
 
-数据位于 `mac-perf-data.js`，页面通过 `window.MAC_PERF` 读取排行数据。更新数据后刷新页面即可生效。
+Open `mac-perf.html` directly in a browser. No build tools or local server required.
 
-## 文件说明
+Data lives in `mac-perf-data.js` and is loaded through `window.MAC_PERF`. Refresh the page after updating data.
 
-| 文件 | 说明 |
+## Files
+
+| File | Description |
 | --- | --- |
-| `mac-perf.html` | 主页面，包含完整交互 |
-| `mac-perf-data.js` | Geekbench 排行数据，更新时间 2026-08-08 |
-| `mac-perf-v2.html` | 早期简化版本 |
-| `mac-debug.html` | 调试版本，通过 `window.__log` 记录交互事件 |
-| `mac-log2.html` | 日志调试版本，通过 `window.__d` / `window.__dl` 记录点击事件 |
+| `mac-perf.html` | Main page with the full set of interactions |
+| `mac-perf-data.js` | Geekbench ranking data, updated 2026-08-08 |
+| `mac-perf-v2.html` | Earlier simplified version |
+| `mac-debug.html` | Debugging build that logs interactions via `window.__log` |
+| `mac-log2.html` | Logging build that records click events via `window.__d` / `window.__dl` |
 
-## 数据说明
+## Data
 
-数据来自 Geekbench 公开成绩，为个人整理的非官方数据，仅用于性能对比参考。各模式采用 Geekbench 官方计分口径，同一芯片配置可能出现在多款机型中。
+Data is collected from public Geekbench scores. This is an unofficial dataset intended for performance comparison only. Scores follow Geekbench's official metrics, and the same chip configuration may appear across multiple models.
