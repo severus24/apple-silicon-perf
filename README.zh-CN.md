@@ -19,6 +19,11 @@
 
 数据位于 `mac-perf-data.js`，页面通过 `window.MAC_PERF` 读取排行数据。更新数据后刷新页面即可生效。
 
+## 在线访问
+
+- [站点首页](https://severus24.github.io/apple-silicon-perf/)
+- [mac-perf.html](https://severus24.github.io/apple-silicon-perf/mac-perf.html)
+
 ## 文件说明
 
 | 文件 | 说明 |

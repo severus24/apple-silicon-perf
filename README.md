@@ -19,6 +19,11 @@ Open `mac-perf.html` directly in a browser. No build tools or local server requi
 
 Data lives in `mac-perf-data.js` and is loaded through `window.MAC_PERF`. Refresh the page after updating data.
 
+## Live Demo
+
+- [Site home](https://severus24.github.io/apple-silicon-perf/)
+- [mac-perf.html](https://severus24.github.io/apple-silicon-perf/mac-perf.html)
+
 ## Files
 
 | File | Description |
