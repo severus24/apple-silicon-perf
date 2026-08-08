@@ -21,7 +21,6 @@
 
 ## 在线访问
 
-- [站点首页](https://severus24.github.io/apple-silicon-perf/)
 - [mac-perf.html](https://severus24.github.io/apple-silicon-perf/mac-perf.html)
 
 ## 文件说明

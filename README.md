@@ -21,7 +21,6 @@ Data lives in `mac-perf-data.js` and is loaded through `window.MAC_PERF`. Refres
 
 ## Live Demo
 
-- [Site home](https://severus24.github.io/apple-silicon-perf/)
 - [mac-perf.html](https://severus24.github.io/apple-silicon-perf/mac-perf.html)
 
 ## Files
