@@ -1,38 +1,79 @@
 # Apple Silicon Performance Rankings
 
-Interactive Mac chip performance rankings built on public Geekbench scores, covering Apple Silicon and Intel Macs across single-core, multi-core, OpenCL, and Metal.
+Interactive Mac chip performance comparison page built from public benchmark data.
 
-[中文版](README.zh-CN.md)
+The page covers four benchmark families:
 
-## Features
+- Geekbench 6
+- Blender Open Data
+- Geekbench AI
+- MLX
 
-- Four scoring modes: Single-Core, Multi-Core, OpenCL, Metal
-- Search by chip name or device model, e.g. `M4 Pro`
-- Filter by device family: MacBook, Mac mini, iMac, Mac Studio, Mac Pro
-- Adjust how many entries to show (10 to 75 chip configurations)
-- Click a ranking row to add chips to the comparison panel
-- Export the current ranking as a PNG image
-
-## Usage
-
-Open `mac-perf.html` directly in a browser. No build tools or local server required.
-
-Data lives in `mac-perf-data.js` and is loaded through `window.MAC_PERF`. Refresh the page after updating data.
+Apple Silicon and supported Intel/AMD Mac configurations are shown in one page, with primary and secondary metric controls.
 
 ## Live Demo
 
-- [mac-perf.html](https://severus24.github.io/apple-silicon-perf/mac-perf.html)
+The GitHub Pages deployment serves `tep/index.html` as the site root:
 
-## Files
+<https://severus24.github.io/apple-silicon-perf/>
 
-| File | Description |
-| --- | --- |
-| `mac-perf.html` | Main page with the full set of interactions |
-| `mac-perf-data.js` | Geekbench ranking data, updated 2026-08-08 |
-| `mac-perf-v2.html` | Earlier simplified version |
-| `mac-debug.html` | Debugging build that logs interactions via `window.__log` |
-| `mac-log2.html` | Logging build that records click events via `window.__d` / `window.__dl` |
+## Run Locally
 
-## Data
+Open `tep/index.html` directly in a browser. No build tools, package installation, or local server are required.
 
-Data is collected from public Geekbench scores. This is an unofficial dataset intended for performance comparison only. Scores follow Geekbench's official metrics, and the same chip configuration may appear across multiple models.
+The HTML file is self-contained: the CSS and JavaScript are inlined, and the only local asset is:
+
+- `tep/logo.jpg`
+
+## Features
+
+- Primary benchmark selector: Geekbench, Blender, Geekbench AI, MLX
+- Secondary selectors for each benchmark mode and backend
+- Search by chip name or Mac model
+- Filter by device family
+- Adjustable number of visible rows
+- Unified Geekbench ranking without Apple/Intel group separators
+- Comparison drawer with per-submetric rank badges
+- Expandable details in the comparison cards
+- PNG export of the current ranking
+
+## Project Structure
+
+```text
+.
+├── .github/workflows/pages.yml   # GitHub Pages deployment workflow
+├── tep/
+│   ├── index.html                # Main page with inlined CSS and JavaScript
+│   └── logo.jpg                  # Favicon and Apple logo asset
+└── data/                         # Raw benchmark source data
+    ├── data/
+    │   ├── geekbench.txt
+    │   ├── Blender Benchmark CPU.json
+    │   ├── Blender Benchmark GPU.json
+    │   ├── geekbench_ai_v1_mac.json
+    │   ├── average_benchmark.md
+    │   └── detailed_benchmark.md
+    └── ...
+```
+
+## Data Sources
+
+The raw data is committed for reproducibility and future updates:
+
+- `data/data/geekbench.txt`
+- `data/data/Blender Benchmark CPU.json`
+- `data/data/Blender Benchmark GPU.json`
+- `data/data/geekbench_ai_v1_mac.json`
+- `data/data/average_benchmark.md`
+- `data/data/detailed_benchmark.md`
+
+Benchmark values are only comparable within the same benchmark. They should not be converted or compared across different benchmarks.
+
+## Deployment
+
+Pushing to `main` triggers the GitHub Actions workflow in `.github/workflows/pages.yml`.
+
+The workflow copies:
+
+- `tep/index.html` to the Pages site root as `index.html`
+- `tep/logo.jpg` to the Pages site root as `logo.jpg`
