@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Mac 芯片综合性能排行</title>
+<link rel="icon" href="logo.jpg">
+<style>
+:root{
+  --bg:#050506; --panel:#0d0d0f; --line:#26262b; --text:#f5f6f8; --muted:#9b9ba4;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:0 20px}
+header.site{position:sticky;top:0;z-index:20;background:rgba(5,5,6,.86);backdrop-filter:blur(14px);border-bottom:1px solid #1d1d21}
+.head-row{display:flex;align-items:center;gap:14px;padding:12px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.08em;color:#d8d9dd;font-weight:600}
+.brand .logo{width:30px;height:30px;border:1px solid #35353b;border-radius:8px;display:grid;place-items:center;color:#7ee8c8}
+.head-meta{margin-left:auto;font-size:12px;color:#77777f;text-align:right;line-height:1.5}
+.page-head{padding:34px 0 10px}
+.title-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(26px,4vw,46px);font-weight:800;line-height:1.1;letter-spacing:.02em}
+h1 .accent{background:linear-gradient(90deg,#01d2ff,#3a7cd6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.subtitle{margin:8px 0 0;color:#8c8c94;font-size:13px;line-height:1.6}
+.notice{margin:16px 0 0;color:#d9d9de;font-size:13px;line-height:1.6;padding:10px 14px;border:1px solid #26262b;border-radius:10px;background:rgba(255,255,255,.03)}
+.notice b{color:#fff}
+.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 0 8px}
+.modes{display:flex;gap:8px;flex-wrap:wrap}
+.mode{font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;border:2px solid #48484f;color:#c9c9cf;transition:.2s;background:rgba(0,0,0,.35)}
+.mode.active{background:var(--accent);border-color:var(--accent);color:#000}
+.mode:not(.active):hover{background:#2a2a30}
+.spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;background:#101013;border:1px solid #2d2d33;border-radius:999px;padding:6px 14px;min-width:230px;flex:1 1 240px}
+.search svg{width:15px;height:15px;color:#77777f;flex:none}
+.search input{flex:1;background:none;border:0;outline:0;color:#eee;font-size:13px;min-width:0}
+.selects{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid #333;color:#c4c4cb;background:#0e0e11;transition:.15s;white-space:nowrap}
+.pill:hover{border-color:#666}
+.pill.active{background:#232329;border-color:#5b5b64;color:#fff}
+.range{display:flex;align-items:center;gap:8px;font-size:12px;color:#9a9aa3}
+.range input{width:110px;accent-color:var(--accent,#01d2ff)}
+.score-table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 30px}
+.score-table th{font-size:11px;color:#6d6d75;text-transform:uppercase;letter-spacing:.12em;font-weight:600;text-align:left;padding:8px 6px;border-bottom:1px solid #26262b;background:#0a0a0c;position:sticky;top:60px;z-index:5}
+.score-table th.chart-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.score-table th .mode-count{margin-left:auto;font-size:11px;color:#9a9aa3;text-transform:none;letter-spacing:0;font-weight:500}
+.score-table tbody tr{border-bottom:1px solid #161619;transition:background .15s;cursor:pointer}
+.score-table tbody tr:hover{background:#121216}
+.score-table tbody tr.compare-pin{background:#12151f}
+td.name{width:36%;min-width:280px;padding:10px 8px;vertical-align:middle}
+.name-top{display:flex;align-items:center;gap:10px}
+.name-top > svg{flex:none;width:26px;height:26px}
+.name-top > div{flex:1;min-width:0}
+.rank{font-size:13px;color:#56565e;min-width:34px;font-variant-numeric:tabular-nums}
+.device{font-weight:700;font-size:14px;color:#f1f2f5;line-height:1.35}
+.chip-model{font-size:12px;color:#a3a3ac;margin-top:3px;line-height:1.45;display:block}
+.chip-model b{color:#cfcfd6;font-weight:600}
+.chip-summary{display:inline;cursor:pointer;color:#a3a3ac}
+.chip-summary:hover{color:#e6e6ec;text-decoration:underline}
+.chip-summary b{color:#cfcfd6;font-weight:600}
+.chip-model{display:flex;flex-wrap:wrap;align-items:baseline}
+.chip-summary{cursor:default}
+.chip-summary:hover{color:#a3a3ac;text-decoration:none}
+.expander{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;padding:0;border:1px solid #3a3a42;border-radius:50%;font-size:10px;line-height:1;color:#b9b9c0;background:#15151a;transition:.18s;cursor:pointer;vertical-align:baseline;flex:none}
+.summary-tail{white-space:nowrap}
+.chip-summary b{color:#cfcfd6;font-weight:600}
+.expander:hover{color:#fff;border-color:#5a5a66;background:#1d1d24}
+.expander svg{width:10px;height:10px;transition:transform .2s}
+.expander.open{color:#fff;border-color:var(--accent);background:rgba(255,255,255,.06)}
+.expander.open svg{transform:rotate(180deg)}
+.dev-full{display:block;margin-top:6px;padding:8px 10px 9px;border-left:2px solid #3a3a42;background:#0d0d10;font-size:11px;color:#9b9ba4;line-height:1.65}
+.dev-full .dev-label{font-size:10px;color:#67676f;letter-spacing:.08em}
+.dev-full .dev-item{display:block;color:#c8c8cf}
+.dev-full .dev-item+.dev-item{margin-top:1px}
+.cmp-hint{margin-left:auto;font-size:11px;color:#56565e;white-space:nowrap}
+.compare-pin .cmp-hint{color:#7ee8c8}
+td.chart{width:64%;padding:0 8px;position:relative}
+.axis-ticks{position:absolute;left:8px;right:112px;top:0;height:100%;pointer-events:none}
+.tick{position:absolute;top:0;height:100%;border-left:1px dashed #24242a;color:#4d4d55;font-size:11px;padding-left:5px}
+.bar-wrap{position:relative;height:34px;margin-right:104px}
+.bar{height:20px;border-radius:0 12px 12px 0;position:absolute;top:7px;left:0;min-width:1px;background:linear-gradient(90deg,var(--barA,#01d2ff),var(--barB,#3a7cd6));opacity:1;transform:none;transition:width .6s cubic-bezier(.2,.82,.25,1),opacity .2s,transform .2s;box-shadow:0 0 14px rgba(0,120,255,.18);animation:barIn .6s cubic-bezier(.2,.82,.25,1)}
+@keyframes barIn{from{opacity:0;transform:translateX(-2px)}to{opacity:.95;transform:none}}
+.bar.anim{opacity:.95;transform:none;animation:none}
+.bar .score{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap;font-weight:800;font-size:14px;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.spec{font-size:11px;color:#66666e;margin-top:3px;font-variant-numeric:tabular-nums}
+.none{color:#3c3c44;font-weight:500}
+footer{background:#0b0b0d;border-top:1px solid #1d1d21;padding:26px 0;margin-top:30px}
+footer .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:#66666e;line-height:1.7}
+.drawer{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(10,10,12,.97);border-top:1px solid #303036;box-shadow:0 -20px 60px rgba(0,0,0,.6);transform:translateY(105%);transition:transform .35s cubic-bezier(.2,.82,.25,1)}
+.drawer.open{transform:none}
+.drawer-inner{max-width:1320px;margin:0 auto;padding:14px 20px 18px}
+.drawer-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.drawer-head h3{margin:0;font-size:15px}
+.drawer-head span{font-size:12px;color:#777}
+.drawer-actions{margin-left:auto;display:flex;gap:8px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.cmp-card{background:#151518;border:1px solid #2b2b31;border-radius:10px;padding:12px}
+.cmp-card .cmp-name{font-weight:700;font-size:13px;line-height:1.35}
+.cmp-card .cmp-chip{font-size:11px;color:#999;margin-top:3px}
+.cmp-row{margin-top:10px}
+.cmp-row .label{font-size:10px;color:#777;margin-bottom:4px;display:flex;justify-content:space-between}
+.cmp-row .label .cmp-rank{font-weight:800;margin-right:5px}
+.cmp-row .lbar{height:7px;background:#222;border-radius:4px;overflow:hidden}
+.cmp-row .lfill{height:100%;border-radius:4px}
+.btn{border:1px solid #44444c;border-radius:999px;padding:8px 15px;font-size:12px;font-weight:700;transition:.15s;background:#141417;color:#ddd}
+.btn:hover{border-color:#777}
+.float{position:fixed;bottom:24px;right:24px;z-index:15}
+.float .btn{font-size:13px;padding:12px 18px;background:#1b1b20;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+@media (max-width:900px){
+  .head-row{gap:8px}
+  .head-meta{display:none}
+  .page-head{padding:22px 0 4px}
+  .controls{gap:8px;margin:16px 0 4px}
+  .mode{padding:7px 13px;font-size:13px}
+  td.name{width:52%;min-width:0}
+  td.chart{width:48%;padding:0 6px}
+  .device{font-size:13px}
+  .chip-model{font-size:11px}
+  .rank{min-width:26px;font-size:11px}
+  .cmp-hint{display:none}
+  .bar .score{font-size:11px;left:calc(100% + 6px)}
+  .bar-wrap{height:30px;margin-right:64px}
+  .axis-ticks{left:6px;right:70px}
+  .bar{height:16px}
+  .search{min-width:0;width:100%}
+  .selects{width:100%}
+  .range input{width:90px}
+  .float{bottom:16px;right:16px}
+}
+
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.56);opacity:0;pointer-events:none;transition:opacity .25s;z-index:45}
+.scrim.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;left:auto;right:0;bottom:0;width:min(500px,100%);z-index:50;background:#0a0a0c;border-left:1px solid #303036;transform:translateX(calc(100% + 24px));transition:transform .35s cubic-bezier(.2,.82,.25,1),visibility 0s linear .35s;display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.55);visibility:hidden;pointer-events:none}
+.drawer.open{transform:none;visibility:visible;pointer-events:auto;transition:transform .35s cubic-bezier(.2,.82,.25,1),visibility 0s}
+.drawer-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #303036;flex:none}
+.drawer-head h3{margin:0;font-size:15px}
+.drawer-head p{margin:3px 0 0;font-size:12px;color:#777}
+.drawer-actions{margin-left:auto;display:flex;gap:8px}
+.drawer-actions .btn{height:30px;padding:0 12px;font-size:12px}
+.icon-btn{width:30px;height:30px;border-radius:7px;display:inline-grid;place-items:center;border:1px solid #44444c;background:#141417;color:#aaa}
+.icon-btn:hover{border-color:#777;color:#fff}
+.icon-btn svg{width:15px;height:15px}
+.drawer-body{flex:1;overflow:auto;overflow-x:hidden;padding:14px 16px 22px}
+.empty{height:100%;min-height:260px;display:grid;place-items:center;text-align:center;color:#6a6a72;font-size:13px;line-height:1.8}
+.empty svg{width:26px;height:26px;color:#3f3f46;margin-bottom:8px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;align-items:start}
+.cmp-card{background:#151518;border:1px solid #2b2b31;border-radius:10px;padding:12px 12px 14px;min-width:0}
+.cmp-head{display:flex;align-items:flex-start;gap:8px;margin-bottom:2px}
+.cmp-name{font-weight:700;font-size:13px;line-height:1.35;color:#f1f2f5;word-break:break-word}
+.cmp-chip{font-size:11px;color:#999;margin-top:3px;line-height:1.4;word-break:break-word}
+.cmp-card .x-btn{margin-left:auto;flex:none;align-self:center}
+.x-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:5px;font-size:10.5px;font-weight:600;color:#888;background:#1a1a1e;border:1px solid #333}
+.x-btn:hover{color:#ff8a8a;border-color:#7a3f3f;background:#1c1113}
+.cmp-cat{font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#666;margin:12px 0 5px;display:flex;align-items:center;gap:6px}
+.cmp-cat::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,#2b2b31,transparent)}
+.cmp-row{margin-top:8px}
+.cmp-row .label{font-size:10px;color:#777;margin-bottom:4px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.cmp-row .label b{color:#d7d8dd;font-variant-numeric:tabular-nums;font-weight:700;font-size:11.5px;white-space:nowrap}
+.cmp-row .label .cmp-label{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.cmp-row .label .cmp-rank{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:18px;padding:0 5px;border:1px solid currentColor;border-radius:4px;font-size:9px;font-weight:800;line-height:1;color:var(--accent,#30c8ff);flex:none;font-variant-numeric:tabular-nums}
+.cmp-row .lbar{height:6px;background:#222;border-radius:4px;overflow:hidden}
+.cmp-row .lfill{display:block;height:100%;border-radius:4px}
+.selector-panel{padding:0;margin:20px 0 6px}
+.selector-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.modes{display:flex;gap:8px;flex-wrap:wrap}
+.mode{height:40px;min-width:118px;padding:0 18px;border:1px solid #48484f;border-radius:999px;background:rgba(0,0,0,.35);color:#c9c9cf;font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;line-height:1;transition:.18s;white-space:nowrap}
+.mode:hover{background:#2a2a30;border-color:#666}
+.mode.active{background:var(--accent,#30c8ff);border-color:var(--accent,#30c8ff);color:#000;font-weight:800}
+.selector-sub{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:14px;padding-top:0}
+.metric-row{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin:0}
+.metric-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0;border:0;border-radius:0;background:transparent}
+.metric-label{font-size:10.5px;color:#77777f;letter-spacing:.08em;font-weight:700;margin-right:2px}
+.subs{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.sub{height:32px;padding:0 14px;font-size:12px;font-weight:600;border:1px solid #333;border-radius:999px;color:#c4c4cb;background:#0e0e11;transition:.15s;white-space:nowrap}
+.sub:hover{border-color:#666;background:#17171b}
+.sub.active{background:var(--accent,#30c8ff);border-color:var(--accent,#30c8ff);color:#000;font-weight:800}
+.metric-group + .metric-group{margin-left:6px}
+.metric-group[hidden]{display:none}
+.cmp-btn{display:inline-flex;align-items:center;gap:7px;border:1px solid #44444c;border-radius:999px;padding:8px 15px;font-size:12px;font-weight:700;transition:.15s;background:#141417;color:#ddd}
+.cmp-btn:hover{border-color:#777}
+.cmp-btn .cmp-count{min-width:20px;height:20px;border-radius:999px;background:rgba(255,255,255,.16);display:inline-grid;place-items:center;font-size:11px;font-weight:800}
+.table-scroll{margin:10px 0 30px}
+.score-table{width:100%;border-collapse:collapse;font-size:14px;margin:0}
+.score-table th{font-size:11px;color:#6d6d75;text-transform:uppercase;letter-spacing:.12em;font-weight:600;text-align:left;padding:8px 6px;border-bottom:1px solid #26262b;background:#0a0a0c;position:sticky;top:60px;z-index:5}
+.score-table th .mode-count{display:inline-block;margin-left:8px;font-size:11px;color:#9a9aa3;text-transform:none;letter-spacing:0;font-weight:500}
+#modeTitle{color:#e8e9ec;font-weight:700;text-transform:none;letter-spacing:0}
+.score-table tbody tr.data-row{border-bottom:1px solid #161619;transition:background .15s;cursor:pointer}
+.score-table tbody tr.data-row:hover{background:#121216}
+.score-table tbody tr.compare-pin{background:#12151f}
+td.name{width:38%;min-width:300px;padding:10px 8px;vertical-align:middle}
+.name-top{display:flex;align-items:center;gap:10px}
+.name-top > svg{flex:none;width:26px;height:26px}
+.name-top > div{flex:1;min-width:0}
+.rank{font-size:13px;color:#56565e;min-width:34px;font-variant-numeric:tabular-nums}
+.device{font-weight:700;font-size:14px;color:#f1f2f5;line-height:1.35}
+.chip-model{font-size:12px;color:#a3a3ac;margin-top:3px;line-height:1.45;display:block;overflow-wrap:anywhere}
+.chip-model b{color:#cfcfd6;font-weight:600}
+.chip-summary{display:inline;cursor:default;color:#a3a3ac}
+.chip-summary b{color:#cfcfd6;font-weight:600}
+.summary-tail{white-space:nowrap}
+.expander{display:inline-grid;place-items:center;width:18px;height:18px;margin-left:6px;padding:0;border:1px solid #3a3a42;border-radius:50%;font-size:10px;line-height:1;color:#b9b9c0;background:#15151a;transition:.18s;cursor:pointer;vertical-align:baseline;flex:none}
+.expander:hover{color:#fff;border-color:#5a5a66;background:#1d1d24}
+.expander svg{width:10px;height:10px;transition:transform .2s}
+.expander.open{color:#fff;border-color:var(--accent);background:rgba(255,255,255,.06)}
+.expander.open svg{transform:rotate(180deg)}
+.cmp-hint{margin-left:auto;font-size:11px;color:#56565e;white-space:nowrap}
+.compare-pin .cmp-hint{color:#7ee8c8}
+.cmp-check{display:none;margin-left:8px;width:17px;height:17px;border-radius:50%;background:var(--accent);color:#050506;flex:none;align-self:center}
+.compare-pin .cmp-check{display:inline-grid;place-items:center}
+.cmp-check svg{width:10px;height:10px}
+td.chart{width:62%;padding:0 8px;position:relative}
+.axis-ticks{position:absolute;left:8px;right:112px;top:0;height:100%;pointer-events:none}
+.tick{position:absolute;top:0;height:100%;border-left:1px dashed #24242a;color:#4d4d55;font-size:11px;padding-left:5px}
+.bar-wrap{position:relative;height:34px;margin-right:104px}
+.bar{height:20px;border-radius:0 12px 12px 0;position:absolute;top:7px;left:0;min-width:1px;background:linear-gradient(90deg,var(--barA,#01d2ff),var(--barB,#3a7cd6));opacity:0;transform:translateX(-2px);transition:width .6s cubic-bezier(.2,.82,.25,1),opacity .2s,transform .2s;box-shadow:0 0 14px rgba(0,120,255,.18)}
+.bar.anim{opacity:.95;transform:none;animation:none}
+.bar .score{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap;font-weight:800;font-size:14px;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.none{color:#3c3c44;font-weight:500}
+tr.group-row td{background:#0a0a0c;color:#8b8b94;font-size:11px;font-weight:700;letter-spacing:.16em;padding:9px 10px;border-top:1px solid #26262b;border-bottom:1px solid #26262b}
+tr.group-row td .group-count{color:#56565e;font-weight:600;margin-left:8px;letter-spacing:0}
+tr.empty-row td{text-align:center;color:#6a6a72;font-size:13px;padding:34px 10px}
+tr.detail-row td{background:#0b0b0e;padding:14px;border-bottom:1px solid #161619}
+.detail-inner{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.detail-box{background:#0d0d10;border:1px solid #222227;border-radius:8px;padding:11px 12px}
+.detail-box.wide{grid-column:1/-1}
+.dlabel{font-size:10px;color:#67676f;letter-spacing:.08em;margin-bottom:9px;text-transform:uppercase;font-weight:700}
+.dev-list{display:flex;flex-wrap:wrap;gap:6px}
+.dev-list span{font-size:11px;color:#c8c8cf;background:#141419;border:1px solid #26262b;border-radius:6px;padding:4px 8px}
+.cfg-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:2px}
+.cfg-table th{color:#6d6d75;font-weight:600;text-align:right;padding:4px 7px;border-bottom:1px solid #222227;background:transparent;position:static;text-transform:none;letter-spacing:.02em;font-size:10px}
+.cfg-table td{color:#cfcfd6;text-align:right;padding:4px 7px;font-variant-numeric:tabular-nums;border-bottom:1px solid #18181c}
+.cfg-table td:first-child,.cfg-table th:first-child{text-align:left;color:#e8e8ee}
+.cfg-table tbody tr:last-child td{border-bottom:0}
+.drow{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#c8c8cf;padding:4px 0;border-bottom:1px solid #18181c}
+.drow:last-child{border-bottom:0}
+.drow b{color:#e8e8ee;font-variant-numeric:tabular-nums}
+.float{position:fixed;bottom:24px;right:24px;z-index:15}
+.float .cmp-btn{font-size:13px;padding:12px 18px;background:#1b1b20;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+@media (max-width:900px){
+  .head-row{gap:8px}
+  .head-meta{display:none}
+  .page-head{padding:22px 0 4px}
+  .controls{gap:8px;margin:16px 0 4px}
+  .selector-panel{padding:0}
+  .selector-main{gap:8px}
+  .modes{gap:8px}
+  .mode{height:38px;min-width:0;flex:1 1 calc(50% - 8px);padding:0 12px;font-size:13.5px;border-radius:999px;flex-direction:row}
+  .selector-sub{gap:8px;margin-top:10px}
+  .metric-group + .metric-group{margin-left:6px}
+  .subs{gap:10px}
+  .sub{height:30px;padding:0 12px;font-size:11.5px}
+  td.name{width:52%;min-width:0}
+  td.chart{width:48%;padding:0 6px}
+  .device{font-size:13px}
+  .chip-model{font-size:11px}
+  .rank{min-width:26px;font-size:11px}
+  .cmp-hint{display:none}
+  .bar .score{font-size:11px;left:calc(100% + 6px)}
+  .bar-wrap{height:30px;margin-right:64px}
+  .axis-ticks{left:6px;right:70px}
+  .bar{height:16px}
+  .search{min-width:0;width:100%}
+  .selects{width:100%}
+  .range input{width:90px}
+  .float{bottom:16px;right:16px}
+  .drawer{left:0;right:0;width:100%;max-width:none;height:78vh;top:auto;bottom:0;border-left:0;border-top:1px solid #303036;transform:translateY(calc(100% + 24px));box-shadow:0 -20px 60px rgba(0,0,0,.55);visibility:hidden;pointer-events:none;transition:transform .35s cubic-bezier(.2,.82,.25,1),visibility 0s linear .35s}
+  .drawer.open{transform:none;visibility:visible;pointer-events:auto;transition:transform .35s cubic-bezier(.2,.82,.25,1),visibility 0s}
+  .detail-inner{grid-template-columns:1fr}
+  .detail-box.wide{grid-column:auto}
+  .summary-tail{white-space:normal}
+  .expander{flex:none}
+  .detail-box{overflow-x:auto}
+}
+
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap head-row">
+  <div class="brand">
+<span class="logo"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.75C12 3.75 13.5 1.75 15.5 1.75C15.5 3.75 14 5.75 12 5.75Z"/><path d="M12.5 8.09001C11.9851 8.09001 11.5867 7.92646 11.1414 7.74368C10.5776 7.51225 9.93875 7.25 8.89334 7.25C7.02235 7.25 4 8.74945 4 12.7495C4 17.4016 7.10471 22.25 9.10471 22.25C9.77426 22.25 10.3775 21.9871 10.954 21.7359C11.4815 21.5059 11.9868 21.2857 12.5 21.2857C13.0132 21.2857 13.5185 21.5059 14.046 21.7359C14.6225 21.9871 15.2257 22.25 15.8953 22.25C17.2879 22.25 18.9573 19.8992 20 16.9008C18.3793 16.2202 17.338 14.618 17.338 12.75C17.338 11.121 18.2036 10.0398 19.5 9.25C18.5 7.75 17.0134 7.25 15.9447 7.25C14.8993 7.25 14.2604 7.51225 13.6966 7.74368C13.2514 7.92646 13.0149 8.09001 12.5 8.09001Z"/></svg></span>Mac 芯片性能排行
+</div>
+  <div class="head-meta">Geekbench 6 · Geekbench AI<br>MLX · Blender 4.5 综合对比</div>
+</div></header>
+<main class="wrap">
+  <div class="page-head">
+    <div class="title-row">
+      <div><h1>Mac 芯片 <span class="accent" id="titleAccent">综合性能排行</span></h1><p class="subtitle">整合 Geekbench、AI、MLX 与 Blender 成绩，同一页内切换指标即可查看横向对比。</p></div>
+      <div class="selects">
+        <button class="pill" data-family="all">全部机型</button>
+        <button class="pill" data-family="MacBook">MacBook</button>
+        <button class="pill" data-family="Mac mini">Mac mini</button>
+        <button class="pill" data-family="iMac">iMac</button>
+        <button class="pill" data-family="Mac Studio">Studio</button>
+        <button class="pill" data-family="Mac Pro">Mac Pro</button>
+      </div>
+    </div>
+    <div class="notice">Geekbench成绩来自 Geekbench 6 公开数据库；同一芯片、同一核心配置的多台 Mac 合并为一行并取最高分。OpenCL 与 Metal 仅包含有对应 GPU 成绩的机型；Blender 取 Open Data 中位数得分；Geekbench AI 取 macOS 平台最高分，可按 CPU / GPU / 神经网络引擎切换；MLX 为各算子平均耗时（毫秒，越低越好），综合指数以 M1 为基准（=100）；不同基准的数值只在本基准内部比较，不能跨基准换算。</div>
+  </div>
+  <div class="selector-panel">
+    <div class="selector-main">
+      <div class="modes" id="metricModes"></div>
+    </div>
+    <div class="selector-sub" id="selectorSub">
+      <div class="metric-group" id="geekGroup"><span class="metric-label">测试模式</span><span id="geekModes"></span></div>
+      <div class="metric-group" id="aiGroups"><span class="metric-label">AI 精度</span><span id="aiModes"></span><span class="metric-label">AI 后端</span><span id="aiBackends"></span></div>
+      <div class="metric-group" id="mlxGroup"><span class="metric-label">MLX 后端</span><span id="mlxBackends"></span></div>
+      <div class="metric-group" id="blenderGroup"><span class="metric-label">渲染设备</span><span id="blenderModes"></span></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="spacer"></div>
+    <div class="range">显示 <input id="topN" type="range" min="5" max="75" value="75" step="1"> <span id="topNLabel">全部 75</span></div>
+    <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search" type="search" placeholder="搜索芯片或机型，如 M4 Pro"></div>
+    <button class="cmp-btn" id="openCmp">对比<span class="cmp-count" id="cmpCount">0</span></button>
+  </div>
+  <div class="table-scroll"><table class="score-table" id="rankTable">
+    <thead><tr><th>芯片配置</th><th><span id="modeTitle">单核</span> <span class="mode-count" id="modeCount">共 75 款芯片配置</span></th></tr></thead>
+    <tbody id="rankBody"></tbody>
+  </table></div>
+</main>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div><h3>芯片对比</h3><p id="cmpHint">点击排行中的行加入或移出</p></div>
+    <div class="drawer-actions">
+      <button class="btn" id="clearCmp">清空</button>
+      <button class="icon-btn" id="closeDrawer" aria-label="关闭"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </div>
+  <div class="drawer-body" id="cmpBody"></div>
+</aside>
+<div class="float"><button class="cmp-btn" id="saveBtn">保存图片</button></div>
+<footer><div class="wrap foot"><div>Geekbench 6 与 Geekbench AI 取公开成绩；MLX 取 ml-explore/mlx-benchmarks；Blender 取 4.5 Open Data 中位数。仅供参考。</div><div>静态页面，无需后端即可打开。</div></div></footer>
+<script>
+const HICONS = {"MacBook":["M20.4999 16.5V8.5C20.4999 6.14298 20.4999 4.96447 19.7676 4.23223C19.0354 3.5 17.8569 3.5 15.4999 3.5H8.49988C6.14286 3.5 4.96434 3.5 4.23211 4.23223C3.49988 4.96447 3.49988 6.14298 3.49988 8.5V16.5","M21.9841 20.5H2.01567C1.63273 20.5 1.38367 20.1088 1.55493 19.7764L3.49988 16.5H20.4999L22.4448 19.7764C22.6161 20.1088 22.367 20.5 21.9841 20.5Z"],"iMac":["M14 21H16M14 21C13.1716 21 12.5 20.3284 12.5 19.5V17L12 17M14 21H10M10 21H8M10 21C10.8284 21 11.5 20.3284 11.5 19.5V17L12 17M12 17V21","M16 3H8C5.17157 3 3.75736 3 2.87868 3.87868C2 4.75736 2 6.17157 2 9V11C2 13.8284 2 15.2426 2.87868 16.1213C3.75736 17 5.17157 17 8 17H16C18.8284 17 20.2426 17 21.1213 16.1213C22 15.2426 22 13.8284 22 11V9C22 6.17157 22 4.75736 21.1213 3.87868C20.2426 3 18.8284 3 16 3Z"],"Mac mini":["M22 12H2","M20 17H16C14.1144 17 13.1716 17 12.5858 16.4142C12 15.8284 12 14.8856 12 13V12","M4 12V22M20 12V22","M7 6V5C7 3.58579 7 2.87868 7.43934 2.43934C7.87868 2 8.58579 2 10 2H14C15.4142 2 16.1213 2 16.5607 2.43934C17 2.87868 17 3.58579 17 5V6C17 7.41421 17 8.12132 16.5607 8.56066C16.1213 9 15.4142 9 14 9H10C8.58579 9 7.87868 9 7.43934 8.56066C7 8.12132 7 7.41421 7 6Z","M13.5 9L14 12M10.5 9L10 12"],"Mac Studio":["M22 12H2","M17 12V8C17 7.17267 17.1727 7 18 7H19C19.8273 7 20 7.17267 20 8V12","M20 17H16C14.1144 17 13.1716 17 12.5858 16.4142C12 15.8284 12 14.8856 12 13V12","M4 12V22M20 12V22","M3 6V5C3 3.58579 3 2.87868 3.43934 2.43934C3.87868 2 4.58579 2 6 2H10C11.4142 2 12.1213 2 12.5607 2.43934C13 2.87868 13 3.58579 13 5V6C13 7.41421 13 8.12132 12.5607 8.56066C12.1213 9 11.4142 9 10 9H6C4.58579 9 3.87868 9 3.43934 8.56066C3 8.12132 3 7.41421 3 6Z","M9.5 9L10 12M6.5 9L6 12"],"Mac Pro":["M6 16V8C6 5.17157 6 3.75736 6.87868 2.87868C7.75736 2 9.17157 2 12 2C14.8284 2 16.2426 2 17.1213 2.87868C18 3.75736 18 5.17157 18 8V16C18 18.8284 18 20.2426 17.1213 21.1213C16.2426 22 14.8284 22 12 22C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16Z","M10 6H14","M10 10H14","M12.125 18H12M12.25 18C12.25 18.1381 12.1381 18.25 12 18.25C11.8619 18.25 11.75 18.1381 11.75 18C11.75 17.8619 11.8619 17.75 12 17.75C12.1381 17.75 12.25 17.8619 12.25 18Z"],"Chip":["M4 12C4 8.22876 4 6.34315 5.17157 5.17157C6.34315 4 8.22876 4 12 4C15.7712 4 17.6569 4 18.8284 5.17157C20 6.34315 20 8.22876 20 12C20 15.7712 20 17.6569 18.8284 18.8284C17.6569 20 15.7712 20 12 20C8.22876 20 6.34315 20 5.17157 18.8284C4 17.6569 4 15.7712 4 12Z","M7.73223 16.2678C8.46447 17 9.64298 17 12 17C12.7898 17 13.4473 17 14 16.9724L16.9724 14C17 13.4473 17 12.7898 17 12C17 9.64298 17 8.46447 16.2678 7.73223C15.5355 7 14.357 7 12 7C9.64298 7 8.46447 7 7.73223 7.73223C7 8.46447 7 9.64298 7 12C7 14.357 7 15.5355 7.73223 16.2678Z","M8 2V4M16 2V4M12 2V4M8 20V22M12 20V22M16 20V22M22 16H20M4 8H2M4 16H2M4 12H2M22 8H20M22 12H20"]};
+const ROWS = [{"key":"Apple M5","chip":"Apple M5","arch":"Apple","devices":["MacBook Pro (14-inch, 2025)","MacBook Air（15 英寸，M5，2026 年）","MacBook Pro（14 英寸，M5）","MacBook Air（13 英寸，M5，2026 年）"],"geek":{"single":{"label":"M5 (10+10)","score":3625},"multi":{"label":"M5 (10+10)","score":17919},"opencl":{"label":"M5 (10+10)","score":46245},"metal":{"label":"M5 (10+10)","score":73133}},"ai":{"single":{"Neural Engine":5813,"GPU":14872,"CPU":5895},"half":{"Neural Engine":43213,"GPU":28186,"CPU":10499},"quant":{"Neural Engine":61182,"GPU":28338,"CPU":7668}},"mlx":null,"mlxList":[],"blender":{"cpu":{"score":251.88,"count":8},"gpu":{"detail":"GPU · GPU - 10 cores","score":2011.24,"count":3},"gpuList":[{"detail":"GPU · GPU - 10 cores","score":2011.24,"count":3},{"detail":"GPU · GPU - 8 cores","score":1820.87,"count":1}]},"configs":[{"label":"M5 (10+10)","single":3625,"multi":17919,"opencl":46245,"metal":73133}],"labels":["M5 (10+10)"]},{"key":"Apple M4 Max","chip":"Apple M4 Max","arch":"Apple","devices":["Mac Studio (2025)","MacBook Pro (16-inch, 2024)","MacBook Pro (14-inch, 2024)"],"geek":{"single":{"label":"M4 Max (14+32)","score":3492},"multi":{"label":"M4 Max (16+40)","score":28948},"opencl":{"label":"M4 Max (16+40)","score":120925},"metal":{"label":"M4 Max (16+40)","score":207179}},"ai":{"single":{"CPU":6250,"GPU":25750,"Neural Engine":6586},"half":{"CPU":10225,"GPU":28462,"Neural Engine":42036},"quant":{"CPU":7759,"GPU":26760,"Neural Engine":58107}},"mlx":{"detail":"4E+12P+40GPU+128GB · · mlx 0.20.0","score":710.5,"vals":{"mlx_gpu":710.5,"mlx_cpu":257.9,"mps":762.2,"cpu":274.7},"raw":{"mlx_gpu":0.8375144094343462,"mlx_cpu":9.426887581732794,"mps":0.8088929166350285,"cpu":6.090000376818522}},"mlxList":[{"detail":"4E+12P+40GPU+128GB · · mlx 0.20.0","vals":{"mlx_gpu":710.5,"mlx_cpu":257.9,"mps":762.2,"cpu":274.7},"raw":{"mlx_gpu":0.8375144094343462,"mlx_cpu":9.426887581732794,"mps":0.8088929166350285,"cpu":6.090000376818522},"ops":{"Argmax":{"mlx_gpu":1.41,"mlx_cpu":8.01,"mps":0.7,"cpu":4.69},"BCE":{"mlx_gpu":0.88,"mlx_cpu":33.88,"mps":0.52,"cpu":2.93},"Concat":{"mlx_gpu":2.86,"mlx_cpu":47.64,"mps":2.67,"cpu":19.94},"Conv1d":{"mlx_gpu":0.59,"mlx_cpu":3.81,"mps":0.4,"cpu":110.98},"Conv2d":{"mlx_gpu":1.43,"mlx_cpu":32.19,"mps":0.6,"cpu":26.71},"Gather":{"mlx_gpu":1.08,"mlx_cpu":3.07,"mps":7.37,"cpu":6.2},"LeakyReLU":{"mlx_gpu":0.24,"mlx_cpu":0.67,"mps":0.19,"cpu":0.75},"Linear":{"mlx_gpu":3.35,"mlx_cpu":39.12,"mps":3.21,"cpu":45.63},"MatMul":{"mlx_gpu":4.12,"mlx_cpu":21,"mps":6.36,"cpu":139.36},"PReLU":{"mlx_gpu":0.38,"mlx_cpu":2.1,"mps":0.28,"cpu":0.87},"ReLU":{"mlx_gpu":0.23,"mlx_cpu":0.42,"mps":0.27,"cpu":0.87},"Scatter":{"mlx_gpu":0.28,"mlx_cpu":9.08,"mps":1.25,"cpu":0.65},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.06},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.06},"SeLU":{"mlx_gpu":0.34,"mlx_cpu":3.63,"mps":0.35,"cpu":1.12},"Sigmoid":{"mlx_gpu":0.21,"mlx_cpu":3.45,"mps":0.27,"cpu":0.93},"Softmax":{"mlx_gpu":3.97,"mlx_cpu":29.65,"mps":1.52,"cpu":13.74},"Softplus":{"mlx_gpu":0.29,"mlx_cpu":21.32,"mps":0.25,"cpu":1.88},"Sort":{"mlx_gpu":0.58,"mlx_cpu":207.83,"mps":7.18,"cpu":41.13},"Sum":{"mlx_gpu":1.25,"mlx_cpu":6.28,"mps":1.44,"cpu":4.54},"SumAll":{"mlx_gpu":0.95,"mlx_cpu":4.61,"mps":1.07,"cpu":1.48}}}],"blender":{"cpu":{"score":403.96,"count":7},"gpu":{"detail":"GPU · GPU - 40 cores","score":5664.39,"count":4},"gpuList":[{"detail":"GPU · GPU - 40 cores","score":5664.39,"count":4},{"detail":"GPU · GPU - 32 cores","score":4737.33,"count":5}]},"configs":[{"label":"M4 Max (16+40)","single":3485,"multi":28948,"opencl":120925,"metal":207179},{"label":"M4 Max (14+32)","single":3492,"multi":25788,"opencl":101417,"metal":169626}],"labels":["M4 Max (16+40)","M4 Max (14+32)"]},{"key":"Apple M4 Pro","chip":"Apple M4 Pro","arch":"Apple","devices":["MacBook Pro (16-inch, 2024)","MacBook Pro (14-inch, 2024)","Mac mini (2024)"],"geek":{"single":{"label":"M4 Pro (14+20)","score":3375},"multi":{"label":"M4 Pro (14+20)","score":24901},"opencl":{"label":"M4 Pro (14+20)","score":69072},"metal":{"label":"M4 Pro (14+20)","score":116115}},"ai":{"single":{"CPU":6298,"Neural Engine":6350,"GPU":16517},"half":{"CPU":9975,"Neural Engine":40906,"GPU":18338},"quant":{"CPU":7668,"Neural Engine":56612,"GPU":17155}},"mlx":{"detail":"4E+8P+16GPU+24GB · · mlx 0.20.0","score":444.7,"vals":{"mlx_gpu":444.7,"mlx_cpu":256.4,"mps":542.3,"cpu":286.6},"raw":{"mlx_gpu":1.3380782302790455,"mlx_cpu":9.484212466600308,"mps":1.304299070430358,"cpu":7.13019321171742}},"mlxList":[{"detail":"4E+8P+16GPU+24GB · · mlx 0.20.0","vals":{"mlx_gpu":444.7,"mlx_cpu":256.4,"mps":472.7,"cpu":234.6},"raw":{"mlx_gpu":1.3380782302790455,"mlx_cpu":9.484212466600308,"mps":1.304299070430358,"cpu":7.13019321171742},"ops":{"Argmax":{"mlx_gpu":1.48,"mlx_cpu":7.96,"mps":1.02,"cpu":5.15},"BCE":{"mlx_gpu":1.47,"mlx_cpu":34,"mps":0.7,"cpu":4.26},"Concat":{"mlx_gpu":5.59,"mlx_cpu":48.85,"mps":5.03,"cpu":27.93},"Conv1d":{"mlx_gpu":1.04,"mlx_cpu":4.24,"mps":0.66,"cpu":85.48},"Conv2d":{"mlx_gpu":3.05,"mlx_cpu":32.51,"mps":0.8,"cpu":29.57},"Gather":{"mlx_gpu":2.28,"mlx_cpu":3.18,"mps":13.48,"cpu":7.39},"LeakyReLU":{"mlx_gpu":0.3,"mlx_cpu":0.64,"mps":0.35,"cpu":0.79},"Linear":{"mlx_gpu":7.61,"mlx_cpu":40.24,"mps":7.45,"cpu":63.95},"MatMul":{"mlx_gpu":8.24,"mlx_cpu":21.94,"mps":13.81,"cpu":137.11},"PReLU":{"mlx_gpu":0.43,"mlx_cpu":2.13,"mps":0.37,"cpu":0.84},"ReLU":{"mlx_gpu":0.29,"mlx_cpu":0.42,"mps":0.36,"cpu":1.17},"Scatter":{"mlx_gpu":0.52,"mlx_cpu":9.16,"mps":2.29,"cpu":0.83},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.06},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.03},"SeLU":{"mlx_gpu":0.46,"mlx_cpu":3.62,"mps":0.4,"cpu":1.13},"Sigmoid":{"mlx_gpu":0.28,"mlx_cpu":3.46,"mps":0.34,"cpu":1.01},"Softmax":{"mlx_gpu":7.23,"mlx_cpu":30.51,"mps":3.08,"cpu":18.53},"Softplus":{"mlx_gpu":0.35,"mlx_cpu":21.29,"mps":0.34,"cpu":2.28},"Sort":{"mlx_gpu":1.26,"mlx_cpu":214.41,"mps":15.29,"cpu":56.47},"Sum":{"mlx_gpu":2.25,"mlx_cpu":5.91,"mps":2.61,"cpu":6.09},"SumAll":{"mlx_gpu":1.69,"mlx_cpu":4.28,"mps":1.77,"cpu":1.82}}},{"detail":"4E+10P+20GPU+24GB · · mlx 0.24.1","vals":{"mlx_gpu":416.6,"mlx_cpu":253.2,"mps":542.3,"cpu":286.6},"raw":{"mlx_gpu":1.4283255999490034,"mlx_cpu":9.601388155192174,"mps":1.137003473298818,"cpu":5.83660503137714},"ops":{"Argmax":{"mlx_gpu":1.42,"mlx_cpu":7.67,"mps":0.78,"cpu":5.01},"BCE":{"mlx_gpu":1.46,"mlx_cpu":14.54,"mps":0.44,"cpu":3.65},"Concat":{"mlx_gpu":5.54,"mlx_cpu":48.61,"mps":4.96,"cpu":29},"Conv1d":{"mlx_gpu":0.82,"mlx_cpu":3.82,"mps":0.47,"cpu":113.39},"Conv2d":{"mlx_gpu":2.52,"mlx_cpu":31.65,"mps":0.67,"cpu":30.7},"Gather":{"mlx_gpu":1.3,"mlx_cpu":3.13,"mps":13.28,"cpu":6.85},"LayerNorm":{"mlx_gpu":0.42,"mlx_cpu":2.62,"mps":0.84,"cpu":1.16},"LeakyReLU":{"mlx_gpu":0.43,"mlx_cpu":0.6,"mps":0.31,"cpu":0.63},"Linear":{"mlx_gpu":6.37,"mlx_cpu":39.72,"mps":6.2,"cpu":36.36},"MatMul":{"mlx_gpu":9.81,"mlx_cpu":22.04,"mps":13.28,"cpu":67.9},"PReLU":{"mlx_gpu":0.57,"mlx_cpu":3.02,"mps":0.34,"cpu":0.62},"ReLU":{"mlx_gpu":0.31,"mlx_cpu":0.37,"mps":0.41,"cpu":0.78},"ScaledDotProductAttention":{"mlx_gpu":2.62,"mlx_cpu":10.11,"mps":1.81,"cpu":5.38},"Scatter":{"mlx_gpu":0.37,"mlx_cpu":9.06,"mps":2.29,"cpu":0.75},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.28,"cpu":0.97},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.29,"cpu":0.98},"SeLU":{"mlx_gpu":0.95,"mlx_cpu":6.1,"mps":0.32,"cpu":0.93},"Sigmoid":{"mlx_gpu":0.36,"mlx_cpu":2.19,"mps":0.28,"cpu":0.84},"Softmax":{"mlx_gpu":7.17,"mlx_cpu":32.41,"mps":2.77,"cpu":13.97},"Softplus":{"mlx_gpu":0.32,"mlx_cpu":20.25,"mps":0.3,"cpu":1.86},"Sort":{"mlx_gpu":1.29,"mlx_cpu":209.96,"mps":14.67,"cpu":45.28},"Sum":{"mlx_gpu":2.25,"mlx_cpu":9.85,"mps":2.49,"cpu":5.12},"SumAll":{"mlx_gpu":1.67,"mlx_cpu":7.18,"mps":1.71,"cpu":1.62}}}],"blender":{"cpu":{"score":380.37,"count":12},"gpu":{"detail":"GPU · GPU - 20 cores","score":2947.9,"count":6},"gpuList":[{"detail":"GPU · GPU - 20 cores","score":2947.9,"count":6},{"detail":"GPU · GPU - 16 cores","score":2556.86,"count":2}]},"configs":[{"label":"M4 Pro (14+20)","single":3375,"multi":24901,"opencl":69072,"metal":116115},{"label":"M4 Pro (12+16)","single":3337,"multi":21792,"opencl":60466,"metal":102587}],"labels":["M4 Pro (14+20)","M4 Pro (12+16)"]},{"key":"Apple M4","chip":"Apple M4","arch":"Apple","devices":["Mac mini (2024)","iMac (24-inch, 2024)","MacBook Pro (14-inch, 2024)","MacBook Air (15-inch, 2025)","MacBook Air (13-inch, 2025)"],"geek":{"single":{"label":"M4 (10+10)","score":3275},"multi":{"label":"M4 (10+10)","score":15472},"opencl":{"label":"M4 (10+10)","score":34545},"metal":{"label":"M4 (10+10)","score":54659}},"ai":{"single":{"Neural Engine":5149,"GPU":11513,"CPU":5133},"half":{"Neural Engine":39650,"GPU":13573,"CPU":8540},"quant":{"Neural Engine":56818,"GPU":12871,"CPU":6815}},"mlx":{"detail":"6E+4P+10GPU+16GB · · mlx 0.20.0","score":212.3,"vals":{"mlx_gpu":212.3,"mlx_cpu":215,"mps":226,"cpu":176},"raw":{"mlx_gpu":2.802635632943466,"mlx_cpu":11.307867556353617,"mps":2.7280468656610664,"cpu":9.502027959379712}},"mlxList":[{"detail":"6E+4P+10GPU+16GB · · mlx 0.20.0","vals":{"mlx_gpu":212.3,"mlx_cpu":215,"mps":226,"cpu":176},"raw":{"mlx_gpu":2.802635632943466,"mlx_cpu":11.307867556353617,"mps":2.7280468656610664,"cpu":9.502027959379712},"ops":{"Argmax":{"mlx_gpu":1.56,"mlx_cpu":8.33,"mps":1.43,"cpu":5.39},"BCE":{"mlx_gpu":3.73,"mlx_cpu":35.59,"mps":1.19,"cpu":8.15},"Concat":{"mlx_gpu":12.61,"mlx_cpu":50.48,"mps":12.59,"cpu":29.69},"Conv1d":{"mlx_gpu":1.77,"mlx_cpu":4.55,"mps":1.16,"cpu":58.55},"Conv2d":{"mlx_gpu":4.94,"mlx_cpu":42.63,"mps":1.48,"cpu":25.15},"Gather":{"mlx_gpu":3.57,"mlx_cpu":3.24,"mps":34.09,"cpu":9.04},"LeakyReLU":{"mlx_gpu":0.76,"mlx_cpu":0.69,"mps":0.82,"cpu":0.83},"Linear":{"mlx_gpu":12.62,"mlx_cpu":60.38,"mps":13.17,"cpu":116.89},"MatMul":{"mlx_gpu":18.27,"mlx_cpu":42.77,"mps":32.16,"cpu":133.45},"PReLU":{"mlx_gpu":0.91,"mlx_cpu":2.15,"mps":0.82,"cpu":0.79},"ReLU":{"mlx_gpu":0.78,"mlx_cpu":0.54,"mps":0.75,"cpu":1.33},"Scatter":{"mlx_gpu":0.82,"mlx_cpu":9.34,"mps":5.89,"cpu":0.98},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.08},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":null,"cpu":1.14},"SeLU":{"mlx_gpu":0.89,"mlx_cpu":3.65,"mps":0.81,"cpu":1.65},"Sigmoid":{"mlx_gpu":0.75,"mlx_cpu":3.48,"mps":0.81,"cpu":1.42},"Softmax":{"mlx_gpu":18.11,"mlx_cpu":38.51,"mps":6.02,"cpu":28.3},"Softplus":{"mlx_gpu":0.83,"mlx_cpu":21.28,"mps":0.78,"cpu":3.51},"Sort":{"mlx_gpu":1.99,"mlx_cpu":218.3,"mps":32.71,"cpu":98.28},"Sum":{"mlx_gpu":5.9,"mlx_cpu":9,"mps":6.7,"cpu":12.98},"SumAll":{"mlx_gpu":4.32,"mlx_cpu":6.58,"mps":4.84,"cpu":5.41}}}],"blender":{"cpu":{"score":225.52,"count":9},"gpu":{"detail":"GPU · GPU - 10 cores","score":1220.72,"count":8},"gpuList":[{"detail":"GPU · GPU - 10 cores","score":1220.72,"count":8},{"detail":"GPU · GPU - 8 cores","score":1196.27,"count":1}]},"configs":[{"label":"M4 (10+10)","single":3275,"multi":15472,"opencl":34545,"metal":54659},{"label":"M4 (10+8)","single":3199,"multi":15030,"opencl":29279,"metal":47809},{"label":"M4 (8+8)","single":3135,"multi":12917}],"labels":["M4 (10+10)","M4 (10+8)","M4 (8+8)"]},{"key":"Apple M3 Ultra","chip":"Apple M3 Ultra","arch":"Apple","devices":["Mac Studio (2025)"],"geek":{"single":{"label":"M3 Ultra (28+60)","score":2914},"multi":{"label":"M3 Ultra (32+80)","score":39632},"opencl":{"label":"M3 Ultra (32+80)","score":141705},"metal":{"label":"M3 Ultra (32+80)","score":241402}},"ai":{},"mlx":{"detail":"8E+20P+60GPU+96GB · · mlx 0.24.1","score":722.1,"vals":{"mlx_gpu":722.1,"mlx_cpu":230.9,"mps":880.3,"cpu":215.2},"raw":{"mlx_gpu":0.8240458903002021,"mlx_cpu":10.528430209266649,"mps":0.700395817580748,"cpu":7.772798576305189}},"mlxList":[{"detail":"8E+20P+60GPU+96GB · · mlx 0.24.1","vals":{"mlx_gpu":722.1,"mlx_cpu":230.9,"mps":880.3,"cpu":215.2},"raw":{"mlx_gpu":0.8240458903002021,"mlx_cpu":10.528430209266649,"mps":0.700395817580748,"cpu":7.772798576305189},"ops":{"Argmax":{"mlx_gpu":1.77,"mlx_cpu":8.4,"mps":0.59,"cpu":7.99},"BCE":{"mlx_gpu":0.68,"mlx_cpu":15.7,"mps":0.54,"cpu":2.77},"Concat":{"mlx_gpu":1.88,"mlx_cpu":84.41,"mps":1.8,"cpu":40.87},"Conv1d":{"mlx_gpu":0.52,"mlx_cpu":4.16,"mps":0.44,"cpu":148.64},"Conv2d":{"mlx_gpu":1.32,"mlx_cpu":31.36,"mps":0.55,"cpu":33.67},"Gather":{"mlx_gpu":0.6,"mlx_cpu":3.38,"mps":4.11,"cpu":14.71},"LeakyReLU":{"mlx_gpu":0.26,"mlx_cpu":0.67,"mps":0.22,"cpu":1.47},"Linear":{"mlx_gpu":2.74,"mlx_cpu":52,"mps":2.53,"cpu":45.65},"MatMul":{"mlx_gpu":3.38,"mlx_cpu":16.76,"mps":4.96,"cpu":231.43},"PReLU":{"mlx_gpu":0.62,"mlx_cpu":3.15,"mps":0.26,"cpu":1.67},"ReLU":{"mlx_gpu":0.26,"mlx_cpu":0.42,"mps":0.22,"cpu":1.47},"Scatter":{"mlx_gpu":0.26,"mlx_cpu":10.27,"mps":0.82,"cpu":0.93},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.41,"cpu":1.25},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":1.22,"cpu":1.23},"SeLU":{"mlx_gpu":0.6,"mlx_cpu":6.39,"mps":0.25,"cpu":1.29},"Sigmoid":{"mlx_gpu":0.26,"mlx_cpu":2.21,"mps":0.27,"cpu":1.25},"Softmax":{"mlx_gpu":2.67,"mlx_cpu":33.54,"mps":1.22,"cpu":11.51},"Softplus":{"mlx_gpu":0.29,"mlx_cpu":24.63,"mps":0.23,"cpu":1.76},"Sort":{"mlx_gpu":0.73,"mlx_cpu":213.11,"mps":6.18,"cpu":33.69},"Sum":{"mlx_gpu":0.96,"mlx_cpu":10.85,"mps":1.09,"cpu":4.35},"SumAll":{"mlx_gpu":0.73,"mlx_cpu":7.93,"mps":0.84,"cpu":1.67}}}],"blender":{"cpu":{"score":788.56,"count":1},"gpu":null,"gpuList":[]},"configs":[{"label":"M3 Ultra (32+80)","single":2912,"multi":39632,"opencl":141705,"metal":241402},{"label":"M3 Ultra (28+60)","single":2914,"multi":34845,"opencl":126708,"metal":221687}],"labels":["M3 Ultra (32+80)","M3 Ultra (28+60)"]},{"key":"Apple M3 Max","chip":"Apple M3 Max","arch":"Apple","devices":["MacBook Pro (14-inch, Nov 2023)","MacBook Pro (16-inch, Nov 2023)"],"geek":{"single":{"label":"M3 Max (14+30)","score":2841},"multi":{"label":"M3 Max (16+40)","score":24683},"opencl":{"label":"M3 Max (16+40)","score":99385},"metal":{"label":"M3 Max (16+40)","score":166564}},"ai":{"single":{"CPU":4895,"Neural Engine":4895,"GPU":21373},"half":{"CPU":7980,"Neural Engine":29280,"GPU":23605},"quant":{"CPU":6297,"Neural Engine":31526,"GPU":22402}},"mlx":{"detail":"cores: 4E+12P+40GPU · · mlx 0.2.0","score":462.4,"vals":{"mlx_gpu":462.4,"mlx_cpu":170.6,"mps":459.8,"cpu":192.9},"raw":{"mlx_gpu":1.2869843005849315,"mlx_cpu":14.247396784189574,"mps":1.340962458845758,"cpu":8.672144643789643}},"mlxList":[{"detail":"cores: 4E+12P+40GPU · · mlx 0.2.0","vals":{"mlx_gpu":462.4,"mlx_cpu":170.6,"mps":459.8,"cpu":192.9},"raw":{"mlx_gpu":1.2869843005849315,"mlx_cpu":14.247396784189574,"mps":1.340962458845758,"cpu":8.672144643789643},"ops":{"Argmax":{"mlx_gpu":1.57,"mlx_cpu":8.34,"mps":1.02,"cpu":6.14},"BCE":{"mlx_gpu":1.12,"mlx_cpu":38.72,"mps":0.59,"cpu":3.73},"Concat":{"mlx_gpu":3.32,"mlx_cpu":82.26,"mps":3.4,"cpu":22.89},"Conv1d":{"mlx_gpu":0.85,"mlx_cpu":2.4,"mps":0.92,"cpu":156},"Conv2d":{"mlx_gpu":4.21,"mlx_cpu":329.47,"mps":1.42,"cpu":31.25},"Gather":{"mlx_gpu":1.56,"mlx_cpu":4.37,"mps":8.23,"cpu":6.68},"LeakyReLU":{"mlx_gpu":0.43,"mlx_cpu":2.57,"mps":0.54,"cpu":0.66},"Linear":{"mlx_gpu":5.66,"mlx_cpu":24.67,"mps":4.24,"cpu":59.04},"MatMul":{"mlx_gpu":4.2,"mlx_cpu":25.57,"mps":7.62,"cpu":585.74},"PReLU":{"mlx_gpu":0.7,"mlx_cpu":2.06,"mps":0.49,"cpu":0.61},"ReLU":{"mlx_gpu":0.51,"mlx_cpu":0.65,"mps":0.78,"cpu":0.62},"Scatter":{"mlx_gpu":2.29,"mlx_cpu":25.4,"mps":1.66,"cpu":0.93},"ScatterSum":{"mlx_gpu":0.04,"mlx_cpu":0.01,"mps":null,"cpu":1.22},"ScatterMax":{"mlx_gpu":0.04,"mlx_cpu":0.01,"mps":null,"cpu":1.23},"SeLU":{"mlx_gpu":1.35,"mlx_cpu":5.14,"mps":0.48,"cpu":2.93},"Sigmoid":{"mlx_gpu":0.3,"mlx_cpu":26.28,"mps":0.49,"cpu":2.85},"Softmax":{"mlx_gpu":4.75,"mlx_cpu":35.79,"mps":3.4,"cpu":16.5},"Softplus":{"mlx_gpu":0.35,"mlx_cpu":26.02,"mps":0.51,"cpu":4},"Sort":{"mlx_gpu":0.77,"mlx_cpu":229.39,"mps":8.04,"cpu":32.43},"Sum":{"mlx_gpu":1.55,"mlx_cpu":6.53,"mps":1.9,"cpu":6.99},"SumAll":{"mlx_gpu":1.19,"mlx_cpu":4.78,"mps":1.32,"cpu":3.22}}}],"blender":{"cpu":null,"gpu":{"detail":"GPU · GPU - 40 cores","score":4419.23,"count":1},"gpuList":[{"detail":"GPU · GPU - 40 cores","score":4419.23,"count":1},{"detail":"GPU · GPU - 30 cores","score":2993.99,"count":1}]},"configs":[{"label":"M3 Max (16+40)","single":2812,"multi":24683,"opencl":99385,"metal":166564},{"label":"M3 Max (14+30)","single":2841,"multi":22385,"opencl":80797,"metal":132466}],"labels":["M3 Max (16+40)","M3 Max (14+30)"]},{"key":"Apple M3 Pro","chip":"Apple M3 Pro","arch":"Apple","devices":["MacBook Pro (16-inch, Nov 2023)","MacBook Pro (14-inch, Nov 2023)"],"geek":{"single":{"label":"M3 Pro (12+18)","score":2804},"multi":{"label":"M3 Pro (12+18)","score":16765},"opencl":{"label":"M3 Pro (12+18)","score":48304},"metal":{"label":"M3 Pro (12+18)","score":76685}},"ai":{"single":{"CPU":4319,"GPU":13061,"Neural Engine":4301},"half":{"CPU":7554,"GPU":14939,"Neural Engine":32444},"quant":{"CPU":6181,"GPU":13956,"Neural Engine":37121}},"mlx":{"detail":"cores: 6E+5P+14GPU","score":175.5,"vals":{"mlx_gpu":175.5,"mlx_cpu":133.2,"mps":173.6,"cpu":149.1},"raw":{"mlx_gpu":3.389775553999213,"mlx_cpu":18.248754156402292,"mps":3.55124814789337,"cpu":11.220881050948954}},"mlxList":[{"detail":"cores: 6E+5P+14GPU","vals":{"mlx_gpu":175.5,"mlx_cpu":133.2,"mps":173.6,"cpu":149.1},"raw":{"mlx_gpu":3.389775553999213,"mlx_cpu":18.248754156402292,"mps":3.55124814789337,"cpu":11.220881050948954},"ops":{"Argmax":{"mlx_gpu":0.98,"mlx_cpu":11.21,"mps":1.24,"cpu":6.14},"BCE":{"mlx_gpu":2.7,"mlx_cpu":39.88,"mps":6.87,"cpu":6.78},"Concat":{"mlx_gpu":8.25,"mlx_cpu":78.33,"mps":8.87,"cpu":38.1},"Conv1d":{"mlx_gpu":2.15,"mlx_cpu":3.36,"mps":2.07,"cpu":83.18},"Conv2d":{"mlx_gpu":12.06,"mlx_cpu":333.03,"mps":3.09,"cpu":33.87},"LeakyReLU":{"mlx_gpu":1.54,"mlx_cpu":1.53,"mps":1.26,"cpu":0.96},"Linear":{"mlx_gpu":15.3,"mlx_cpu":52.78,"mps":11.44,"cpu":91.49},"MatMul":{"mlx_gpu":16.04,"mlx_cpu":69.27,"mps":22.53,"cpu":390.04},"PReLU":{"mlx_gpu":2.04,"mlx_cpu":2.8,"mps":1.35,"cpu":0.91},"ReLU":{"mlx_gpu":0.94,"mlx_cpu":0.61,"mps":1.37,"cpu":0.92},"SeLU":{"mlx_gpu":3.98,"mlx_cpu":10.1,"mps":1.27,"cpu":4.69},"Sigmoid":{"mlx_gpu":1.03,"mlx_cpu":26.28,"mps":1.3,"cpu":4.28},"Softmax":{"mlx_gpu":4.62,"mlx_cpu":32.54,"mps":9.32,"cpu":29.78},"Softplus":{"mlx_gpu":1.02,"mlx_cpu":25.95,"mps":1.26,"cpu":6.52},"Sort":{"mlx_gpu":8.67,"mlx_cpu":711.98,"mps":21.37,"cpu":46.71},"Sum":{"mlx_gpu":4.73,"mlx_cpu":9.81,"mps":5.12,"cpu":8.83},"SumAll":{"mlx_gpu":3.17,"mlx_cpu":4.71,"mps":3.69,"cpu":3.44}}}],"blender":{"cpu":{"score":205.77,"count":1},"gpu":{"detail":"GPU · GPU - 18 cores","score":1800.39,"count":1},"gpuList":[{"detail":"GPU · GPU - 18 cores","score":1800.39,"count":1},{"detail":"GPU · GPU - 14 cores","score":1735.97,"count":2}]},"configs":[{"label":"M3 Pro (12+18)","single":2804,"multi":16765,"opencl":48304,"metal":76685},{"label":"M3 Pro (11+14)","single":2764,"multi":14962,"opencl":43282,"metal":70759}],"labels":["M3 Pro (12+18)","M3 Pro (11+14)"]},{"key":"Apple M3","chip":"Apple M3","arch":"Apple","devices":["iMac (24-inch, 2023)","MacBook Pro (14-inch, Nov 2023)","MacBook Air（13 英寸，M3，2024 年）"],"geek":{"single":{"label":"M3 (8+8)","score":2767},"multi":{"label":"M3 (8+8)","score":12038},"opencl":{"label":"M3 (8+10)","score":29608},"metal":{"label":"M3 (8+10)","score":47052}},"ai":{"single":{"CPU":4190,"GPU":8215,"Neural Engine":4178},"half":{"CPU":7526,"GPU":9348,"Neural Engine":32056},"quant":{"CPU":6061,"GPU":8832,"Neural Engine":36588}},"mlx":{"detail":"4E+4P+10GPU+16GB · · · mlx 0.30.1","score":232.1,"vals":{"mlx_gpu":232.1,"mlx_cpu":210.6,"mps":216.6,"cpu":237.3},"raw":{"mlx_gpu":2.5640589735473194,"mlx_cpu":11.542722442973322,"mps":2.8468882724050584,"cpu":7.049997589696851}},"mlxList":[{"detail":"4E+4P+10GPU+16GB · · · mlx 0.30.1","vals":{"mlx_gpu":232.1,"mlx_cpu":210.6,"mps":216.6,"cpu":237.3},"raw":{"mlx_gpu":2.5640589735473194,"mlx_cpu":11.542722442973322,"mps":2.8468882724050584,"cpu":7.049997589696851},"ops":{"Argmax":{"mlx_gpu":1.74,"mlx_cpu":8.92,"mps":1.55,"cpu":5.3},"BCE":{"mlx_gpu":3.81,"mlx_cpu":18.08,"mps":0.93,"cpu":8.21},"Concat":{"mlx_gpu":12.05,"mlx_cpu":105.18,"mps":12.06,"cpu":18.32},"Conv1d":{"mlx_gpu":0.69,"mlx_cpu":4.55,"mps":1.04,"cpu":61.59},"Conv2d":{"mlx_gpu":3.5,"mlx_cpu":39.37,"mps":1.39,"cpu":17.42},"Gather":{"mlx_gpu":2.41,"mlx_cpu":4.49,"mps":9.37,"cpu":4.42},"LayerNorm":{"mlx_gpu":1.03,"mlx_cpu":3.5,"mps":1.03,"cpu":1.05},"LeakyReLU":{"mlx_gpu":0.72,"mlx_cpu":0.49,"mps":0.7,"cpu":0.41},"Linear":{"mlx_gpu":14.05,"mlx_cpu":62.67,"mps":14.33,"cpu":45.74},"MatMul":{"mlx_gpu":15.41,"mlx_cpu":52.7,"mps":31.76,"cpu":51.6},"PReLU":{"mlx_gpu":0.73,"mlx_cpu":2.12,"mps":0.77,"cpu":0.45},"ReLU":{"mlx_gpu":0.72,"mlx_cpu":0.48,"mps":0.73,"cpu":0.43},"ScaledDotProductAttention":{"mlx_gpu":5.51,"mlx_cpu":12.18,"mps":4.72,"cpu":7.14},"Scatter":{"mlx_gpu":0.63,"mlx_cpu":11.76,"mps":1.72,"cpu":1.09},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.55,"cpu":1.15},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.55,"cpu":1.16},"SeLU":{"mlx_gpu":0.73,"mlx_cpu":3,"mps":0.74,"cpu":3.36},"Sigmoid":{"mlx_gpu":0.73,"mlx_cpu":2.54,"mps":0.71,"cpu":1.13},"Softmax":{"mlx_gpu":18.05,"mlx_cpu":43.25,"mps":6.05,"cpu":16.17},"Softplus":{"mlx_gpu":0.72,"mlx_cpu":22.87,"mps":0.74,"cpu":4.14},"Sort":{"mlx_gpu":3.32,"mlx_cpu":312.48,"mps":179.91,"cpu":88.58},"Sum":{"mlx_gpu":5.78,"mlx_cpu":11.55,"mps":6.13,"cpu":12.62},"SumAll":{"mlx_gpu":4.26,"mlx_cpu":8.42,"mps":4.54,"cpu":5.77}}}],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"M3 (8+8)","single":2767,"multi":12038},{"label":"M3 (8+10)","single":2767,"multi":12038,"opencl":29608,"metal":47052}],"labels":["M3 (8+8)","M3 (8+10)"]},{"key":"Apple M2 Max","chip":"Apple M2 Max","arch":"Apple","devices":["Mac Studio (2023)","MacBook Pro (16-inch, 2023)"],"geek":{"single":{"label":"M2 Max (12+38)","score":2531},"multi":{"label":"M2 Max (12+38)","score":17298},"opencl":{"label":"M2 Max (12+38)","score":87045},"metal":{"label":"M2 Max (12+38)","score":145165}},"ai":{"single":{"CPU":4365,"GPU":17859,"Neural Engine":4371},"half":{"CPU":7362,"GPU":19739,"Neural Engine":28926},"quant":{"CPU":5827,"GPU":18437,"Neural Engine":32263}},"mlx":{"detail":"cores: 4E+8P+38GPU · · mlx 0.5.0 · torch 2.2.1","score":617.1,"vals":{"mlx_gpu":617.1,"mlx_cpu":175,"mps":512.9,"cpu":141.8},"raw":{"mlx_gpu":0.9643486760726335,"mlx_cpu":13.891076002719563,"mps":1.2021713359526318,"cpu":11.793526781086971}},"mlxList":[{"detail":"cores: 4E+8P+38GPU · · mlx 0.5.0 · torch 2.2.1","vals":{"mlx_gpu":617.1,"mlx_cpu":175,"mps":512.9,"cpu":141.8},"raw":{"mlx_gpu":0.9643486760726335,"mlx_cpu":13.891076002719563,"mps":1.2021713359526318,"cpu":11.793526781086971},"ops":{"Argmax":{"mlx_gpu":1.5,"mlx_cpu":10.1,"mps":0.68,"cpu":8.63},"BCE":{"mlx_gpu":1,"mlx_cpu":59.91,"mps":0.6,"cpu":9.01},"Concat":{"mlx_gpu":3.18,"mlx_cpu":83.04,"mps":3.34,"cpu":27.24},"Conv1d":{"mlx_gpu":0.86,"mlx_cpu":3.03,"mps":0.53,"cpu":160.4},"Conv2d":{"mlx_gpu":2.45,"mlx_cpu":424.52,"mps":1.15,"cpu":34.3},"Gather":{"mlx_gpu":1.34,"mlx_cpu":3.92,"mps":8.12,"cpu":8.98},"LeakyReLU":{"mlx_gpu":0.22,"mlx_cpu":0.72,"mps":0.3,"cpu":1.21},"Linear":{"mlx_gpu":5.51,"mlx_cpu":23.52,"mps":12.97,"cpu":37.92},"MatMul":{"mlx_gpu":3.77,"mlx_cpu":27.42,"mps":9.78,"cpu":83.55},"PReLU":{"mlx_gpu":0.28,"mlx_cpu":3.27,"mps":0.42,"cpu":1.03},"ReLU":{"mlx_gpu":0.37,"mlx_cpu":0.62,"mps":0.35,"cpu":0.94},"Scatter":{"mlx_gpu":0.22,"mlx_cpu":28.88,"mps":1.47,"cpu":1.82},"ScatterSum":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.37},"ScatterMax":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.39},"SeLU":{"mlx_gpu":0.29,"mlx_cpu":4.62,"mps":0.49,"cpu":7.07},"Sigmoid":{"mlx_gpu":0.24,"mlx_cpu":4.34,"mps":0.36,"cpu":6.35},"Softmax":{"mlx_gpu":4.62,"mlx_cpu":40.03,"mps":3.07,"cpu":33.25},"Softplus":{"mlx_gpu":0.25,"mlx_cpu":34.73,"mps":0.33,"cpu":9.39},"Sort":{"mlx_gpu":0.73,"mlx_cpu":248.89,"mps":10.65,"cpu":58.88},"Sum":{"mlx_gpu":1.61,"mlx_cpu":9.22,"mps":1.96,"cpu":12.05},"SumAll":{"mlx_gpu":1.2,"mlx_cpu":6.86,"mps":1.32,"cpu":3.84}}}],"blender":{"cpu":{"score":244.78,"count":3},"gpu":{"detail":"GPU · GPU - 38 cores","score":1699.27,"count":2},"gpuList":[{"detail":"GPU · GPU - 38 cores","score":1699.27,"count":2},{"detail":"GPU · GPU - 30 cores","score":1379.21,"count":1}]},"configs":[{"label":"M2 Max (12+38)","single":2531,"multi":17298,"opencl":87045,"metal":145165},{"label":"M2 Max (12+30)","single":2477,"multi":16976}],"labels":["M2 Max (12+38)","M2 Max (12+30)"]},{"key":"Apple M2 Ultra","chip":"Apple M2 Ultra","arch":"Apple","devices":["Mac Studio (2023)"],"geek":{"single":{"label":"M2 Ultra (24+60)","score":2511},"multi":{"label":"M2 Ultra (24+60)","score":28212}},"ai":{},"mlx":{"detail":"cores: 8E+16P+76GPU · · mlx 0.7.0","score":807.1,"vals":{"mlx_gpu":807.1,"mlx_cpu":186.4,"mps":783.8,"cpu":185.9},"raw":{"mlx_gpu":0.7372522045304919,"mlx_cpu":13.040238382564986,"mps":0.7866371465308596,"cpu":8.996879012993418}},"mlxList":[{"detail":"cores: 8E+16P+76GPU · · mlx 0.7.0","vals":{"mlx_gpu":807.1,"mlx_cpu":186.4,"mps":783.8,"cpu":185.9},"raw":{"mlx_gpu":0.7372522045304919,"mlx_cpu":13.040238382564986,"mps":0.7866371465308596,"cpu":8.996879012993418},"ops":{"Argmax":{"mlx_gpu":1.6,"mlx_cpu":9.46,"mps":0.65,"cpu":9.49},"BCE":{"mlx_gpu":0.64,"mlx_cpu":56.57,"mps":0.47,"cpu":4.23},"Concat":{"mlx_gpu":1.69,"mlx_cpu":81.95,"mps":1.66,"cpu":38.93},"Conv1d":{"mlx_gpu":0.55,"mlx_cpu":2.64,"mps":0.45,"cpu":187.91},"Conv2d":{"mlx_gpu":1.35,"mlx_cpu":409.78,"mps":0.67,"cpu":46.05},"Gather":{"mlx_gpu":0.77,"mlx_cpu":3.83,"mps":3.92,"cpu":11.82},"LeakyReLU":{"mlx_gpu":0.32,"mlx_cpu":0.85,"mps":0.21,"cpu":1.99},"Linear":{"mlx_gpu":2.26,"mlx_cpu":16.83,"mps":6.67,"cpu":39.12},"MatMul":{"mlx_gpu":2.53,"mlx_cpu":19.21,"mps":5.59,"cpu":66.55},"PReLU":{"mlx_gpu":0.37,"mlx_cpu":3.15,"mps":0.32,"cpu":1.61},"ReLU":{"mlx_gpu":0.29,"mlx_cpu":0.67,"mps":0.33,"cpu":1.61},"Scatter":{"mlx_gpu":0.25,"mlx_cpu":27.04,"mps":0.73,"cpu":1.49},"ScatterSum":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.36},"ScatterMax":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.37},"SeLU":{"mlx_gpu":0.46,"mlx_cpu":4.5,"mps":0.29,"cpu":1.86},"Sigmoid":{"mlx_gpu":0.24,"mlx_cpu":4.11,"mps":0.26,"cpu":1.71},"Softmax":{"mlx_gpu":2.47,"mlx_cpu":39.27,"mps":1.35,"cpu":17.9},"Softplus":{"mlx_gpu":0.27,"mlx_cpu":32.13,"mps":0.26,"cpu":3.53},"Sort":{"mlx_gpu":0.48,"mlx_cpu":229.84,"mps":6.41,"cpu":33.91},"Sum":{"mlx_gpu":0.9,"mlx_cpu":9.22,"mps":0.95,"cpu":6.8},"SumAll":{"mlx_gpu":0.7,"mlx_cpu":6.7,"mps":0.83,"cpu":1.97}}}],"blender":{"cpu":{"score":496.76,"count":1},"gpu":{"detail":"GPU · GPU - 60 cores","score":2858.42,"count":1},"gpuList":[{"detail":"GPU · GPU - 60 cores","score":2858.42,"count":1}]},"configs":[{"label":"M2 Ultra (24+60)","single":2511,"multi":28212},{"label":"M2 Ultra (24+76)","single":2511,"multi":28212}],"labels":["M2 Ultra (24+60)","M2 Ultra (24+76)"]},{"key":"Apple M2 Pro","chip":"Apple M2 Pro","arch":"Apple","devices":["MacBook Pro (16-inch, 2023)","MacBook Pro (14-inch, 2023)","Mac mini (2023)"],"geek":{"single":{"label":"M2 Pro (12+19)","score":2433},"multi":{"label":"M2 Pro (12+19)","score":16726},"opencl":{"label":"M2 Pro (12+19)","score":49576},"metal":{"label":"M2 Pro (12+19)","score":83461}},"ai":{"single":{"CPU":3306,"GPU":10621,"Neural Engine":3309},"half":{"CPU":5545,"GPU":11769,"Neural Engine":26890},"quant":{"CPU":4343,"GPU":10700,"Neural Engine":29809}},"mlx":{"detail":"cores: 4E+6P+16GPU · · mlx 0.12.2 · torch 2.1.2","score":345.7,"vals":{"mlx_gpu":345.7,"mlx_cpu":167.3,"mps":323.4,"cpu":144.4},"raw":{"mlx_gpu":1.72134809641498,"mlx_cpu":14.536714155355199,"mps":1.9066777366776373,"cpu":11.583282132357162}},"mlxList":[{"detail":"cores: 4E+6P+16GPU · · mlx 0.12.2 · torch 2.1.2","vals":{"mlx_gpu":345.7,"mlx_cpu":167.3,"mps":323.4,"cpu":144.4},"raw":{"mlx_gpu":1.72134809641498,"mlx_cpu":14.536714155355199,"mps":1.9066777366776373,"cpu":11.583282132357162},"ops":{"Argmax":{"mlx_gpu":1.55,"mlx_cpu":9.98,"mps":1.28,"cpu":7.88},"BCE":{"mlx_gpu":2.03,"mlx_cpu":59.53,"mps":0.74,"cpu":8.01},"Concat":{"mlx_gpu":6.17,"mlx_cpu":86.32,"mps":6.26,"cpu":36.48},"Conv1d":{"mlx_gpu":1.62,"mlx_cpu":3.05,"mps":0.9,"cpu":147.44},"Conv2d":{"mlx_gpu":5.2,"mlx_cpu":410.99,"mps":2.11,"cpu":43.67},"Gather":{"mlx_gpu":3.03,"mlx_cpu":4.13,"mps":15.83,"cpu":9.79},"LeakyReLU":{"mlx_gpu":0.36,"mlx_cpu":0.9,"mps":0.44,"cpu":0.93},"Linear":{"mlx_gpu":9.36,"mlx_cpu":27.06,"mps":31.34,"cpu":115.1},"MatMul":{"mlx_gpu":10.93,"mlx_cpu":35.71,"mps":21.59,"cpu":754.1},"PReLU":{"mlx_gpu":0.53,"mlx_cpu":3.46,"mps":0.44,"cpu":0.91},"ReLU":{"mlx_gpu":0.41,"mlx_cpu":0.73,"mps":0.43,"cpu":0.92},"Scatter":{"mlx_gpu":0.31,"mlx_cpu":28.25,"mps":2.77,"cpu":2.31},"ScatterSum":{"mlx_gpu":0.04,"mlx_cpu":0.02,"mps":null,"cpu":1.38},"ScatterMax":{"mlx_gpu":0.04,"mlx_cpu":0.02,"mps":null,"cpu":1.38},"SeLU":{"mlx_gpu":0.49,"mlx_cpu":4.85,"mps":0.51,"cpu":2.66},"Sigmoid":{"mlx_gpu":0.37,"mlx_cpu":4.33,"mps":0.48,"cpu":2.23},"Softmax":{"mlx_gpu":9.25,"mlx_cpu":39.72,"mps":4.88,"cpu":25},"Softplus":{"mlx_gpu":0.41,"mlx_cpu":33.75,"mps":0.47,"cpu":4.73},"Sort":{"mlx_gpu":1.48,"mlx_cpu":242.55,"mps":22.4,"cpu":51.73},"Sum":{"mlx_gpu":3.24,"mlx_cpu":9.11,"mps":3.09,"cpu":10.11},"SumAll":{"mlx_gpu":2.37,"mlx_cpu":6.58,"mps":2.36,"cpu":3.31}}}],"blender":{"cpu":{"score":155.7,"count":3},"gpu":{"detail":"GPU · GPU - 19 cores","score":896.08,"count":1},"gpuList":[{"detail":"GPU · GPU - 19 cores","score":896.08,"count":1}]},"configs":[{"label":"M2 Pro (12+19)","single":2433,"multi":16726,"opencl":49576,"metal":83461},{"label":"M2 Pro (10+16)","single":2399,"multi":13634,"opencl":43994,"metal":74842}],"labels":["M2 Pro (12+19)","M2 Pro (10+16)"]},{"key":"Apple M2","chip":"Apple M2","arch":"Apple","devices":["Mac mini (2023)","MacBook Pro (13-inch, 2022)","MacBook Air (2022)","MacBook Air (15-inch, 2023)"],"geek":{"single":{"label":"M2 (8+10)","score":2388},"multi":{"label":"M2 (8+10)","score":9706},"opencl":{"label":"M2 (8+10)","score":26307},"metal":{"label":"M2 (8+10)","score":43714}},"ai":{"single":{"Neural Engine":3393,"GPU":6927,"CPU":3495},"half":{"Neural Engine":28175,"GPU":7967,"CPU":6261},"quant":{"Neural Engine":31528,"GPU":7160,"CPU":5095}},"mlx":{"detail":"() · · mlx 0.2.0","score":128.3,"vals":{"mlx_gpu":128.3,"mlx_cpu":73.3,"mps":113,"cpu":90.5},"raw":{"mlx_gpu":4.6368233023328145,"mlx_cpu":33.14700226504028,"mps":5.458297290586072,"cpu":18.486379085206792}},"mlxList":[{"detail":"() · · mlx 0.2.0","vals":{"mlx_gpu":128.3,"mlx_cpu":73.3,"mps":113,"cpu":90.5},"raw":{"mlx_gpu":4.6368233023328145,"mlx_cpu":33.14700226504028,"mps":5.458297290586072,"cpu":18.486379085206792},"ops":{"Argmax":{"mlx_gpu":1.71,"mlx_cpu":16.21,"mps":2.71,"cpu":8.51},"BCE":{"mlx_gpu":3.71,"mlx_cpu":82.34,"mps":13.06,"cpu":13.34},"Concat":{"mlx_gpu":12.14,"mlx_cpu":161.07,"mps":12.51,"cpu":46.33},"Conv1d":{"mlx_gpu":3.66,"mlx_cpu":6.01,"mps":3.29,"cpu":132.69},"Conv2d":{"mlx_gpu":27.74,"mlx_cpu":705.78,"mps":5.94,"cpu":56.88},"LeakyReLU":{"mlx_gpu":1.5,"mlx_cpu":2.44,"mps":1.1,"cpu":1.33},"Linear":{"mlx_gpu":25.01,"mlx_cpu":99.71,"mps":57.29,"cpu":183.02},"MatMul":{"mlx_gpu":22.04,"mlx_cpu":120.61,"mps":78.1,"cpu":629.63},"PReLU":{"mlx_gpu":2.43,"mlx_cpu":4.58,"mps":1.04,"cpu":1.35},"ReLU":{"mlx_gpu":0.77,"mlx_cpu":1,"mps":1,"cpu":1.34},"SeLU":{"mlx_gpu":5.31,"mlx_cpu":17.25,"mps":1.11,"cpu":8.24},"Sigmoid":{"mlx_gpu":0.77,"mlx_cpu":52.85,"mps":1.13,"cpu":7.47},"Softmax":{"mlx_gpu":7.07,"mlx_cpu":65.62,"mps":14.54,"cpu":60.92},"Softplus":{"mlx_gpu":0.91,"mlx_cpu":53.94,"mps":1.73,"cpu":12.12},"Sort":{"mlx_gpu":16.87,"mlx_cpu":1243.25,"mps":46.69,"cpu":79.31},"Sum":{"mlx_gpu":9.15,"mlx_cpu":18.38,"mps":10.47,"cpu":14.19},"SumAll":{"mlx_gpu":4.31,"mlx_cpu":7.79,"mps":4.96,"cpu":6.11}}}],"blender":{"cpu":{"score":42.9,"count":1},"gpu":{"detail":"GPU · GPU - 10 cores","score":352.33,"count":2},"gpuList":[{"detail":"GPU · GPU - 10 cores","score":352.33,"count":2},{"detail":"GPU · GPU - 8 cores","score":275.99,"count":1}]},"configs":[{"label":"M2 (8+10)","single":2388,"multi":9706,"opencl":26307,"metal":43714},{"label":"M2 (8)","single":2352,"multi":9701,"opencl":26240,"metal":43099}],"labels":["M2 (8+10)","M2 (8)"]},{"key":"Apple M1 Ultra","chip":"Apple M1 Ultra","arch":"Apple","devices":["Mac Studio"],"geek":{"single":{"label":"M1 Ultra (20)","score":2227},"multi":{"label":"M1 Ultra (20)","score":23707},"opencl":{"label":"M1 Ultra (20)","score":94149},"metal":{"label":"M1 Ultra (20)","score":153050}},"ai":{},"mlx":{"detail":"4E+16P+48GPU+64GB · · mlx 0.29.3 · torch 2.8.0","score":690.4,"vals":{"mlx_gpu":690.4,"mlx_cpu":190.9,"mps":579.9,"cpu":378.5},"raw":{"mlx_gpu":0.8619576271899554,"mlx_cpu":12.73348182318729,"mps":1.0631581729232484,"cpu":4.418891835027916}},"mlxList":[{"detail":"4E+16P+48GPU+64GB · · mlx 0.29.3 · torch 2.8.0","vals":{"mlx_gpu":690.4,"mlx_cpu":190.9,"mps":579.9,"cpu":378.5},"raw":{"mlx_gpu":0.8619576271899554,"mlx_cpu":12.73348182318729,"mps":1.0631581729232484,"cpu":4.418891835027916},"ops":{"Argmax":{"mlx_gpu":1.71,"mlx_cpu":10.68,"mps":0.8,"cpu":9.35},"BCE":{"mlx_gpu":0.77,"mlx_cpu":21.38,"mps":0.56,"cpu":3.79},"Concat":{"mlx_gpu":2.09,"mlx_cpu":76.78,"mps":1.84,"cpu":6.54},"Conv1d":{"mlx_gpu":0.43,"mlx_cpu":4.57,"mps":0.67,"cpu":194.82},"Conv2d":{"mlx_gpu":1.4,"mlx_cpu":31.35,"mps":0.72,"cpu":32.71},"Gather":{"mlx_gpu":0.69,"mlx_cpu":4.9,"mps":2.99,"cpu":2.79},"LayerNorm":{"mlx_gpu":0.3,"mlx_cpu":4.87,"mps":0.43,"cpu":0.72},"LeakyReLU":{"mlx_gpu":0.29,"mlx_cpu":0.81,"mps":0.28,"cpu":0.29},"Linear":{"mlx_gpu":3.4,"mlx_cpu":49.12,"mps":3.78,"cpu":16.24},"MatMul":{"mlx_gpu":4.39,"mlx_cpu":26.42,"mps":5.25,"cpu":27.67},"PReLU":{"mlx_gpu":0.31,"mlx_cpu":2.7,"mps":0.34,"cpu":0.29},"ReLU":{"mlx_gpu":0.28,"mlx_cpu":0.66,"mps":0.31,"cpu":0.27},"ScaledDotProductAttention":{"mlx_gpu":1.51,"mlx_cpu":20.98,"mps":1.14,"cpu":5.36},"Scatter":{"mlx_gpu":0.34,"mlx_cpu":17.06,"mps":0.72,"cpu":1.47},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":22.86,"cpu":1.41},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.66,"cpu":1.42},"SeLU":{"mlx_gpu":0.37,"mlx_cpu":3.8,"mps":0.33,"cpu":1.72},"Sigmoid":{"mlx_gpu":0.37,"mlx_cpu":3.15,"mps":0.32,"cpu":0.63},"Softmax":{"mlx_gpu":2.81,"mlx_cpu":45.86,"mps":1.85,"cpu":8.25},"Softplus":{"mlx_gpu":0.35,"mlx_cpu":31.49,"mps":0.43,"cpu":1.99},"Sort":{"mlx_gpu":1.07,"mlx_cpu":383.92,"mps":92.57,"cpu":30.71},"Sum":{"mlx_gpu":1.05,"mlx_cpu":16.37,"mps":1.7,"cpu":5.18},"SumAll":{"mlx_gpu":0.85,"mlx_cpu":11.9,"mps":0.92,"cpu":2.19}}}],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"M1 Ultra (20)","single":2227,"multi":23707,"opencl":94149,"metal":153050}],"labels":["M1 Ultra (20)"]},{"key":"Apple M1 Max","chip":"Apple M1 Max","arch":"Apple","devices":["Mac Studio","MacBook Pro (16-inch, 2021)","MacBook Pro (14-inch, 2021)"],"geek":{"single":{"label":"M1 Max (10)","score":2220},"multi":{"label":"M1 Max (10)","score":14150},"opencl":{"label":"M1 Max (10)","score":66415},"metal":{"label":"M1 Max (10)","score":110027}},"ai":{"single":{"Neural Engine":3857,"CPU":3857,"GPU":13188},"half":{"Neural Engine":16564,"CPU":6336,"GPU":14563},"quant":{"Neural Engine":16361,"CPU":5055,"GPU":13427}},"mlx":{"detail":"64GB · · mlx 0.2.0","score":369.5,"vals":{"mlx_gpu":369.5,"mlx_cpu":127.9,"mps":352.6,"cpu":167},"raw":{"mlx_gpu":1.6105998535765078,"mlx_cpu":19.005563600662633,"mps":1.74858293041383,"cpu":10.013879473594063}},"mlxList":[{"detail":"64GB · · mlx 0.2.0","vals":{"mlx_gpu":369.5,"mlx_cpu":127.9,"mps":352.6,"cpu":167},"raw":{"mlx_gpu":1.6105998535765078,"mlx_cpu":19.005563600662633,"mps":1.74858293041383,"cpu":10.013879473594063},"ops":{"Argmax":{"mlx_gpu":2.14,"mlx_cpu":10.8,"mps":1.93,"cpu":9.17},"BCE":{"mlx_gpu":1.3,"mlx_cpu":50.27,"mps":1.01,"cpu":8.09},"Concat":{"mlx_gpu":3.2,"mlx_cpu":92.35,"mps":3.27,"cpu":24.79},"Conv1d":{"mlx_gpu":2.2,"mlx_cpu":3.34,"mps":1.18,"cpu":157.26},"Conv2d":{"mlx_gpu":8.18,"mlx_cpu":455.47,"mps":1.98,"cpu":35.56},"Gather":{"mlx_gpu":2.51,"mlx_cpu":5.94,"mps":9.78,"cpu":8.92},"LeakyReLU":{"mlx_gpu":0.54,"mlx_cpu":4.4,"mps":0.45,"cpu":0.63},"Linear":{"mlx_gpu":6.73,"mlx_cpu":32.46,"mps":16.44,"cpu":39.44},"MatMul":{"mlx_gpu":4.66,"mlx_cpu":47.17,"mps":11.16,"cpu":88.32},"PReLU":{"mlx_gpu":0.82,"mlx_cpu":2.64,"mps":0.44,"cpu":0.57},"ReLU":{"mlx_gpu":0.36,"mlx_cpu":0.82,"mps":0.44,"cpu":0.6},"Scatter":{"mlx_gpu":4.11,"mlx_cpu":30.31,"mps":1.85,"cpu":1.78},"ScatterSum":{"mlx_gpu":0.05,"mlx_cpu":0.01,"mps":null,"cpu":1.35},"ScatterMax":{"mlx_gpu":0.05,"mlx_cpu":0.01,"mps":null,"cpu":1.35},"SeLU":{"mlx_gpu":1.53,"mlx_cpu":7.05,"mps":0.46,"cpu":5.97},"Sigmoid":{"mlx_gpu":0.38,"mlx_cpu":32.57,"mps":0.5,"cpu":5.43},"Softmax":{"mlx_gpu":4.84,"mlx_cpu":43.48,"mps":3.88,"cpu":28.93},"Softplus":{"mlx_gpu":0.57,"mlx_cpu":32.79,"mps":0.67,"cpu":8.25},"Sort":{"mlx_gpu":1.08,"mlx_cpu":257.18,"mps":20.18,"cpu":49.3},"Sum":{"mlx_gpu":1.75,"mlx_cpu":8.87,"mps":3.1,"cpu":10.35},"SumAll":{"mlx_gpu":1.36,"mlx_cpu":6.63,"mps":1.5,"cpu":3.36}}}],"blender":{"cpu":{"score":202.89,"count":1},"gpu":{"detail":"GPU · GPU - 32 cores","score":1082.85,"count":5},"gpuList":[{"detail":"GPU · GPU - 32 cores","score":1082.85,"count":5},{"detail":"GPU · GPU - 24 cores","score":915.86,"count":5}]},"configs":[{"label":"M1 Max (10)","single":2220,"multi":14150,"opencl":66415,"metal":110027}],"labels":["M1 Max (10)"]},{"key":"Apple M1 Pro","chip":"Apple M1 Pro","arch":"Apple","devices":["MacBook Pro (16-inch, 2021)","MacBook Pro (14-inch, 2021)"],"geek":{"single":{"label":"M1 Pro (10+10)","score":2204},"multi":{"label":"M1 Pro (10+10)","score":14022},"opencl":{"label":"M1 Pro (10)","score":38545},"metal":{"label":"M1 Pro (10)","score":65224}},"ai":{"single":{"Neural Engine":3848,"GPU":10034,"CPU":3853},"half":{"Neural Engine":18321,"GPU":11006,"CPU":6342},"quant":{"Neural Engine":18399,"GPU":10149,"CPU":5085}},"mlx":{"detail":"2E+8P+16GPU+16GB · · · mlx 0.5.0","score":321.8,"vals":{"mlx_gpu":321.8,"mlx_cpu":161.9,"mps":281.3,"cpu":118.5},"raw":{"mlx_gpu":1.8489662982495754,"mlx_cpu":15.019260806984674,"mps":2.1921565224564747,"cpu":14.113088302046556}},"mlxList":[{"detail":"2E+8P+16GPU+16GB · · · mlx 0.5.0","vals":{"mlx_gpu":321.8,"mlx_cpu":161.9,"mps":281.3,"cpu":118.5},"raw":{"mlx_gpu":1.8489662982495754,"mlx_cpu":15.019260806984674,"mps":2.1921565224564747,"cpu":14.113088302046556},"ops":{"Argmax":{"mlx_gpu":1.75,"mlx_cpu":10.55,"mps":1.02,"cpu":8.19},"BCE":{"mlx_gpu":2.18,"mlx_cpu":59.5,"mps":0.84,"cpu":8.48},"Concat":{"mlx_gpu":6.14,"mlx_cpu":87.88,"mps":6.21,"cpu":36.74},"Conv1d":{"mlx_gpu":1.76,"mlx_cpu":3.42,"mps":1.01,"cpu":154.38},"Conv2d":{"mlx_gpu":5.71,"mlx_cpu":443.83,"mps":2.52,"cpu":42.12},"Gather":{"mlx_gpu":3.15,"mlx_cpu":4.95,"mps":18.87,"cpu":9.03},"LeakyReLU":{"mlx_gpu":0.46,"mlx_cpu":0.8,"mps":0.47,"cpu":1.21},"Linear":{"mlx_gpu":9.57,"mlx_cpu":34.65,"mps":33.21,"cpu":127.82},"MatMul":{"mlx_gpu":10.52,"mlx_cpu":38.29,"mps":22.76,"cpu":498.7},"PReLU":{"mlx_gpu":0.48,"mlx_cpu":3.37,"mps":0.55,"cpu":1.07},"ReLU":{"mlx_gpu":0.47,"mlx_cpu":0.63,"mps":0.55,"cpu":1.08},"Scatter":{"mlx_gpu":0.59,"mlx_cpu":30.02,"mps":3.38,"cpu":1.94},"ScatterSum":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.47},"ScatterMax":{"mlx_gpu":0.03,"mlx_cpu":0.01,"mps":null,"cpu":1.44},"SeLU":{"mlx_gpu":0.51,"mlx_cpu":4.86,"mps":0.47,"cpu":6.72},"Sigmoid":{"mlx_gpu":0.44,"mlx_cpu":4.58,"mps":0.55,"cpu":6.39},"Softmax":{"mlx_gpu":9.44,"mlx_cpu":41.66,"mps":5.96,"cpu":30.23},"Softplus":{"mlx_gpu":0.46,"mlx_cpu":35.26,"mps":0.49,"cpu":8.97},"Sort":{"mlx_gpu":1.69,"mlx_cpu":258.35,"mps":37.76,"cpu":58.56},"Sum":{"mlx_gpu":3.38,"mlx_cpu":9.25,"mps":6.06,"cpu":10.02},"SumAll":{"mlx_gpu":2.52,"mlx_cpu":6.83,"mps":2.48,"cpu":3.46}}}],"blender":{"cpu":{"score":188.07,"count":5},"gpu":{"detail":"GPU · GPU - 16 cores","score":541.26,"count":5},"gpuList":[{"detail":"GPU · GPU - 16 cores","score":541.26,"count":5},{"detail":"GPU · GPU - 14 cores","score":503.48,"count":1}]},"configs":[{"label":"M1 Pro (10+10)","single":2204,"multi":14022},{"label":"M1 Pro (10)","single":2198,"multi":13927,"opencl":38545,"metal":65224},{"label":"M1 Pro (8)","single":2181,"multi":11150,"opencl":35103,"metal":60609}],"labels":["M1 Pro (10+10)","M1 Pro (10)","M1 Pro (8)"]},{"key":"Apple M1","chip":"Apple M1","arch":"Apple","devices":["Mac mini (Late 2020)","iMac (24-inch Mid 2021)","MacBook Air (Late 2020)","MacBook Pro (13-inch Late 2020)"],"geek":{"single":{"label":"M1 (8)","score":2192},"multi":{"label":"M1 (8)","score":8667},"opencl":{"label":"M1 (8)","score":18322},"metal":{"label":"M1 (8+8)","score":28806}},"ai":{"single":{"CPU":3272,"GPU":5762,"Neural Engine":3272},"half":{"CPU":5751,"GPU":6725,"Neural Engine":16019},"quant":{"CPU":4708,"GPU":6288,"Neural Engine":15785}},"mlx":{"detail":"cores: 4E+4P+8GPU","score":100,"vals":{"mlx_gpu":100,"mlx_cpu":100,"mps":100,"cpu":100},"raw":{"mlx_gpu":5.950548020239471,"mlx_cpu":24.313173232928833,"mps":6.1655880914732615,"cpu":16.72722121432001}},"mlxList":[{"detail":"cores: 4E+4P+8GPU","vals":{"mlx_gpu":100,"mlx_cpu":100,"mps":100,"cpu":100},"raw":{"mlx_gpu":5.950548020239471,"mlx_cpu":24.313173232928833,"mps":6.1655880914732615,"cpu":16.72722121432001},"ops":{"Argmax":{"mlx_gpu":1.81,"mlx_cpu":10.63,"mps":2.87,"cpu":8.05},"BCE":{"mlx_gpu":5.51,"mlx_cpu":51.81,"mps":12.19,"cpu":10.87},"Concat":{"mlx_gpu":19.13,"mlx_cpu":100.88,"mps":19.28,"cpu":49.63},"Conv1d":{"mlx_gpu":3.83,"mlx_cpu":4.53,"mps":3.73,"cpu":116.13},"Conv2d":{"mlx_gpu":30.12,"mlx_cpu":436.68,"mps":7.06,"cpu":45.54},"LeakyReLU":{"mlx_gpu":2.06,"mlx_cpu":2.9,"mps":1.16,"cpu":1.37},"Linear":{"mlx_gpu":30.41,"mlx_cpu":73.32,"mps":53.7,"cpu":117.68},"MatMul":{"mlx_gpu":26.38,"mlx_cpu":93.82,"mps":47.87,"cpu":504.47},"PReLU":{"mlx_gpu":3.5,"mlx_cpu":4.54,"mps":1.15,"cpu":1.32},"ReLU":{"mlx_gpu":0.98,"mlx_cpu":0.9,"mps":1.13,"cpu":1.35},"SeLU":{"mlx_gpu":7.81,"mlx_cpu":14.73,"mps":1.14,"cpu":7.72},"Sigmoid":{"mlx_gpu":0.96,"mlx_cpu":32.66,"mps":1.16,"cpu":7.23},"Softmax":{"mlx_gpu":10.15,"mlx_cpu":40.98,"mps":19.27,"cpu":46.69},"Softplus":{"mlx_gpu":1.07,"mlx_cpu":33.08,"mps":1.73,"cpu":10.99},"Sort":{"mlx_gpu":18.49,"mlx_cpu":713.23,"mps":73.24,"cpu":70.11},"Sum":{"mlx_gpu":11.33,"mlx_cpu":12.7,"mps":16.35,"cpu":13.43},"SumAll":{"mlx_gpu":6.91,"mlx_cpu":6.85,"mps":7.4,"cpu":7}}}],"blender":{"cpu":{"score":122.03,"count":5},"gpu":{"detail":"GPU · GPU - 8 cores","score":269.48,"count":1},"gpuList":[{"detail":"GPU · GPU - 8 cores","score":269.48,"count":1},{"detail":"GPU · GPU - 7 cores","score":244.13,"count":1}]},"configs":[{"label":"M1 (8)","single":2192,"multi":8667,"opencl":18322,"metal":28610},{"label":"M1 (8+8)","single":2168,"multi":8175,"opencl":18300,"metal":28806},{"label":"M1 (8+7)","single":2168,"multi":8175,"opencl":16678,"metal":27000}],"labels":["M1 (8)","M1 (8+8)","M1 (8+7)"]},{"key":"Intel Core i7-10700K","chip":"Intel Core i7-10700K","arch":"Intel","devices":["iMac (27-inch Retina Mid 2020)"],"geek":{"single":{"label":"i7-10700K (8)","score":1639},"multi":{"label":"i7-10700K (8)","score":8336}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-10700K (8)","single":1639,"multi":8336}],"labels":["i7-10700K (8)"]},{"key":"Intel Core i9-9900K","chip":"Intel Core i9-9900K","arch":"Intel","devices":["iMac (27-inch Retina Early 2019)"],"geek":{"single":{"label":"i9-9900K (8)","score":1591},"multi":{"label":"i9-9900K (8)","score":7541}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i9-9900K (8)","single":1591,"multi":7541}],"labels":["i9-9900K (8)"]},{"key":"Intel Core i5-10600","chip":"Intel Core i5-10600","arch":"Intel","devices":["iMac (27-inch Retina Mid 2020)"],"geek":{"single":{"label":"i5-10600 (6)","score":1531},"multi":{"label":"i5-10600 (6)","score":6425}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-10600 (6)","single":1531,"multi":6425}],"labels":["i5-10600 (6)"]},{"key":"Intel Core i5-10500","chip":"Intel Core i5-10500","arch":"Intel","devices":["iMac (27-inch Retina Mid 2020)"],"geek":{"single":{"label":"i5-10500 (6)","score":1432},"multi":{"label":"i5-10500 (6)","score":6274}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-10500 (6)","single":1432,"multi":6274}],"labels":["i5-10500 (6)"]},{"key":"Intel Core i5-9600K","chip":"Intel Core i5-9600K","arch":"Intel","devices":["iMac (27-inch Retina Early 2019)"],"geek":{"single":{"label":"i5-9600K (6)","score":1405},"multi":{"label":"i5-9600K (6)","score":5025}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-9600K (6)","single":1405,"multi":5025}],"labels":["i5-9600K (6)"]},{"key":"Intel Core i7-8700B","chip":"Intel Core i7-8700B","arch":"Intel","devices":["Mac mini (Late 2018)"],"geek":{"single":{"label":"i7-8700B (6)","score":1404},"multi":{"label":"i7-8700B (6)","score":5403}},"ai":{"single":{"CPU":877,"GPU":1878},"half":{"CPU":108,"GPU":1967},"quant":{"CPU":89,"GPU":1083}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-8700B (6)","single":1404,"multi":5403}],"labels":["i7-8700B (6)"]},{"key":"Intel Xeon W-2191B","chip":"Intel Xeon W-2191B","arch":"Intel","devices":["iMac Pro (Late 2017)"],"geek":{"single":{"label":"W-2191B (18)","score":1369},"multi":{"label":"W-2191B (18)","score":11177}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-2191B (18)","single":1369,"multi":11177}],"labels":["W-2191B (18)"]},{"key":"Intel Core i9-9980HK","chip":"Intel Core i9-9980HK","arch":"Intel","devices":["MacBook Pro (15-inch Mid 2019)","MacBook Pro (16-inch Late 2019)"],"geek":{"single":{"label":"i9-9980HK (8)","score":1365},"multi":{"label":"i9-9980HK (8)","score":6595}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i9-9980HK (8)","single":1365,"multi":6595}],"labels":["i9-9980HK (8)"]},{"key":"Intel Core i7-6700K","chip":"Intel Core i7-6700K","arch":"Intel","devices":["iMac (27-inch Retina Late 2015)"],"geek":{"single":{"label":"i7-6700K (4)","score":1358},"multi":{"label":"i7-6700K (4)","score":4579}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-6700K (4)","single":1358,"multi":4579}],"labels":["i7-6700K (4)"]},{"key":"Intel Xeon W-2150B","chip":"Intel Xeon W-2150B","arch":"Intel","devices":["iMac Pro (Late 2017)"],"geek":{"single":{"label":"W-2150B (10)","score":1357},"multi":{"label":"W-2150B (10)","score":8545}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-2150B (10)","single":1357,"multi":8545}],"labels":["W-2150B (10)"]},{"key":"Intel Core i7-1068NG7","chip":"Intel Core i7-1068NG7","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2020)"],"geek":{"single":{"label":"i7-1068NG7 (4)","score":1354},"multi":{"label":"i7-1068NG7 (4)","score":4388}},"ai":{"single":{"GPU":838},"half":{"GPU":811},"quant":{"GPU":443}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-1068NG7 (4)","single":1354,"multi":4388}],"labels":["i7-1068NG7 (4)"]},{"key":"Intel Core i5-8500B","chip":"Intel Core i5-8500B","arch":"Intel","devices":["Mac mini (Late 2018)"],"geek":{"single":{"label":"i5-8500B (6)","score":1329},"multi":{"label":"i5-8500B (6)","score":4731}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-8500B (6)","single":1329,"multi":4731}],"labels":["i5-8500B (6)"]},{"key":"Intel Core i9-8950HK","chip":"Intel Core i9-8950HK","arch":"Intel","devices":["MacBook Pro (15-inch Mid 2018)"],"geek":{"single":{"label":"i9-8950HK (6)","score":1327},"multi":{"label":"i9-8950HK (6)","score":5022}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i9-8950HK (6)","single":1327,"multi":5022}],"labels":["i9-8950HK (6)"]},{"key":"Intel Core i5-8500","chip":"Intel Core i5-8500","arch":"Intel","devices":["iMac (21.5-inch Retina Early 2019)","iMac (27-inch Retina Early 2019)"],"geek":{"single":{"label":"i5-8500 (6)","score":1325},"multi":{"label":"i5-8500 (6)","score":5088}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-8500 (6)","single":1325,"multi":5088}],"labels":["i5-8500 (6)"]},{"key":"Intel Core i7-7700K","chip":"Intel Core i7-7700K","arch":"Intel","devices":["iMac (27-inch Retina Mid 2017)","iMac（27 英寸，2020 年）"],"geek":{"single":{"label":"i7-7700K (4)","score":1323},"multi":{"label":"i7-7700K (4)","score":4385}},"ai":{"single":{"CPU":1001},"half":{"CPU":667},"quant":{"CPU":469}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-7700K (4)","single":1323,"multi":4385}],"labels":["i7-7700K (4)"]},{"key":"Intel Core i7-8850H","chip":"Intel Core i7-8850H","arch":"Intel","devices":["MacBook Pro (15-inch Mid 2018)"],"geek":{"single":{"label":"i7-8850H (6)","score":1321},"multi":{"label":"i7-8850H (6)","score":5203}},"ai":{"single":{"CPU":773},"half":{"CPU":104},"quant":{"CPU":84}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-8850H (6)","single":1321,"multi":5203}],"labels":["i7-8850H (6)"]},{"key":"Intel Core i9-9880H","chip":"Intel Core i9-9880H","arch":"Intel","devices":["MacBook Pro (16-inch Late 2019)","MacBook Pro (15-inch Mid 2019)"],"geek":{"single":{"label":"i9-9880H (8)","score":1318},"multi":{"label":"i9-9880H (8)","score":6458}},"ai":{"single":{"GPU":3067,"CPU":1075},"half":{"GPU":3468,"CPU":716},"quant":{"GPU":938,"CPU":468}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i9-9880H (8)","single":1318,"multi":6458}],"labels":["i9-9880H (8)"]},{"key":"Intel Xeon W-3275M","chip":"Intel Xeon W-3275M","arch":"Intel","devices":["Mac Pro (Late 2019)"],"geek":{"single":{"label":"W-3275M (28)","score":1313},"multi":{"label":"W-3275M (28)","score":14696}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-3275M (28)","single":1313,"multi":14696}],"labels":["W-3275M (28)"]},{"key":"Intel Xeon W-3245","chip":"Intel Xeon W-3245","arch":"Intel","devices":["Mac Pro (Late 2019)"],"geek":{"single":{"label":"W-3245 (16)","score":1311},"multi":{"label":"W-3245 (16)","score":12438}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-3245 (16)","single":1311,"multi":12438}],"labels":["W-3245 (16)"]},{"key":"Intel Xeon W-3235","chip":"Intel Xeon W-3235","arch":"Intel","devices":["Mac Pro (Late 2019)"],"geek":{"single":{"label":"W-3235 (12)","score":1300},"multi":{"label":"W-3235 (12)","score":10489}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-3235 (12)","single":1300,"multi":10489}],"labels":["W-3235 (12)"]},{"key":"Intel Core i7-9750H","chip":"Intel Core i7-9750H","arch":"Intel","devices":["MacBook Pro (16-inch Late 2019)","MacBook Pro (15-inch Mid 2019)"],"geek":{"single":{"label":"i7-9750H (6)","score":1282},"multi":{"label":"i7-9750H (6)","score":5380}},"ai":{"single":{"CPU":825,"GPU":2870},"half":{"CPU":722,"GPU":2924},"quant":{"CPU":496,"GPU":378}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-9750H (6)","single":1282,"multi":5380}],"labels":["i7-9750H (6)"]},{"key":"Intel Core i7-8569U","chip":"Intel Core i7-8569U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2019)"],"geek":{"single":{"label":"i7-8569U (4)","score":1234},"multi":{"label":"i7-8569U (4)","score":3752}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-8569U (4)","single":1234,"multi":3752}],"labels":["i7-8569U (4)"]},{"key":"Intel Core i5-7500","chip":"Intel Core i5-7500","arch":"Intel","devices":["iMac (27-inch Retina Mid 2017)"],"geek":{"single":{"label":"i5-7500 (4)","score":1211},"multi":{"label":"i5-7500 (4)","score":3325}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-7500 (4)","single":1211,"multi":3325}],"labels":["i5-7500 (4)"]},{"key":"Intel Core i7-8750H","chip":"Intel Core i7-8750H","arch":"Intel","devices":["MacBook Pro (15-inch Mid 2018)"],"geek":{"single":{"label":"i7-8750H (6)","score":1206},"multi":{"label":"i7-8750H (6)","score":4749}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-8750H (6)","single":1206,"multi":4749}],"labels":["i7-8750H (6)"]},{"key":"Intel Core i3-8100B","chip":"Intel Core i3-8100B","arch":"Intel","devices":["Mac mini (Late 2018)"],"geek":{"single":{"label":"i3-8100B (4)","score":1192},"multi":{"label":"i3-8100B (4)","score":3384}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i3-8100B (4)","single":1192,"multi":3384}],"labels":["i3-8100B (4)"]},{"key":"Intel Core i5-1038NG7","chip":"Intel Core i5-1038NG7","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2020)"],"geek":{"single":{"label":"i5-1038NG7 (4)","score":1186},"multi":{"label":"i5-1038NG7 (4)","score":4204}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-1038NG7 (4)","single":1186,"multi":4204}],"labels":["i5-1038NG7 (4)"]},{"key":"Intel Core i5-8257U","chip":"Intel Core i5-8257U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2019)","MacBook Pro (13-inch Mid 2020)"],"geek":{"single":{"label":"i5-8257U (4)","score":1171},"multi":{"label":"i5-8257U (4)","score":3716}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-8257U (4)","single":1171,"multi":3716}],"labels":["i5-8257U (4)"]},{"key":"Intel Xeon W-2140B","chip":"Intel Xeon W-2140B","arch":"Intel","devices":["iMac Pro (Late 2017)"],"geek":{"single":{"label":"W-2140B (8)","score":1163},"multi":{"label":"W-2140B (8)","score":6496}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"W-2140B (8)","single":1163,"multi":6496}],"labels":["W-2140B (8)"]},{"key":"Intel Core i7-8559U","chip":"Intel Core i7-8559U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2018)"],"geek":{"single":{"label":"i7-8559U (4)","score":1160},"multi":{"label":"i7-8559U (4)","score":3694}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-8559U (4)","single":1160,"multi":3694}],"labels":["i7-8559U (4)"]},{"key":"Intel Core i5-8279U","chip":"Intel Core i5-8279U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2019)"],"geek":{"single":{"label":"i5-8279U (4)","score":1146},"multi":{"label":"i5-8279U (4)","score":3791}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-8279U (4)","single":1146,"multi":3791}],"labels":["i5-8279U (4)"]},{"key":"Intel Core i5-8259U","chip":"Intel Core i5-8259U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2018)"],"geek":{"single":{"label":"i5-8259U (4)","score":1111},"multi":{"label":"i5-8259U (4)","score":3656}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-8259U (4)","single":1111,"multi":3656}],"labels":["i5-8259U (4)"]},{"key":"Intel Core i5-7360U","chip":"Intel Core i5-7360U","arch":"Intel","devices":["MacBook Pro (13-inch Mid 2017)"],"geek":{"single":{"label":"i5-7360U (2)","score":1092},"multi":{"label":"i5-7360U (2)","score":2106}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-7360U (2)","single":1092,"multi":2106}],"labels":["i5-7360U (2)"]},{"key":"Intel Core i5-7400","chip":"Intel Core i5-7400","arch":"Intel","devices":["iMac (21.5-inch Retina Mid 2017)"],"geek":{"single":{"label":"i5-7400 (4)","score":1074},"multi":{"label":"i5-7400 (4)","score":2881}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-7400 (4)","single":1074,"multi":2881}],"labels":["i5-7400 (4)"]},{"key":"Intel Core i7-1060NG7","chip":"Intel Core i7-1060NG7","arch":"Intel","devices":["MacBook Air (Early 2020)"],"geek":{"single":{"label":"i7-1060NG7 (4)","score":1069},"multi":{"label":"i7-1060NG7 (4)","score":2445}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-1060NG7 (4)","single":1069,"multi":2445}],"labels":["i7-1060NG7 (4)"]},{"key":"Intel Core i5-6500","chip":"Intel Core i5-6500","arch":"Intel","devices":["iMac (27-inch Retina Late 2015)"],"geek":{"single":{"label":"i5-6500 (4)","score":1019},"multi":{"label":"i5-6500 (4)","score":2734}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-6500 (4)","single":1019,"multi":2734}],"labels":["i5-6500 (4)"]},{"key":"Intel Core i3-1000NG4","chip":"Intel Core i3-1000NG4","arch":"Intel","devices":["MacBook Air (Early 2020)"],"geek":{"single":{"label":"i3-1000NG4 (2)","score":1011},"multi":{"label":"i3-1000NG4 (2)","score":1648}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i3-1000NG4 (2)","single":1011,"multi":1648}],"labels":["i3-1000NG4 (2)"]},{"key":"Intel Core i5-1030NG7","chip":"Intel Core i5-1030NG7","arch":"Intel","devices":["MacBook Air (Early 2020)"],"geek":{"single":{"label":"i5-1030NG7 (4)","score":998},"multi":{"label":"i5-1030NG7 (4)","score":2120}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-1030NG7 (4)","single":998,"multi":2120}],"labels":["i5-1030NG7 (4)"]},{"key":"Intel Core i7-4770HQ","chip":"Intel Core i7-4770HQ","arch":"Intel","devices":["MacBook Pro (15-inch Retina Mid 2015)"],"geek":{"single":{"label":"i7-4770HQ (4)","score":954},"multi":{"label":"i7-4770HQ (4)","score":3388}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-4770HQ (4)","single":954,"multi":3388}],"labels":["i7-4770HQ (4)"]},{"key":"Intel Core i5-5257U","chip":"Intel Core i5-5257U","arch":"Intel","devices":["MacBook Pro (13-inch Retina Early 2015)"],"geek":{"single":{"label":"i5-5257U (2)","score":948},"multi":{"label":"i5-5257U (2)","score":1765}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-5257U (2)","single":948,"multi":1765}],"labels":["i5-5257U (2)"]},{"key":"Intel Core i5-4570R","chip":"Intel Core i5-4570R","arch":"Intel","devices":["iMac (21.5-inch Late 2013)"],"geek":{"single":{"label":"i5-4570R (4)","score":899},"multi":{"label":"i5-4570R (4)","score":2688}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-4570R (4)","single":899,"multi":2688}],"labels":["i5-4570R (4)"]},{"key":"Intel Core i7-4750HQ","chip":"Intel Core i7-4750HQ","arch":"Intel","devices":["MacBook Pro (15-inch Retina Late 2013)"],"geek":{"single":{"label":"i7-4750HQ (4)","score":850},"multi":{"label":"i7-4750HQ (4)","score":2543}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-4750HQ (4)","single":850,"multi":2543}],"labels":["i7-4750HQ (4)"]},{"key":"Intel Core i7-4870HQ","chip":"Intel Core i7-4870HQ","arch":"Intel","devices":["MacBook Pro (15-inch Retina Mid 2015)"],"geek":{"single":{"label":"i7-4870HQ (4)","score":836},"multi":{"label":"i7-4870HQ (4)","score":2919}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i7-4870HQ (4)","single":836,"multi":2919}],"labels":["i7-4870HQ (4)"]},{"key":"Intel Core i5-5250U","chip":"Intel Core i5-5250U","arch":"Intel","devices":["MacBook Air (13-inch Early 2015)"],"geek":{"single":{"label":"i5-5250U (2)","score":822},"multi":{"label":"i5-5250U (2)","score":1490}},"ai":{},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[{"label":"i5-5250U (2)","single":822,"multi":1490}],"labels":["i5-5250U (2)"]},{"key":"Apple M5 Pro","chip":"Apple M5 Pro","arch":"Apple","devices":["MacBook Pro（14 英寸，M5 Pro 或 M5 Max）","MacBook Pro（16 英寸，M5 Pro 或 M5 Max）"],"geek":{},"ai":{"single":{"CPU":6034,"Neural Engine":6105,"GPU":21771},"half":{"CPU":10483,"Neural Engine":48872,"GPU":37201},"quant":{"CPU":7813,"Neural Engine":66789,"GPU":36544}},"mlx":null,"mlxList":[],"blender":{"cpu":{"score":557.96,"count":11},"gpu":{"detail":"GPU · GPU - 20 cores","score":4224.02,"count":4},"gpuList":[{"detail":"GPU · GPU - 20 cores","score":4224.02,"count":4}]},"configs":[],"labels":[]},{"key":"Apple M5 Max","chip":"Apple M5 Max","arch":"Apple","devices":["MacBook Pro（16 英寸，M5 Pro 或 M5 Max）","MacBook Pro（14 英寸，M5 Pro 或 M5 Max）"],"geek":{},"ai":{"single":{"CPU":5483,"GPU":29446,"Neural Engine":5486},"half":{"CPU":9472,"GPU":46430,"Neural Engine":48942},"quant":{"CPU":7359,"GPU":43476,"Neural Engine":66664}},"mlx":{"detail":"6S+12P+40GPU+128GB · · mlx 0.31.1 · torch 2.11.0","score":802.8,"vals":{"mlx_gpu":802.8,"mlx_cpu":280.2,"mps":737.9,"cpu":432.7},"raw":{"mlx_gpu":0.7411958757322964,"mlx_cpu":8.675671496660835,"mps":0.8355601426110131,"cpu":3.8659982675512974}},"mlxList":[{"detail":"6S+12P+40GPU+128GB · · mlx 0.31.1 · torch 2.11.0","vals":{"mlx_gpu":802.8,"mlx_cpu":280.2,"mps":737.9,"cpu":432.7},"raw":{"mlx_gpu":0.7411958757322964,"mlx_cpu":8.675671496660835,"mps":0.8355601426110131,"cpu":3.8659982675512974},"ops":{"Argmax":{"mlx_gpu":0.98,"mlx_cpu":7.79,"mps":0.62,"cpu":5.63},"BCE":{"mlx_gpu":0.81,"mlx_cpu":13.7,"mps":0.42,"cpu":4.93},"Concat":{"mlx_gpu":2.37,"mlx_cpu":35.06,"mps":2.25,"cpu":5.38},"Conv1d":{"mlx_gpu":0.28,"mlx_cpu":3.57,"mps":0.53,"cpu":53.75},"Conv2d":{"mlx_gpu":0.8,"mlx_cpu":20.69,"mps":0.55,"cpu":18.46},"Gather":{"mlx_gpu":0.64,"mlx_cpu":3.57,"mps":2.15,"cpu":2.77},"LayerNorm":{"mlx_gpu":0.31,"mlx_cpu":2.56,"mps":0.4,"cpu":0.47},"LeakyReLU":{"mlx_gpu":0.33,"mlx_cpu":0.47,"mps":0.24,"cpu":0.19},"Linear":{"mlx_gpu":1.53,"mlx_cpu":48.03,"mps":3.16,"cpu":30.8},"MatMul":{"mlx_gpu":3.61,"mlx_cpu":31.26,"mps":5.47,"cpu":30.53},"PReLU":{"mlx_gpu":0.33,"mlx_cpu":2.05,"mps":0.36,"cpu":0.18},"ReLU":{"mlx_gpu":0.26,"mlx_cpu":0.43,"mps":0.26,"cpu":0.16},"ScaledDotProductAttention":{"mlx_gpu":1.41,"mlx_cpu":8.5,"mps":1.11,"cpu":2.73},"Scatter":{"mlx_gpu":0.3,"mlx_cpu":9.36,"mps":0.51,"cpu":1.52},"ScatterSum":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.3,"cpu":0.9},"ScatterMax":{"mlx_gpu":0,"mlx_cpu":0,"mps":0.36,"cpu":0.91},"SeLU":{"mlx_gpu":0.37,"mlx_cpu":2.65,"mps":0.25,"cpu":2.07},"Sigmoid":{"mlx_gpu":0.32,"mlx_cpu":2.02,"mps":0.24,"cpu":0.6},"Softmax":{"mlx_gpu":3.28,"mlx_cpu":35.25,"mps":1.2,"cpu":8.36},"Softplus":{"mlx_gpu":0.26,"mlx_cpu":17.34,"mps":0.29,"cpu":2.23},"Sort":{"mlx_gpu":0.88,"mlx_cpu":256.2,"mps":25.37,"cpu":59.17},"Sum":{"mlx_gpu":1.18,"mlx_cpu":9.2,"mps":1.37,"cpu":6.4},"SumAll":{"mlx_gpu":0.89,"mlx_cpu":6.74,"mps":0.98,"cpu":1.44}}}],"blender":{"cpu":{"score":580.58,"count":14},"gpu":{"detail":"GPU · GPU - 40 cores","score":8074.05,"count":13},"gpuList":[{"detail":"GPU · GPU - 40 cores","score":8074.05,"count":13},{"detail":"GPU · GPU - 32 cores","score":6106.87,"count":3}]},"configs":[],"labels":[]},{"key":"Intel Core i9-12900K","chip":"Intel Core i9-12900K","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"GPU":8233},"half":{"GPU":8765},"quant":{"GPU":2011}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"AMD Ryzen 9 9950X","chip":"AMD Ryzen 9 9950X","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"CPU":1863,"GPU":10096},"half":{"CPU":1419,"GPU":10059},"quant":{"CPU":1037,"GPU":2295}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i5-13400","chip":"Intel Core i5-13400","arch":"Intel","devices":["iMac（27 英寸，2020 年）"],"geek":{},"ai":{"single":{"CPU":1571,"GPU":2892},"half":{"CPU":1061,"GPU":2710},"quant":{"CPU":705,"GPU":1003}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i9-7980XE","chip":"Intel Core i9-7980XE","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"CPU":1337,"GPU":4654},"half":{"CPU":907,"GPU":4800},"quant":{"CPU":534,"GPU":1219}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Apple A18 Pro","chip":"Apple A18 Pro","arch":"Apple","devices":["MacBook Neo（A18 Pro，2026 年）"],"geek":{},"ai":{"single":{"Neural Engine":5036,"GPU":7392,"CPU":4911},"half":{"Neural Engine":35430,"GPU":8779,"CPU":8278},"quant":{"Neural Engine":49106,"GPU":7921,"CPU":6608}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i3-8100","chip":"Intel Core i3-8100","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"CPU":807},"half":{"CPU":519},"quant":{"CPU":364}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i5-13400F","chip":"Intel Core i5-13400F","arch":"Intel","devices":["iMac Pro（2017 年）"],"geek":{},"ai":{"single":{"CPU":1597,"GPU":6508},"half":{"CPU":1048,"GPU":6581},"quant":{"CPU":681,"GPU":1718}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i7-10700","chip":"Intel Core i7-10700","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"GPU":5626},"half":{"GPU":5790},"quant":{"GPU":1439}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i9-13900K","chip":"Intel Core i9-13900K","arch":"Intel","devices":["iMac（27 英寸，2020 年）"],"geek":{},"ai":{"single":{"CPU":2087,"GPU":9004},"half":{"CPU":1382,"GPU":8975},"quant":{"CPU":845,"GPU":2061}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i5-10310U","chip":"Intel Core i5-10310U","arch":"Intel","devices":["MacBook Pro（13 英寸，2020 年，两个雷雳 3 端口）"],"geek":{},"ai":{"single":{"CPU":650},"half":{"CPU":424},"quant":{"CPU":303}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i7-9700K","chip":"Intel Core i7-9700K","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"GPU":4497,"CPU":1138},"half":{"GPU":4359,"CPU":135},"quant":{"GPU":1165,"CPU":106}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i7-8700","chip":"Intel Core i7-8700","arch":"Intel","devices":["iMac (21.5-inch Retina Early 2019)"],"geek":{},"ai":{"single":{"CPU":930},"half":{"CPU":117},"quant":{"CPU":93}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i5-6600K","chip":"Intel Core i5-6600K","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"CPU":698},"half":{"CPU":467},"quant":{"CPU":349}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i9-14900K","chip":"Intel Core i9-14900K","arch":"Intel","devices":["Mac Pro（2019 年）"],"geek":{},"ai":{"single":{"CPU":2051},"half":{"CPU":1412},"quant":{"CPU":854}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]},{"key":"Intel Core i7-6820HQ","chip":"Intel Core i7-6820HQ","arch":"Intel","devices":["MacBook Pro (15-inch Late 2016)"],"geek":{},"ai":{"single":{"CPU":603},"half":{"CPU":80},"quant":{"CPU":67}},"mlx":null,"mlxList":[],"blender":{"cpu":null,"gpu":null,"gpuList":[]},"configs":[],"labels":[]}];
+const META = {"geek":{"single":{"label":"单核"},"multi":{"label":"多核"},"opencl":{"label":"OpenCL"},"metal":{"label":"Metal"}},"ai":{"color":"#ff6b9d","colorB":"#c0276b","modes":{"single":{"label":"单精度"},"half":{"label":"半精度"},"quant":{"label":"量化"}},"backends":["CPU","GPU","Neural Engine"],"backendLabels":{"CPU":"CPU","GPU":"GPU","Neural Engine":"神经网络引擎"}},"mlx":{"color":"#b99bff","colorB":"#6c4bd8","label":"综合指数 (M1=100)","backends":["mlx_gpu","mlx_cpu","mps","cpu"],"backendLabels":{"mlx_gpu":"MLX GPU","mlx_cpu":"MLX CPU","mps":"MPS","cpu":"PyTorch CPU"}},"blender":{"color":"#ffd166","colorB":"#d98a1e","modes":{"cpu":{"label":"CPU"},"gpu":{"label":"GPU"}}}};
+
+const $=id=>document.getElementById(id);
+const METRIC_ORDER=['geek','blender','ai','mlx'];
+const METRICS={
+  geek:{label:'Geekbench',color:'#30c8ff',colorB:'#1488c4',max:250000,dec:0},
+  single:{label:'单核',color:'#01d2ff',colorB:'#3a7cd6',max:4000,dec:0},
+  multi:{label:'多核',color:'#7c6cff',colorB:'#2f54d0',max:40000,dec:0},
+  opencl:{label:'OpenCL',color:'#ffb224',colorB:'#f4650f',max:160000,dec:0},
+  metal:{label:'Metal',color:'#34d9b2',colorB:'#0f9e8b',max:250000,dec:0},
+  ai:{label:'Geekbench AI',color:'#ff6b9d',colorB:'#c0276b',max:70000,dec:0},
+  mlx:{label:'MLX',color:'#b99bff',colorB:'#6c4bd8',max:1000,dec:1},
+  blender:{label:'Blender',color:'#ffd166',colorB:'#d98a1e',max:9000,dec:1}
+};
+
+let metric='geek', sub='single', aiMode='single', aiBackend='GPU', mlxBackend='mlx_gpu', blenderMode='cpu';
+let family='all', q='', topN='all';
+const compare=new Set(), expanded=new Set();
+const byKey=new Map(ROWS.map(r=>[r.key,r]));
+let currentKeyMap=byKey;
+const ARCH_COLOR={Apple:'#7ee8c8',Intel:'#ffb35c'};
+const checkSvg='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>';
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmt(n,d){return n==null?'—':Number(n).toLocaleString('en-US',{maximumFractionDigits:d==null?0:d});}
+function genOf(chip){const m=/^Apple M(\d+)/.exec(chip);return m?+m[1]:0;}
+function familyOf(device){return /MacBook/.test(device)?'MacBook':/Mac mini/.test(device)?'Mac mini':/iMac/.test(device)?'iMac':/Mac Studio/.test(device)?'Mac Studio':/Mac Pro/.test(device)?'Mac Pro':'Other';}
+function devColor(device,chip){if(!device)return ARCH_COLOR[chip]||'#9fd8ff';const fam=familyOf(device);return {MacBook:'#4dc3ff','Mac mini':'#8fe3a0',iMac:'#ffb35c','Mac Studio':'#b99bff','Mac Pro':'#ff8c9a'}[fam]||'#9fd8ff';}
+function deviceIcon(device,color){
+  const key=/MacBook/.test(device)?'MacBook':/Mac mini/.test(device)?'Mac mini':/iMac/.test(device)?'iMac':/Mac Studio/.test(device)?'Mac Studio':/Mac Pro/.test(device)?'Mac Pro':'Chip';
+  const paths=HICONS[key]||HICONS.Chip;
+  return '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+paths.map(d=>'<path d="'+d+'"/>').join('')+'</svg>';
+}
+function geekScore(r){const v=r.geek[sub];return v?v.score:null;}
+function aiVal(r){const m=r.ai[aiMode];return m?m[aiBackend]:null;}
+function mlxVal(r){return r.mlx?r.mlx.vals[mlxBackend]:null;}
+function blenderVal(r){const v=r.blender[blenderMode];return v?v.score:null;}
+function metricVal(r){
+  if(metric==='ai')return aiVal(r);
+  if(metric==='mlx')return mlxVal(r);
+  if(metric==='blender')return blenderVal(r);
+  return geekScore(r);
+}
+function rowMatches(r,sq){
+  const hay=(r.chip+' '+r.labels.join(' ')+' '+r.devices.join(' ')+(r.mlx?r.mlx.detail:'')+' '+r.blender.gpuList.map(g=>g.detail).join(' ')).toLowerCase();
+  return hay.includes(sq);
+}
+function inFamily(r,fam){return r.devices.some(d=>familyOf(d)===fam);}
+function visibleRows(){
+  const sq=q.trim().toLowerCase();
+  const pool=geekItems();
+  const base=pool.filter(r=>(!sq||rowMatches(r,sq))&&(family==='all'||inFamily(r,family))&&metricVal(r)!=null);
+  if(metric==='geek'){
+    const list=base.sort((a,b)=>((metricVal(b)==null?-1:metricVal(b))-(metricVal(a)==null?-1:metricVal(a)))||(genOf(b.chip)-genOf(a.chip)));
+    return topN==='all'?list:list.slice(0,topN);
+  }
+  const apple=base.filter(r=>r.arch==='Apple').sort((a,b)=>((metricVal(b)==null?-1:metricVal(b))-(metricVal(a)==null?-1:metricVal(a)))||(genOf(b.chip)-genOf(a.chip)));
+  const intel=base.filter(r=>r.arch==='Intel').sort((a,b)=>((metricVal(b)==null?-1:metricVal(b))-(metricVal(a)==null?-1:metricVal(a))));
+  const list=[...apple,...intel];
+  return topN==='all'?list:list.slice(0,topN);
+}
+function metricDef(){
+  if(metric==='ai')return METRICS.ai;
+  if(metric==='mlx')return {...METRICS.mlx,label:META.mlx.label};
+  if(metric==='blender')return METRICS.blender;
+  return METRICS[sub]||METRICS.single;
+}
+function geekItems(){
+  if(metric!=='geek')return ROWS;
+  const items=[];
+  ROWS.forEach(r=>{
+    (r.configs||[]).forEach(c=>{
+      const score=c[sub];
+      if(score==null)return;
+      const geek={};
+      ['single','multi','opencl','metal'].forEach(mode=>{
+        if(c[mode]!=null)geek[mode]={label:c.label,score:c[mode]};
+      });
+      items.push({
+        key:r.key+'::'+c.label,
+        chip:r.chip,
+        arch:r.arch,
+        devices:r.devices,
+        labels:[c.label],
+        configs:r.configs,
+        geek,
+        ai:r.ai,
+        mlx:r.mlx,
+        blender:r.blender,
+        expandable:false
+      });
+    });
+  });
+  return items;
+}
+function axisTicks(){
+  const md=metricDef();
+  return [0,1,2,3,4].map(t=>{
+    const val=Math.round(md.max*t/4);
+    return '<span class="tick" style="left:'+(t*25)+'%">'+fmt(val)+'</span>';
+  }).join('');
+}
+function expanderHTML(key){
+  const open=expanded.has(key);
+  const chev='<svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l5 5 5-5"/></svg>';
+  return '<button type="button" class="expander'+(open?' open':'')+'" data-key="'+esc(key)+'" title="查看配置与机型详情">'+chev+'</button>';
+}
+function nameSummary(r){
+  let cores=r.labels.length?r.labels[0]:r.chip.replace(/^Apple\s+/,'').replace(/^Intel\s+(?:Core|Xeon|Pentium|Celeron)\s+/,'');
+  const devs=r.devices.length>1?esc(r.devices[0])+' 等 '+r.devices.length+' 款':esc(r.devices[0]||r.chip);
+  return '<span class="chip-summary"><b>'+esc(cores)+'</b><span class="summary-tail"> · '+devs+'</span></span>';
+}
+function detailBoxesHTML(r){
+  let dev='<div class="detail-box"><div class="dlabel">来源机型 · '+r.devices.length+' 款</div><div class="dev-list">'+(r.devices.length?r.devices.map(d=>'<span>'+esc(d)+'</span>').join(''):'<span class="none">暂无机型信息</span>')+'</div></div>';
+  let cfg='<div class="detail-box wide"><div class="dlabel">Geekbench 核心配置</div>';
+  if(!r.configs.length)cfg+='<div class="none">暂无 Geekbench 成绩</div>';
+  else{
+    cfg+='<table class="cfg-table"><thead><tr><th>配置</th><th>单核</th><th>多核</th><th>OpenCL</th><th>Metal</th></tr></thead><tbody>';
+    r.configs.forEach(c=>{
+      cfg+='<tr><td>'+esc(c.label)+'</td><td>'+(c.single?fmt(c.single,0):'<span class="none">—</span>')+'</td><td>'+(c.multi?fmt(c.multi,0):'<span class="none">—</span>')+'</td><td>'+(c.opencl?fmt(c.opencl,0):'<span class="none">—</span>')+'</td><td>'+(c.metal?fmt(c.metal,0):'<span class="none">—</span>')+'</td></tr>';
+    });
+    cfg+='</tbody></table>';
+  }
+  cfg+='</div>';
+  let mlx='<div class="detail-box"><div class="dlabel">MLX 配置 · '+esc(META.mlx.backendLabels[mlxBackend]||mlxBackend)+'</div>';
+  if(!r.mlxList.length)mlx+='<div class="none">无 MLX 成绩</div>';
+  else mlx+=r.mlxList.map(m=>'<div class="drow"><span>'+esc(m.detail)+'</span><b>'+fmt(m.vals[mlxBackend],1)+'</b></div>').join('');
+  mlx+='</div>';
+  let bl='<div class="detail-box"><div class="dlabel">Blender 4.5 · 中位数</div>';
+  if(r.blender.cpu)bl+='<div class="drow"><span>CPU · '+r.blender.cpu.count+' 次</span><b>'+fmt(r.blender.cpu.score,2)+'</b></div>';
+  if(r.blender.gpuList.length)bl+=r.blender.gpuList.map(g=>'<div class="drow"><span>'+esc(g.detail.replace('GPU · ',''))+' · '+g.count+' 次</span><b>'+fmt(g.score,2)+'</b></div>').join('');
+  if(!r.blender.cpu&&!r.blender.gpuList.length)bl+='<div class="none">无 Blender 成绩</div>';
+  bl+='</div>';
+  let ai='';
+  if(r.arch==='Apple'&&Object.keys(r.ai).length){
+    ai='<div class="detail-box"><div class="dlabel">Geekbench AI</div>';
+    ['single','half','quant'].forEach(mode=>{
+      const m=r.ai[mode];
+      if(!m)return;
+      ai+='<div class="drow"><span>'+esc(META.ai.modes[mode].label)+'</span><b>'+fmt(m[aiBackend]!=null?m[aiBackend]:0,0)+'</b></div>';
+    });
+    ai+='</div>';
+  }
+  return dev+cfg+ai+mlx+bl;
+}
+function appendDetailRow(tbody,r){
+  const tr=document.createElement('tr');
+  tr.className='detail-row';
+  tr.innerHTML='<td colspan="2"><div class="detail-inner">'+detailBoxesHTML(r)+'</div></td>';
+  tbody.appendChild(tr);
+}
+function subPills(container,entries,current,onPick){
+  container.innerHTML='';
+  container.classList.add('subs');
+  entries.forEach(e=>{
+    const b=document.createElement('button');
+    b.className='sub'+(e.key===current?' active':'');
+    b.textContent=e.label;
+    b.onclick=()=>onPick(e.key);
+    container.appendChild(b);
+  });
+  return container;
+}
+function renderControls(){
+  const box=$('metricModes');box.innerHTML='';
+  METRIC_ORDER.forEach(k=>{
+    const b=document.createElement('button');
+    b.className='mode'+(k===metric?' active':'');
+    b.textContent=METRICS[k].label;
+    b.onclick=()=>{
+      if(k!==metric){compare.clear();expanded.clear();}
+      metric=k;sub='single';topN='all';
+      if(k==='geek')sub='single';
+      if(k==='ai'){aiMode='single';aiBackend='GPU';}
+      if(k==='mlx')mlxBackend='mlx_gpu';
+      if(k==='blender')blenderMode='cpu';
+      render();
+    };
+    box.appendChild(b);
+  });
+  subPills($('aiModes'),Object.keys(META.ai.modes).map(k=>({key:k,label:META.ai.modes[k].label})),aiMode,k=>{aiMode=k;render();});
+  subPills($('aiBackends'),META.ai.backends.map(k=>({key:k,label:META.ai.backendLabels[k]||k})),aiBackend,k=>{aiBackend=k;render();});
+  subPills($('mlxBackends'),META.mlx.backends.map(k=>({key:k,label:META.mlx.backendLabels[k]||k})),mlxBackend,k=>{mlxBackend=k;render();});
+  subPills($('blenderModes'),Object.keys(META.blender.modes).map(k=>({key:k,label:META.blender.modes[k].label})),blenderMode,k=>{blenderMode=k;render();});
+  const showAi=metric==='ai',showMlx=metric==='mlx',showBlender=metric==='blender',showGeek=metric==='geek';
+  $('aiGroups').hidden=!showAi;
+  $('mlxGroup').hidden=!showMlx;
+  $('blenderGroup').hidden=!showBlender;
+  $('geekGroup').hidden=!showGeek;
+  subPills($('geekModes'),['single','multi','opencl','metal'].map(k=>({key:k,label:METRICS[k].label})),sub,k=>{sub=k;render();});
+  document.querySelectorAll('.pill[data-family]').forEach(p=>p.classList.toggle('active',p.dataset.family===family));
+  const md=metricDef();
+  document.documentElement.style.setProperty('--accent',md.color);
+  const acc=$('titleAccent');acc.style.background='linear-gradient(90deg,'+md.color+','+md.colorB+')';acc.style.webkitBackgroundClip='text';acc.style.backgroundClip='text';
+  $('modeTitle').textContent=md.label;
+  const count=metric==='geek'?geekItems().length:ROWS.filter(r=>metricVal(r)!=null).length;
+  $('modeCount').textContent='共 '+count+(metric==='geek'?' 款芯片配置':' 款芯片');
+}
+function render(){
+  renderControls();
+  const list=visibleRows();
+  currentKeyMap=new Map(list.map(r=>[r.key,r]));
+  const apple=list.filter(r=>r.arch==='Apple').length, intel=list.filter(r=>r.arch==='Intel').length;
+  const md=metricDef();
+  const tbody=$('rankBody');tbody.innerHTML='';
+  let aRank=0,iRank=0;
+  const pushGroup=(label,n)=>{
+    const tr=document.createElement('tr');tr.className='group-row';
+    const td=document.createElement('td');td.colSpan=2;
+    td.innerHTML=esc(label)+'<span class="group-count">'+n+' 款</span>';
+    tr.appendChild(td);tbody.appendChild(tr);
+  };
+  const buildRow=(r,rank)=>{
+    const tr=document.createElement('tr');
+    tr.className='data-row'+(compare.has(r.key)?' compare-pin':'');
+    tr.dataset.key=r.key;
+    const primary=r.devices[0]||r.chip;
+    const color=devColor(primary,r.chip);
+    const pin=compare.has(r.key);
+    const nameCell=document.createElement('td');nameCell.className='name';
+    nameCell.innerHTML='<div class="name-top"><span class="rank">'+rank+'</span>'+deviceIcon(primary,color)+'<div><div class="device">'+esc(r.chip)+'</div><div class="chip-model">'+nameSummary(r)+'</div></div><span class="cmp-hint">'+(pin?'已加入':'对比')+'</span><span class="cmp-check">'+checkSvg+'</span></div>';
+    tr.appendChild(nameCell);
+    const barCell=document.createElement('td');barCell.className='chart';
+    const val=metricVal(r);
+    const pct=val==null?0:Math.max(0.4,Math.min(100,val/md.max*100));
+    barCell.innerHTML='<div class="axis-ticks">'+axisTicks()+'</div><div class="bar-wrap"><div class="bar" style="--barA:'+md.color+';--barB:'+md.colorB+';width:'+pct+'%"><span class="score">'+(val==null?'<span class="none">—</span>':fmt(val,md.dec))+'</span></div></div>';
+    tr.appendChild(barCell);
+    tbody.appendChild(tr);
+    if(expanded.has(r.key))appendDetailRow(tbody,r);
+    requestAnimationFrame(()=>{const bar=tr.querySelector('.bar');if(bar)setTimeout(()=>bar.classList.add('anim'),(tbody.children.length%8)*18);});
+  };
+  if(metric==='geek'){
+    let rank=0;
+    list.forEach(r=>buildRow(r,metricVal(r)==null?'—':'#'+(++rank)));
+  }else{
+    if(apple)pushGroup('Apple 芯片',apple);
+    list.forEach(r=>{if(r.arch==='Apple')buildRow(r,metricVal(r)==null?'—':'#'+(++aRank));});
+    if(intel)pushGroup('Intel 芯片',intel);
+    list.forEach(r=>{if(r.arch==='Intel')buildRow(r,metricVal(r)==null?'—':'#'+(++iRank));});
+  }
+  if(!list.length){
+    const tr=document.createElement('tr');tr.className='empty-row';
+    const td=document.createElement('td');td.colSpan=2;
+    td.className='no-data';
+    td.textContent='当前筛选条件下没有该指标的数据';
+    tr.appendChild(td);tbody.appendChild(tr);
+  }
+  const total=metric==='geek'?geekItems().length:ROWS.filter(r=>metricVal(r)!=null).length;
+  const max=Math.max(1,total);
+  $('topNLabel').textContent=list.length>=total?('全部 '+total):('前 '+list.length+' / '+total);
+  $('topN').max=max;$('topN').value=topN==='all'?max:Math.min(topN,max);
+  renderCmp();
+}
+function toggleCmp(r){
+  const k=r.key;
+  if(compare.has(k))compare.delete(k);
+  else{if(compare.size>=6)compare.delete([...compare][0]);compare.add(k);}
+  render();
+}
+function openDrawer(){
+  $('drawer').classList.add('open');
+  $('drawer').setAttribute('aria-hidden','false');
+  $('scrim').classList.add('show');
+  document.body.classList.add('no-scroll');
+}
+function closeDrawer(){
+  $('drawer').classList.remove('open');
+  $('drawer').setAttribute('aria-hidden','true');
+  $('scrim').classList.remove('show');
+  document.body.classList.remove('no-scroll');
+}
+function renderCmp(){
+  const body=$('cmpBody');body.innerHTML='';
+  $('cmpCount').textContent=compare.size?String(compare.size):'0';
+  $('cmpHint').textContent=compare.size?'点击排行中的行可继续增减':'点击排行中的行加入对比';
+  if(!compare.size){
+    body.innerHTML='<div class="empty"><div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg><br>还没有加入对比的芯片<br>点击表格行即可添加</div></div>';
+    return;
+  }
+  const items=[...compare].map(k=>currentKeyMap.get(k)||byKey.get(k)).filter(Boolean);
+  const rankOf=(vals,val)=>val==null?null:vals.filter(v=>v!=null).sort((a,b)=>b-a).indexOf(val)+1;
+  const rankBadge=(rank)=>rank==null?'<span class="cmp-rank">—</span>':'<span class="cmp-rank">#'+rank+'</span>';
+  const geekVals={};
+  ['single','multi','opencl','metal'].forEach(k=>geekVals[k]=items.map(r=>(r.geek[k]||{}).score));
+  const aiVals=items.map(r=>aiVal(r));
+  const mlxVals=items.map(r=>mlxVal(r));
+  const blenderVals=items.map(r=>blenderVal(r));
+  let html='<div class="compare-grid">';
+  items.forEach(r=>{
+    html+='<div class="cmp-card"><div class="cmp-head"><div><div class="cmp-name">'+esc(r.chip)+'</div><div class="cmp-chip">'+esc(r.labels.slice(0,2).join(' / ')||'Apple 芯片')+' · '+(r.devices.length>1?esc(r.devices[0])+' 等 '+r.devices.length+' 款':esc(r.devices[0]||''))+'</div></div><button class="x-btn" data-rm="'+esc(r.key)+'">移除</button></div>';
+    html+='<div class="cmp-cat">Geekbench 6</div>';
+    ['single','multi','opencl','metal'].forEach(k=>{
+      const v=(r.geek[k]||{}).score;
+      const p=v==null?0:Math.max(1,Math.min(100,v/METRICS[k].max*100));
+      html+='<div class="cmp-row"><div class="label"><span class="cmp-label">'+rankBadge(rankOf(geekVals[k],v))+'<span>'+esc(METRICS[k].label)+'</span></span>'+(v==null?'<b class="none">—</b>':'<b>'+fmt(v,0)+'</b>')+'</div><div class="lbar">'+(v==null?'':'<span class="lfill" style="width:'+p.toFixed(1)+'%;background:'+METRICS[k].color+'"></span>')+'</div></div>';
+    });
+    const ai=aiVal(r),mlx=mlxVal(r),bl=blenderVal(r);
+    if(Object.keys(r.ai||{}).length){
+      const aip=ai==null?0:Math.max(1,Math.min(100,ai/METRICS.ai.max*100));
+      html+='<div class="cmp-cat">Geekbench AI</div>';
+      html+='<div class="cmp-row"><div class="label"><span class="cmp-label">'+rankBadge(rankOf(aiVals,ai))+'<span>AI '+esc(META.ai.modes[aiMode].label)+' · '+esc(META.ai.backendLabels[aiBackend]||aiBackend)+'</span></span>'+(ai==null?'<b class="none">—</b>':'<b>'+fmt(ai,0)+'</b>')+'</div><div class="lbar">'+(ai==null?'':'<span class="lfill" style="width:'+aip.toFixed(1)+'%;background:#ff6b9d"></span>')+'</div></div>';
+    }
+    if(r.mlx){
+      const mlxp=mlx==null?0:Math.max(1,Math.min(100,mlx/METRICS.mlx.max*100));
+      html+='<div class="cmp-cat">MLX</div>';
+      html+='<div class="cmp-row"><div class="label"><span class="cmp-label">'+rankBadge(rankOf(mlxVals,mlx))+'<span>MLX · '+esc(META.mlx.backendLabels[mlxBackend]||mlxBackend)+'</span></span>'+(mlx==null?'<b class="none">—</b>':'<b>'+fmt(mlx,1)+'</b>')+'</div><div class="lbar">'+(mlx==null?'':'<span class="lfill" style="width:'+mlxp.toFixed(1)+'%;background:#b99bff"></span>')+'</div></div>';
+    }
+    if(r.blender.cpu||r.blender.gpuList.length){
+      const blp=bl==null?0:Math.max(1,Math.min(100,bl/METRICS.blender.max*100));
+      html+='<div class="cmp-cat">Blender</div>';
+      html+='<div class="cmp-row"><div class="label"><span class="cmp-label">'+rankBadge(rankOf(blenderVals,bl))+'<span>Blender '+esc(META.blender.modes[blenderMode].label)+'</span></span>'+(bl==null?'<b class="none">—</b>':'<b>'+fmt(bl,1)+'</b>')+'</div><div class="lbar">'+(bl==null?'':'<span class="lfill" style="width:'+blp.toFixed(1)+'%;background:#ffd166"></span>')+'</div></div>';
+    }
+    html+='</div>';
+  });
+  html+='</div>';
+  body.innerHTML=html;
+  body.querySelectorAll('[data-rm]').forEach(b=>{
+    b.onclick=e=>{e.stopPropagation();toggleCmp(currentKeyMap.get(b.dataset.rm)||byKey.get(b.dataset.rm),false);if(!compare.size)closeDrawer();};
+  });
+}
+$('rankTable').addEventListener('click',e=>{
+  const exp=e.target.closest('.expander');
+  if(exp){const k=exp.dataset.key;if(expanded.has(k))expanded.delete(k);else expanded.add(k);render();return;}
+  if(e.target.closest('.detail-row'))return;
+  const tr=e.target.closest('tr[data-key]');
+  if(tr){const r=currentKeyMap.get(tr.dataset.key)||byKey.get(tr.dataset.key);if(r)toggleCmp(r);}
+},{capture:true});
+$('search').addEventListener('input',e=>{q=e.target.value;render();});
+$('topN').addEventListener('input',e=>{topN=+e.target.value;render();});
+document.querySelectorAll('.pill[data-family]').forEach(p=>p.addEventListener('click',()=>{family=p.dataset.family;render();}));
+$('openCmp').onclick=()=>{compare.size?openDrawer():alert('先点击表格行添加要对比的芯片');};
+$('clearCmp').onclick=()=>{compare.clear();render();closeDrawer();};
+$('closeDrawer').onclick=closeDrawer;
+$('scrim').onclick=closeDrawer;
+$('saveBtn').onclick=async()=>{
+  const btn=$('saveBtn');btn.textContent='生成中...';
+  try{
+    const mod=await import('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.esm.js');
+    const html2canvas=mod.default||window.html2canvas;
+    if(typeof html2canvas!=='function')throw new Error('html2canvas 加载失败');
+    const el=document.querySelector('.table-scroll');
+    const canvas=await html2canvas(el,{backgroundColor:'#050506',scale:2,useCORS:true,windowWidth:1320});
+    const a=document.createElement('a');a.download='Mac芯片综合性能排行-'+METRICS[metric].label+'.png';a.href=canvas.toDataURL('image/png');a.click();
+  }catch(err){alert('保存失败：'+err.message);}
+  btn.textContent='保存图片';
+};
+render();
+
+</script>
+</body>
+</html>
