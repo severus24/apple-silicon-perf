@@ -22,8 +22,8 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp tep/index.html _site/index.html
-          cp tep/logo.jpg _site/logo.jpg
+          cp index.html _site/index.html
+          cp logo.jpg _site/logo.jpg
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

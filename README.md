@@ -1,51 +1,50 @@
-# Apple Silicon Performance Rankings
+# Apple Silicon 性能排行
 
-Interactive Mac chip performance comparison page built from public benchmark data.
+[English](README.en.md)
 
-The page covers four benchmark families:
+基于公开基准数据整理的 Mac 芯片综合性能对比页面。
+
+页面覆盖四类基准：
 
 - Geekbench 6
 - Blender Open Data
 - Geekbench AI
 - MLX
 
-Apple Silicon and supported Intel/AMD Mac configurations are shown in one page, with primary and secondary metric controls.
+Apple Silicon 以及支持的 Intel/AMD Mac 配置会显示在同一个页面中，并支持主选项与二级选项切换。
 
-## Live Demo
-
-The GitHub Pages deployment serves `tep/index.html` as the site root:
+## 在线访问
 
 <https://severus24.github.io/apple-silicon-perf/>
 
-## Run Locally
+## 本地运行
 
-Open `tep/index.html` directly in a browser. No build tools, package installation, or local server are required.
+直接用浏览器打开根目录的 `index.html` 即可，不需要构建工具、依赖安装或本地服务器。
 
-The HTML file is self-contained: the CSS and JavaScript are inlined, and the only local asset is:
+HTML 文件是自包含的，CSS 和 JavaScript 都已内嵌，唯一的本地资源是：
 
-- `tep/logo.jpg`
+- `logo.jpg`
 
-## Features
+## 功能
 
-- Primary benchmark selector: Geekbench, Blender, Geekbench AI, MLX
-- Secondary selectors for each benchmark mode and backend
-- Search by chip name or Mac model
-- Filter by device family
-- Adjustable number of visible rows
-- Unified Geekbench ranking without Apple/Intel group separators
-- Comparison drawer with per-submetric rank badges
-- Expandable details in the comparison cards
-- PNG export of the current ranking
+- 主选项：Geekbench、Blender、Geekbench AI、MLX
+- 各基准对应的二级选项
+- 按芯片名称或 Mac 机型搜索
+- 按设备家族筛选
+- 可调整显示行数
+- Geekbench 统一排行，不再拆分 Apple / Intel 分组
+- 对比抽屉支持每个子项目的排名徽标
+- 对比卡片中的详情分类展示
+- 当前排行可导出为 PNG 图片
 
-## Project Structure
+## 项目结构
 
 ```text
 .
-├── .github/workflows/pages.yml   # GitHub Pages deployment workflow
-├── tep/
-│   ├── index.html                # Main page with inlined CSS and JavaScript
-│   └── logo.jpg                  # Favicon and Apple logo asset
-└── data/                         # Raw benchmark source data
+├── .github/workflows/pages.yml   # GitHub Pages 部署工作流
+├── index.html                    # 主页面，内嵌 CSS 和 JavaScript
+├── logo.jpg                      # favicon 和 Apple logo 资源
+└── data/                         # 原始基准数据
     ├── data/
     │   ├── geekbench.txt
     │   ├── Blender Benchmark CPU.json
@@ -56,9 +55,9 @@ The HTML file is self-contained: the CSS and JavaScript are inlined, and the onl
     └── ...
 ```
 
-## Data Sources
+## 数据来源
 
-The raw data is committed for reproducibility and future updates:
+原始数据已提交，便于复现和后续更新：
 
 - `data/data/geekbench.txt`
 - `data/data/Blender Benchmark CPU.json`
@@ -67,13 +66,13 @@ The raw data is committed for reproducibility and future updates:
 - `data/data/average_benchmark.md`
 - `data/data/detailed_benchmark.md`
 
-Benchmark values are only comparable within the same benchmark. They should not be converted or compared across different benchmarks.
+不同基准的数值只应在同一个基准内部比较，不应跨基准换算或直接比较。
 
-## Deployment
+## 部署
 
-Pushing to `main` triggers the GitHub Actions workflow in `.github/workflows/pages.yml`.
+推送到 `main` 会触发 `.github/workflows/pages.yml` 中的 GitHub Actions 工作流。
 
-The workflow copies:
+工作流会将：
 
-- `tep/index.html` to the Pages site root as `index.html`
-- `tep/logo.jpg` to the Pages site root as `logo.jpg`
+- `index.html` 复制为 Pages 站点根目录的 `index.html`
+- `logo.jpg` 复制为 Pages 站点根目录的 `logo.jpg`
