@@ -1,0 +1,964 @@
+单核分数：
+MacBook Pro (14-inch, 2025)
+Apple M5 @ 4.6 GHz (10 CPU cores, 10 GPU cores)
+3625
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+3492
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+3485
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+3414
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+3390
+MacBook Pro (16-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+3375
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+3355
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+3337
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+3328
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+3322
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+3315
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+3309
+Mac mini (2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+3275
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+3243
+MacBook Pro (14-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+3238
+MacBook Air (15-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+3206
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 8 GPU cores)
+3199
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+3199
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (8 CPU cores, 8 GPU cores)
+3135
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (28 CPU cores, 60 GPU cores)
+2914
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (32 CPU cores, 80 GPU cores)
+2912
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+2841
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+2818
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+2812
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+2807
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+2804
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+2777
+iMac (24-inch, 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 8 GPU cores)
+2767
+iMac (24-inch, 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+2767
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (11 CPU cores, 14 GPU cores)
+2764
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+2737
+Mac Studio (2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+2531
+Mac Studio (2023)
+Apple M2 Ultra @ 3.7 GHz (24 CPU cores, 60 GPU cores)
+2511
+Mac Studio (2023)
+Apple M2 Ultra @ 3.7 GHz (24 CPU cores, 76 GPU cores)
+2511
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 30 GPU cores)
+2477
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+2477
+MacBook Pro (16-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+2433
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+2411
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+2399
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+2398
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+2389
+Mac mini (2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+2388
+MacBook Pro (13-inch, 2022)
+Apple M2 @ 3.5 GHz (8 cores)
+2352
+MacBook Air (2022)
+Apple M2 @ 3.5 GHz (8 cores)
+2352
+MacBook Air (15-inch, 2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+2339
+Mac Studio
+Apple M1 Ultra @ 3.2 GHz (20 cores)
+2227
+Mac Studio
+Apple M1 Max @ 3.2 GHz (10 cores)
+2220
+MacBook Pro (16-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 CPU cores, 10 GPU cores)
+2204
+MacBook Pro (16-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+2204
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 cores)
+2198
+MacBook Pro (14-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+2198
+Mac mini (Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+2192
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (8 cores)
+2181
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+2175
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+2175
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 8 GPU cores)
+2168
+MacBook Pro (13-inch Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+2168
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 7 GPU cores)
+2168
+iMac (27-inch Retina Mid 2020)
+Intel Core i7-10700K @ 3.8 GHz (8 cores)
+1639
+iMac (27-inch Retina Early 2019)
+Intel Core i9-9900K @ 3.6 GHz (8 cores)
+1591
+iMac (27-inch Retina Mid 2020)
+Intel Core i5-10600 @ 3.3 GHz (6 cores)
+1531
+iMac (27-inch Retina Mid 2020)
+Intel Core i5-10500 @ 3.1 GHz (6 cores)
+1432
+iMac (27-inch Retina Early 2019)
+Intel Core i5-9600K @ 3.7 GHz (6 cores)
+1405
+Mac mini (Late 2018)
+Intel Core i7-8700B @ 3.2 GHz (6 cores)
+1404
+iMac Pro (Late 2017)
+Intel Xeon W-2191B @ 2.3 GHz (18 cores)
+1369
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+1365
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+1365
+iMac (27-inch Retina Late 2015)
+Intel Core i7-6700K @ 4.0 GHz (4 cores)
+1358
+iMac Pro (Late 2017)
+Intel Xeon W-2150B @ 3.0 GHz (10 cores)
+1357
+MacBook Pro (13-inch Mid 2020)
+Intel Core i7-1068NG7 @ 2.3 GHz (4 cores)
+1354
+MacBook Pro (16-inch Late 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+1333
+Mac mini (Late 2018)
+Intel Core i5-8500B @ 3.0 GHz (6 cores)
+1329
+MacBook Pro (15-inch Mid 2018)
+Intel Core i9-8950HK @ 2.9 GHz (6 cores)
+1327
+iMac (21.5-inch Retina Early 2019)
+Intel Core i5-8500 @ 3.0 GHz (6 cores)
+1325
+iMac (27-inch Retina Mid 2017)
+Intel Core i7-7700K @ 4.2 GHz (4 cores)
+1323
+MacBook Pro (15-inch Mid 2018)
+Intel Core i7-8850H @ 2.6 GHz (6 cores)
+1321
+MacBook Pro (16-inch Late 2019)
+Intel Core i9-9880H @ 2.3 GHz (8 cores)
+1318
+Mac Pro (Late 2019)
+Intel Xeon W-3275M @ 2.5 GHz (28 cores)
+1313
+Mac Pro (Late 2019)
+Intel Xeon W-3245 @ 3.2 GHz (16 cores)
+1311
+Mac Pro (Late 2019)
+Intel Xeon W-3235 @ 3.3 GHz (12 cores)
+1300
+iMac (27-inch Retina Early 2019)
+Intel Core i5-8500 @ 3.0 GHz (6 cores)
+1292
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9880H @ 2.3 GHz (8 cores)
+1290
+MacBook Pro (16-inch Late 2019)
+Intel Core i7-9750H @ 2.6 GHz (6 cores)
+1282
+MacBook Pro (15-inch Mid 2019)
+Intel Core i7-9750H @ 2.6 GHz (6 cores)
+1253
+MacBook Pro (13-inch Mid 2019)
+Intel Core i7-8569U @ 2.8 GHz (4 cores)
+1234
+iMac (27-inch Retina Mid 2017)
+Intel Core i5-7500 @ 3.4 GHz (4 cores)
+1211
+MacBook Pro (15-inch Mid 2018)
+Intel Core i7-8750H @ 2.2 GHz (6 cores)
+1206
+Mac mini (Late 2018)
+Intel Core i3-8100B @ 3.6 GHz (4 cores)
+1192
+MacBook Pro (13-inch Mid 2020)
+Intel Core i5-1038NG7 @ 2.0 GHz (4 cores)
+1186
+MacBook Pro (13-inch Mid 2019)
+Intel Core i5-8257U @ 1.4 GHz (4 cores)
+1171
+iMac Pro (Late 2017)
+Intel Xeon W-2140B @ 3.2 GHz (8 cores)
+1163
+MacBook Pro (13-inch Mid 2018)
+Intel Core i7-8559U @ 2.7 GHz (4 cores)
+1160
+MacBook Pro (13-inch Mid 2019)
+Intel Core i5-8279U @ 2.4 GHz (4 cores)
+1146
+MacBook Pro (13-inch Mid 2020)
+Intel Core i5-8257U @ 1.4 GHz (4 cores)
+1145
+MacBook Pro (13-inch Mid 2018)
+Intel Core i5-8259U @ 2.3 GHz (4 cores)
+1111
+MacBook Pro (13-inch Mid 2017)
+Intel Core i5-7360U @ 2.3 GHz (2 cores)
+1092
+iMac (21.5-inch Retina Mid 2017)
+Intel Core i5-7400 @ 3.0 GHz (4 cores)
+1074
+MacBook Air (Early 2020)
+Intel Core i7-1060NG7 @ 1.2 GHz (4 cores)
+1069
+iMac (27-inch Retina Late 2015)
+Intel Core i5-6500 @ 3.2 GHz (4 cores)
+1019
+MacBook Air (Early 2020)
+Intel Core i3-1000NG4 @ 1.1 GHz (2 cores)
+1011
+MacBook Air (Early 2020)
+Intel Core i5-1030NG7 @ 1.1 GHz (4 cores)
+998
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4770HQ @ 2.2 GHz (4 cores)
+954
+MacBook Pro (13-inch Retina Early 2015)
+Intel Core i5-5257U @ 2.7 GHz (2 cores)
+948
+iMac (21.5-inch Late 2013)
+Intel Core i5-4570R @ 2.7 GHz (4 cores)
+899
+MacBook Pro (15-inch Retina Late 2013)
+Intel Core i7-4750HQ @ 2.0 GHz (4 cores)
+850
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4870HQ @ 2.5 GHz (4 cores)
+836
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4870HQ @ 2.5 GHz (4 cores)
+836
+MacBook Air (13-inch Early 2015)
+Intel Core i5-5250U @ 1.6 GHz (2 cores)
+822
+
+多核分数：
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (32 CPU cores, 80 GPU cores)
+39632
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (28 CPU cores, 60 GPU cores)
+34845
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+28948
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+28816
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+28343
+Mac Studio (2023)
+Apple M2 Ultra @ 3.7 GHz (24 CPU cores, 60 GPU cores)
+28212
+Mac Studio (2023)
+Apple M2 Ultra @ 3.7 GHz (24 CPU cores, 76 GPU cores)
+28212
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+25788
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+25590
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+25038
+MacBook Pro (16-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+24901
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+24683
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+24599
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+24414
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+24162
+Mac Studio
+Apple M1 Ultra @ 3.2 GHz (20 cores)
+23707
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+22385
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+21889
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+21792
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+21762
+MacBook Pro (14-inch, 2025)
+Apple M5 @ 4.6 GHz (10 CPU cores, 10 GPU cores)
+17919
+Mac Studio (2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+17298
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 30 GPU cores)
+16976
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+16976
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+16765
+MacBook Pro (16-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+16726
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+16605
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+16463
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+16001
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+15472
+Mac mini (2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+15302
+MacBook Pro (14-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+15157
+MacBook Air (15-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+15048
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 8 GPU cores)
+15030
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+15030
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (11 CPU cores, 14 GPU cores)
+14962
+Mac Pro (Late 2019)
+Intel Xeon W-3275M @ 2.5 GHz (28 cores)
+14696
+Mac Studio
+Apple M1 Max @ 3.2 GHz (10 cores)
+14150
+MacBook Pro (16-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 CPU cores, 10 GPU cores)
+14022
+MacBook Pro (16-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+14022
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 cores)
+13927
+MacBook Pro (14-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+13927
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+13634
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+13613
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (8 CPU cores, 8 GPU cores)
+12917
+Mac Pro (Late 2019)
+Intel Xeon W-3245 @ 3.2 GHz (16 cores)
+12438
+iMac (24-inch, 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 8 GPU cores)
+12038
+iMac (24-inch, 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+12038
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+11305
+iMac Pro (Late 2017)
+Intel Xeon W-2191B @ 2.3 GHz (18 cores)
+11177
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (8 cores)
+11150
+Mac Pro (Late 2019)
+Intel Xeon W-3235 @ 3.3 GHz (12 cores)
+10489
+Mac mini (2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+9706
+MacBook Air (2022)
+Apple M2 @ 3.5 GHz (8 cores)
+9701
+MacBook Pro (13-inch, 2022)
+Apple M2 @ 3.5 GHz (8 cores)
+9658
+MacBook Air (15-inch, 2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+9536
+Mac mini (Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+8667
+iMac Pro (Late 2017)
+Intel Xeon W-2150B @ 3.0 GHz (10 cores)
+8545
+MacBook Pro (13-inch Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+8353
+iMac (27-inch Retina Mid 2020)
+Intel Core i7-10700K @ 3.8 GHz (8 cores)
+8336
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+8280
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+8280
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 8 GPU cores)
+8175
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 7 GPU cores)
+8175
+iMac (27-inch Retina Early 2019)
+Intel Core i9-9900K @ 3.6 GHz (8 cores)
+7541
+MacBook Pro (16-inch Late 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+6595
+iMac Pro (Late 2017)
+Intel Xeon W-2140B @ 3.2 GHz (8 cores)
+6496
+MacBook Pro (16-inch Late 2019)
+Intel Core i9-9880H @ 2.3 GHz (8 cores)
+6458
+iMac (27-inch Retina Mid 2020)
+Intel Core i5-10600 @ 3.3 GHz (6 cores)
+6425
+iMac (27-inch Retina Mid 2020)
+Intel Core i5-10500 @ 3.1 GHz (6 cores)
+6274
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+6208
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9980HK @ 2.4 GHz (8 cores)
+6208
+MacBook Pro (15-inch Mid 2019)
+Intel Core i9-9880H @ 2.3 GHz (8 cores)
+5489
+Mac mini (Late 2018)
+Intel Core i7-8700B @ 3.2 GHz (6 cores)
+5403
+MacBook Pro (16-inch Late 2019)
+Intel Core i7-9750H @ 2.6 GHz (6 cores)
+5380
+MacBook Pro (15-inch Mid 2018)
+Intel Core i7-8850H @ 2.6 GHz (6 cores)
+5203
+iMac (21.5-inch Retina Early 2019)
+Intel Core i5-8500 @ 3.0 GHz (6 cores)
+5088
+iMac (27-inch Retina Early 2019)
+Intel Core i5-9600K @ 3.7 GHz (6 cores)
+5025
+MacBook Pro (15-inch Mid 2018)
+Intel Core i9-8950HK @ 2.9 GHz (6 cores)
+5022
+iMac (27-inch Retina Early 2019)
+Intel Core i5-8500 @ 3.0 GHz (6 cores)
+4981
+MacBook Pro (15-inch Mid 2019)
+Intel Core i7-9750H @ 2.6 GHz (6 cores)
+4832
+MacBook Pro (15-inch Mid 2018)
+Intel Core i7-8750H @ 2.2 GHz (6 cores)
+4749
+Mac mini (Late 2018)
+Intel Core i5-8500B @ 3.0 GHz (6 cores)
+4731
+iMac (27-inch Retina Late 2015)
+Intel Core i7-6700K @ 4.0 GHz (4 cores)
+4579
+MacBook Pro (13-inch Mid 2020)
+Intel Core i7-1068NG7 @ 2.3 GHz (4 cores)
+4388
+iMac (27-inch Retina Mid 2017)
+Intel Core i7-7700K @ 4.2 GHz (4 cores)
+4385
+MacBook Pro (13-inch Mid 2020)
+Intel Core i5-1038NG7 @ 2.0 GHz (4 cores)
+4204
+MacBook Pro (13-inch Mid 2019)
+Intel Core i5-8279U @ 2.4 GHz (4 cores)
+3791
+MacBook Pro (13-inch Mid 2019)
+Intel Core i7-8569U @ 2.8 GHz (4 cores)
+3752
+MacBook Pro (13-inch Mid 2019)
+Intel Core i5-8257U @ 1.4 GHz (4 cores)
+3716
+MacBook Pro (13-inch Mid 2018)
+Intel Core i7-8559U @ 2.7 GHz (4 cores)
+3694
+MacBook Pro (13-inch Mid 2018)
+Intel Core i5-8259U @ 2.3 GHz (4 cores)
+3656
+MacBook Pro (13-inch Mid 2020)
+Intel Core i5-8257U @ 1.4 GHz (4 cores)
+3608
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4770HQ @ 2.2 GHz (4 cores)
+3388
+Mac mini (Late 2018)
+Intel Core i3-8100B @ 3.6 GHz (4 cores)
+3384
+iMac (27-inch Retina Mid 2017)
+Intel Core i5-7500 @ 3.4 GHz (4 cores)
+3325
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4870HQ @ 2.5 GHz (4 cores)
+2919
+MacBook Pro (15-inch Retina Mid 2015)
+Intel Core i7-4870HQ @ 2.5 GHz (4 cores)
+2919
+iMac (21.5-inch Retina Mid 2017)
+Intel Core i5-7400 @ 3.0 GHz (4 cores)
+2881
+iMac (27-inch Retina Late 2015)
+Intel Core i5-6500 @ 3.2 GHz (4 cores)
+2734
+iMac (21.5-inch Late 2013)
+Intel Core i5-4570R @ 2.7 GHz (4 cores)
+2688
+MacBook Pro (15-inch Retina Late 2013)
+Intel Core i7-4750HQ @ 2.0 GHz (4 cores)
+2543
+MacBook Air (Early 2020)
+Intel Core i7-1060NG7 @ 1.2 GHz (4 cores)
+2445
+MacBook Air (Early 2020)
+Intel Core i5-1030NG7 @ 1.1 GHz (4 cores)
+2120
+MacBook Pro (13-inch Mid 2017)
+Intel Core i5-7360U @ 2.3 GHz (2 cores)
+2106
+MacBook Pro (13-inch Retina Early 2015)
+Intel Core i5-5257U @ 2.7 GHz (2 cores)
+1765
+MacBook Air (Early 2020)
+Intel Core i3-1000NG4 @ 1.1 GHz (2 cores)
+1648
+MacBook Air (13-inch Early 2015)
+Intel Core i5-5250U @ 1.6 GHz (2 cores)
+1490
+
+OpenCL
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (32 CPU cores, 80 GPU cores)
+141705
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (28 CPU cores, 60 GPU cores)
+126708
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+120925
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+120474
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+114619
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+101417
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+101047
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+100807
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+99385
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+98998
+Mac Studio
+Apple M1 Ultra @ 3.2 GHz (20 cores)
+94149
+Mac Studio (2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+87045
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+86934
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+80797
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+79580
+MacBook Pro (16-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+69072
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+68515
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+68066
+MacBook Pro (16-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+66415
+MacBook Pro (14-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+65415
+Mac Studio
+Apple M1 Max @ 3.2 GHz (10 cores)
+61273
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+60466
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+60441
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+49576
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+49469
+MacBook Pro (16-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+49126
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+48304
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+48288
+MacBook Pro (14-inch, 2025)
+Apple M5 @ 4.6 GHz (10 CPU cores, 10 GPU cores)
+46245
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+43994
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (11 CPU cores, 14 GPU cores)
+43282
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+43179
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 cores)
+38545
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (8 cores)
+35103
+Mac mini (2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+34545
+MacBook Pro (14-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+34049
+MacBook Air (15-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+33017
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+33003
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+32936
+iMac (24-inch, 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+29608
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 8 GPU cores)
+29279
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+28830
+Mac mini (2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+26307
+MacBook Pro (13-inch, 2022)
+Apple M2 @ 3.5 GHz (8 cores)
+26240
+MacBook Air (15-inch, 2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+26174
+MacBook Air (2022)
+Apple M2 @ 3.5 GHz (8 cores)
+23470
+Mac mini (Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+18322
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 8 GPU cores)
+18300
+MacBook Pro (13-inch Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+18272
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+17710
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+17710
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 7 GPU cores)
+16678
+
+Metal：
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (32 CPU cores, 80 GPU cores)
+241402
+Mac Studio (2025)
+Apple M3 Ultra @ 4.0 GHz (28 CPU cores, 60 GPU cores)
+221687
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+207179
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+204949
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (16 CPU cores, 40 GPU cores)
+204243
+MacBook Pro (14-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+169626
+MacBook Pro (16-inch, 2024)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+168880
+Mac Studio (2025)
+Apple M4 Max @ 4.5 GHz (14 CPU cores, 32 GPU cores)
+168686
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+166564
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (16 CPU cores, 40 GPU cores)
+164537
+Mac Studio
+Apple M1 Ultra @ 3.2 GHz (20 cores)
+153050
+Mac Studio (2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+145165
+MacBook Pro (16-inch, 2023)
+Apple M2 Max @ 3.7 GHz (12 CPU cores, 38 GPU cores)
+141054
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+132466
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Max @ 4.1 GHz (14 CPU cores, 30 GPU cores)
+130277
+MacBook Pro (16-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+116115
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+115815
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (14 CPU cores, 20 GPU cores)
+115040
+MacBook Pro (16-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+110027
+MacBook Pro (14-inch, 2021)
+Apple M1 Max @ 3.2 GHz (10 cores)
+108846
+Mac Studio
+Apple M1 Max @ 3.2 GHz (10 cores)
+103213
+MacBook Pro (14-inch, 2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+102587
+Mac mini (2024)
+Apple M4 Pro @ 4.5 GHz (12 CPU cores, 16 GPU cores)
+101856
+MacBook Pro (16-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+83461
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+82641
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (12 CPU cores, 19 GPU cores)
+82298
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+76685
+MacBook Pro (16-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (12 CPU cores, 18 GPU cores)
+76669
+MacBook Pro (14-inch, 2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+74842
+Mac mini (2023)
+Apple M2 Pro @ 3.5 GHz (10 CPU cores, 16 GPU cores)
+74359
+MacBook Pro (14-inch, 2025)
+Apple M5 @ 4.6 GHz (10 CPU cores, 10 GPU cores)
+73133
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 Pro @ 4.1 GHz (11 CPU cores, 14 GPU cores)
+70759
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (10 cores)
+65224
+MacBook Pro (14-inch, 2021)
+Apple M1 Pro @ 3.2 GHz (8 cores)
+60609
+MacBook Pro (14-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+54659
+Mac mini (2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+54233
+MacBook Air (15-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+53164
+iMac (24-inch, 2024)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+52992
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 10 GPU cores)
+52856
+MacBook Air (13-inch, 2025)
+Apple M4 @ 4.4 GHz (10 CPU cores, 8 GPU cores)
+47809
+MacBook Pro (14-inch, Nov 2023)
+Apple M3 @ 4.1 GHz (8 CPU cores, 10 GPU cores)
+47052
+Mac mini (2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+43714
+MacBook Air (15-inch, 2023)
+Apple M2 @ 3.5 GHz (8 CPU cores, 10 GPU cores)
+43219
+MacBook Pro (13-inch, 2022)
+Apple M2 @ 3.5 GHz (8 cores)
+43099
+MacBook Air (2022)
+Apple M2 @ 3.5 GHz (8 cores)
+40615
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 8 GPU cores)
+28806
+MacBook Pro (13-inch Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+28610
+Mac mini (Late 2020)
+Apple M1 @ 3.2 GHz (8 cores)
+28469
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+27730
+iMac (24-inch Mid 2021)
+Apple M1 @ 3.2 GHz (8 cores)
+27730
+MacBook Air (Late 2020)
+Apple M1 @ 3.2 GHz (8 CPU cores, 7 GPU cores)
+27000

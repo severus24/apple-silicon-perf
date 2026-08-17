@@ -1,0 +1,145 @@
+{
+    "header": [
+        "设备名称",
+        "中位数得分",
+        "基准测试数量"
+    ],
+    "footer": null,
+    "body": [
+        [
+            "Apple M5 Max (GPU - 40 cores)",
+            8074.05,
+            13
+        ],
+        [
+            "Apple M5 Max (GPU - 32 cores)",
+            6106.87,
+            3
+        ],
+        [
+            "Apple M4 Max (GPU - 40 cores)",
+            5664.39,
+            4
+        ],
+        [
+            "Apple M4 Max (GPU - 32 cores)",
+            4737.33,
+            5
+        ],
+        [
+            "Apple M3 Max (GPU - 40 cores)",
+            4419.23,
+            1
+        ],
+        [
+            "Apple M5 Pro (GPU - 20 cores)",
+            4224.02,
+            4
+        ],
+        [
+            "Apple M3 Max (GPU - 30 cores)",
+            2993.99,
+            1
+        ],
+        [
+            "Apple M4 Pro (GPU - 20 cores)",
+            2947.9,
+            6
+        ],
+        [
+            "Apple M2 Ultra (GPU - 60 cores)",
+            2858.42,
+            1
+        ],
+        [
+            "Apple M4 Pro (GPU - 16 cores)",
+            2556.86,
+            2
+        ],
+        [
+            "Apple M5 (GPU - 10 cores)",
+            2011.24,
+            3
+        ],
+        [
+            "Apple M5 (GPU - 8 cores)",
+            1820.87,
+            1
+        ],
+        [
+            "Apple M3 Pro (GPU - 18 cores)",
+            1800.39,
+            1
+        ],
+        [
+            "Apple M3 Pro (GPU - 14 cores)",
+            1735.97,
+            2
+        ],
+        [
+            "Apple M2 Max (GPU - 38 cores)",
+            1699.27,
+            2
+        ],
+        [
+            "Apple M2 Max (GPU - 30 cores)",
+            1379.21,
+            1
+        ],
+        [
+            "Apple M4 (GPU - 10 cores)",
+            1220.72,
+            8
+        ],
+        [
+            "Apple M4 (GPU - 8 cores)",
+            1196.27,
+            1
+        ],
+        [
+            "Apple M1 Max (GPU - 32 cores)",
+            1082.85,
+            5
+        ],
+        [
+            "Apple M1 Max (GPU - 24 cores)",
+            915.86,
+            5
+        ],
+        [
+            "Apple M2 Pro (GPU - 19 cores)",
+            896.08,
+            1
+        ],
+        [
+            "Apple M1 Pro (GPU - 16 cores)",
+            541.26,
+            5
+        ],
+        [
+            "Apple M1 Pro (GPU - 14 cores)",
+            503.48,
+            1
+        ],
+        [
+            "Apple M2 (GPU - 10 cores)",
+            352.33,
+            2
+        ],
+        [
+            "Apple M2 (GPU - 8 cores)",
+            275.99,
+            1
+        ],
+        [
+            "Apple M1 (GPU - 8 cores)",
+            269.48,
+            1
+        ],
+        [
+            "Apple M1 (GPU - 7 cores)",
+            244.13,
+            1
+        ]
+    ]
+}

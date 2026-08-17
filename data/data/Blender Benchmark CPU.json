@@ -1,0 +1,85 @@
+{
+    "header": [
+        "Device Name",
+        "Median Score",
+        "Number of Benchmarks"
+    ],
+    "footer": null,
+    "body": [
+        [
+            "Apple M3 Ultra",
+            788.56,
+            1
+        ],
+        [
+            "Apple M5 Max",
+            580.58,
+            14
+        ],
+        [
+            "Apple M5 Pro",
+            557.96,
+            11
+        ],
+        [
+            "Apple M2 Ultra",
+            496.76,
+            1
+        ],
+        [
+            "Apple M4 Max",
+            403.96,
+            7
+        ],
+        [
+            "Apple M4 Pro",
+            380.37,
+            12
+        ],
+        [
+            "Apple M5",
+            251.88,
+            8
+        ],
+        [
+            "Apple M2 Max",
+            244.78,
+            3
+        ],
+        [
+            "Apple M4",
+            225.52,
+            9
+        ],
+        [
+            "Apple M3 Pro",
+            205.77,
+            1
+        ],
+        [
+            "Apple M1 Max",
+            202.89,
+            1
+        ],
+        [
+            "Apple M1 Pro",
+            188.07,
+            5
+        ],
+        [
+            "Apple M2 Pro",
+            155.7,
+            3
+        ],
+        [
+            "Apple M1",
+            122.03,
+            5
+        ],
+        [
+            "Apple M2",
+            42.9,
+            1
+        ]
+    ]
+}

@@ -1,0 +1,261 @@
+{
+ "_note": "机型标识符 -> 官方型号。",
+ "identifiers": {
+  "Mac17,7": "MacBook Pro（14 英寸，M5 Pro 或 M5 Max）",
+  "Mac17,9": "MacBook Pro（14 英寸，M5 Pro 或 M5 Max）",
+  "Mac17,6": "MacBook Pro（16 英寸，M5 Pro 或 M5 Max）",
+  "Mac17,8": "MacBook Pro（16 英寸，M5 Pro 或 M5 Max）",
+  "Mac17,2": "MacBook Pro（14 英寸，M5）",
+  "Mac16,1": "MacBook Pro（14 英寸，2024 年，M4）",
+  "Mac16,6": "MacBook Pro（14 英寸，2024 年，M4 Pro 或 M4 Max）",
+  "Mac16,8": "MacBook Pro（14 英寸，2024 年，M4 Pro 或 M4 Max）",
+  "Mac16,7": "MacBook Pro（16 英寸，2024 年，M4 Pro 或 M4 Max）",
+  "Mac16,5": "MacBook Pro（16 英寸，2024 年，M4 Pro 或 M4 Max）",
+  "Mac15,3": "MacBook Pro（14 英寸，2023 年 11 月，M3）",
+  "Mac15,6": "MacBook Pro（14 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac15,8": "MacBook Pro（14 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac15,10": "MacBook Pro（14 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac15,7": "MacBook Pro（16 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac15,9": "MacBook Pro（16 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac15,11": "MacBook Pro（16 英寸，2023 年 11 月，M3 Pro 或 M3 Max）",
+  "Mac14,5": "MacBook Pro（14 英寸，2023 年，M2 Pro 或 M2 Max）",
+  "Mac14,9": "MacBook Pro（14 英寸，2023 年，M2 Pro 或 M2 Max）",
+  "Mac14,6": "MacBook Pro（16 英寸，2023 年，M2 Pro 或 M2 Max）",
+  "Mac14,10": "MacBook Pro（16 英寸，2023 年，M2 Pro 或 M2 Max）",
+  "Mac14,7": "MacBook Pro（13 英寸，M2，2022 年）",
+  "MacBookPro18,3": "MacBook Pro（14 英寸，2021 年）",
+  "MacBookPro18,4": "MacBook Pro（14 英寸，2021 年）",
+  "MacBookPro18,1": "MacBook Pro（16 英寸，2021 年）",
+  "MacBookPro18,2": "MacBook Pro（16 英寸，2021 年）",
+  "MacBookPro17,1": "MacBook Pro（13 英寸，M1，2020 年）",
+  "MacBookPro16,3": "MacBook Pro（13 英寸，2020 年，两个雷雳 3 端口）",
+  "MacBookPro16,2": "MacBook Pro（13 英寸，2020 年，四个雷雳 3 端口）",
+  "MacBookPro16,1": "MacBook Pro（16 英寸，2019 年）",
+  "MacBookPro16,4": "MacBook Pro（16 英寸，2019 年）",
+  "MacBookPro15,4": "MacBook Pro（13 英寸，2019 年，两个雷雳 3 端口）",
+  "MacBookPro15,1": "MacBook Pro（15 英寸，2019 年）",
+  "MacBookPro15,3": "MacBook Pro（15 英寸，2019 年）",
+  "MacBookPro15,2": "MacBook Pro（13 英寸，2019 年，四个雷雳 3 端口）",
+  "MacBookPro14,3": "MacBook Pro（15 英寸，2017 年）",
+  "MacBookPro14,2": "MacBook Pro（13 英寸，2017 年，四个雷雳 3 端口）",
+  "MacBookPro14,1": "MacBook Pro（13 英寸，2017 年，两个雷雳 3 端口）",
+  "MacBookPro13,3": "MacBook Pro（15 英寸，2016 年）",
+  "MacBookPro13,2": "MacBook Pro（13 英寸，2016 年，四个雷雳 3 端口）",
+  "MacBookPro13,1": "MacBook Pro（13 英寸，2016 年，两个雷雳 3 端口）",
+  "MacBookPro11,4": "MacBook Pro（视网膜显示屏，15 英寸，2015 年中）",
+  "MacBookPro11,5": "MacBook Pro（视网膜显示屏，15 英寸，2015 年中）",
+  "MacBookPro12,1": "MacBook Pro（视网膜显示屏，13 英寸，2015 年初）",
+  "MacBookPro11,2": "MacBook Pro（视网膜显示屏，15 英寸，2014 年中）",
+  "MacBookPro11,3": "MacBook Pro（视网膜显示屏，15 英寸，2014 年中）",
+  "MacBookPro11,1": "MacBook Pro（视网膜显示屏，13 英寸，2014 年中）",
+  "MacBookPro10,1": "MacBook Pro（视网膜显示屏，15 英寸，2013 年初）",
+  "MacBookPro10,2": "MacBook Pro（视网膜显示屏，13 英寸，2013 年初）",
+  "MacBookPro8,3": "MacBook Pro（17 英寸，2011 年末/初）",
+  "MacBookPro8,2": "MacBook Pro（15 英寸，2011 年末/初）",
+  "MacBookPro8,1": "MacBook Pro（13 英寸，2011 年末/初）",
+  "MacBookPro6,1": "MacBook Pro（17 英寸，2010 年中）",
+  "MacBookPro6,2": "MacBook Pro（15 英寸，2010 年中）",
+  "MacBookPro7,1": "MacBook Pro（13 英寸，2010 年中）",
+  "MacBookPro5,2": "MacBook Pro（17 英寸，2009 年中/初）",
+  "MacBookPro5,3": "MacBook Pro（15 英寸，2009 年中）",
+  "MacBookPro5,5": "MacBook Pro（13 英寸，2009 年中）",
+  "MacBookPro5,1": "MacBook Pro（15 英寸，2008 年末 / 17 英寸 2008 年初）",
+  "MacBookPro4,1": "MacBook Pro（15 英寸，2008 年末 / 17 英寸 2008 年初）",
+  "Mac17,3": "MacBook Air（13 英寸，M5，2026 年）",
+  "Mac17,4": "MacBook Air（15 英寸，M5，2026 年）",
+  "Mac17,5": "MacBook Neo（A18 Pro，2026 年）",
+  "Mac15,12": "MacBook Air（13 英寸，M3，2024 年）",
+  "Mac16,10": "Mac mini（2024 年）",
+  "Mac16,11": "Mac mini（2024 年）",
+  "Mac15,14": "Mac Studio（2025 年）",
+  "Mac16,9": "Mac Studio（2025 年）",
+  "Mac15,4": "iMac（24 英寸，M3，2023 年）",
+  "Mac15,5": "iMac（24 英寸，M3，2023 年）",
+  "iMac20,1": "iMac（27 英寸，2020 年）",
+  "iMac20,2": "iMac（27 英寸，2020 年）",
+  "iMacPro1,1": "iMac Pro（2017 年）",
+  "MacPro7,1": "Mac Pro（2019 年）"
+ },
+ "models": {
+  "Mac Pro（2019 年）": [
+   "MacPro7,1"
+  ],
+  "Mac Studio（2025 年）": [
+   "Mac15,14",
+   "Mac16,9"
+  ],
+  "Mac mini（2024 年）": [
+   "Mac16,10",
+   "Mac16,11"
+  ],
+  "MacBook Air（13 英寸，M3，2024 年）": [
+   "Mac15,12"
+  ],
+  "MacBook Air（13 英寸，M5，2026 年）": [
+   "Mac17,3"
+  ],
+  "MacBook Air（15 英寸，M5，2026 年）": [
+   "Mac17,4"
+  ],
+  "MacBook Neo（A18 Pro，2026 年）": [
+   "Mac17,5"
+  ],
+  "MacBook Pro（13 英寸，2009 年中）": [
+   "MacBookPro5,5"
+  ],
+  "MacBook Pro（13 英寸，2010 年中）": [
+   "MacBookPro7,1"
+  ],
+  "MacBook Pro（13 英寸，2011 年末/初）": [
+   "MacBookPro8,1"
+  ],
+  "MacBook Pro（13 英寸，2016 年，两个雷雳 3 端口）": [
+   "MacBookPro13,1"
+  ],
+  "MacBook Pro（13 英寸，2016 年，四个雷雳 3 端口）": [
+   "MacBookPro13,2"
+  ],
+  "MacBook Pro（13 英寸，2017 年，两个雷雳 3 端口）": [
+   "MacBookPro14,1"
+  ],
+  "MacBook Pro（13 英寸，2017 年，四个雷雳 3 端口）": [
+   "MacBookPro14,2"
+  ],
+  "MacBook Pro（13 英寸，2019 年，两个雷雳 3 端口）": [
+   "MacBookPro15,4"
+  ],
+  "MacBook Pro（13 英寸，2019 年，四个雷雳 3 端口）": [
+   "MacBookPro15,2"
+  ],
+  "MacBook Pro（13 英寸，2020 年，两个雷雳 3 端口）": [
+   "MacBookPro16,3"
+  ],
+  "MacBook Pro（13 英寸，2020 年，四个雷雳 3 端口）": [
+   "MacBookPro16,2"
+  ],
+  "MacBook Pro（13 英寸，M1，2020 年）": [
+   "MacBookPro17,1"
+  ],
+  "MacBook Pro（13 英寸，M2，2022 年）": [
+   "Mac14,7"
+  ],
+  "MacBook Pro（14 英寸，2021 年）": [
+   "MacBookPro18,3",
+   "MacBookPro18,4"
+  ],
+  "MacBook Pro（14 英寸，2023 年 11 月，M3 Pro 或 M3 Max）": [
+   "Mac15,10",
+   "Mac15,6",
+   "Mac15,8"
+  ],
+  "MacBook Pro（14 英寸，2023 年 11 月，M3）": [
+   "Mac15,3"
+  ],
+  "MacBook Pro（14 英寸，2023 年，M2 Pro 或 M2 Max）": [
+   "Mac14,5",
+   "Mac14,9"
+  ],
+  "MacBook Pro（14 英寸，2024 年，M4 Pro 或 M4 Max）": [
+   "Mac16,6",
+   "Mac16,8"
+  ],
+  "MacBook Pro（14 英寸，2024 年，M4）": [
+   "Mac16,1"
+  ],
+  "MacBook Pro（14 英寸，M5 Pro 或 M5 Max）": [
+   "Mac17,7",
+   "Mac17,9"
+  ],
+  "MacBook Pro（14 英寸，M5）": [
+   "Mac17,2"
+  ],
+  "MacBook Pro（15 英寸，2008 年末 / 17 英寸 2008 年初）": [
+   "MacBookPro4,1",
+   "MacBookPro5,1"
+  ],
+  "MacBook Pro（15 英寸，2009 年中）": [
+   "MacBookPro5,3"
+  ],
+  "MacBook Pro（15 英寸，2010 年中）": [
+   "MacBookPro6,2"
+  ],
+  "MacBook Pro（15 英寸，2011 年末/初）": [
+   "MacBookPro8,2"
+  ],
+  "MacBook Pro（15 英寸，2016 年）": [
+   "MacBookPro13,3"
+  ],
+  "MacBook Pro（15 英寸，2017 年）": [
+   "MacBookPro14,3"
+  ],
+  "MacBook Pro（15 英寸，2019 年）": [
+   "MacBookPro15,1",
+   "MacBookPro15,3"
+  ],
+  "MacBook Pro（16 英寸，2019 年）": [
+   "MacBookPro16,1",
+   "MacBookPro16,4"
+  ],
+  "MacBook Pro（16 英寸，2021 年）": [
+   "MacBookPro18,1",
+   "MacBookPro18,2"
+  ],
+  "MacBook Pro（16 英寸，2023 年 11 月，M3 Pro 或 M3 Max）": [
+   "Mac15,11",
+   "Mac15,7",
+   "Mac15,9"
+  ],
+  "MacBook Pro（16 英寸，2023 年，M2 Pro 或 M2 Max）": [
+   "Mac14,10",
+   "Mac14,6"
+  ],
+  "MacBook Pro（16 英寸，2024 年，M4 Pro 或 M4 Max）": [
+   "Mac16,5",
+   "Mac16,7"
+  ],
+  "MacBook Pro（16 英寸，M5 Pro 或 M5 Max）": [
+   "Mac17,6",
+   "Mac17,8"
+  ],
+  "MacBook Pro（17 英寸，2009 年中/初）": [
+   "MacBookPro5,2"
+  ],
+  "MacBook Pro（17 英寸，2010 年中）": [
+   "MacBookPro6,1"
+  ],
+  "MacBook Pro（17 英寸，2011 年末/初）": [
+   "MacBookPro8,3"
+  ],
+  "MacBook Pro（视网膜显示屏，13 英寸，2013 年初）": [
+   "MacBookPro10,2"
+  ],
+  "MacBook Pro（视网膜显示屏，13 英寸，2014 年中）": [
+   "MacBookPro11,1"
+  ],
+  "MacBook Pro（视网膜显示屏，13 英寸，2015 年初）": [
+   "MacBookPro12,1"
+  ],
+  "MacBook Pro（视网膜显示屏，15 英寸，2013 年初）": [
+   "MacBookPro10,1"
+  ],
+  "MacBook Pro（视网膜显示屏，15 英寸，2014 年中）": [
+   "MacBookPro11,2",
+   "MacBookPro11,3"
+  ],
+  "MacBook Pro（视网膜显示屏，15 英寸，2015 年中）": [
+   "MacBookPro11,4",
+   "MacBookPro11,5"
+  ],
+  "iMac Pro（2017 年）": [
+   "iMacPro1,1"
+  ],
+  "iMac（24 英寸，M3，2023 年）": [
+   "Mac15,4",
+   "Mac15,5"
+  ],
+  "iMac（27 英寸，2020 年）": [
+   "iMac20,1",
+   "iMac20,2"
+  ]
+ }
+}
