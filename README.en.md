@@ -76,6 +76,16 @@ node scripts/update-geekbench.mjs
 
 The script updates the canonical data and embedded Geekbench fields while preserving AI, MLX, and Blender data.
 
+### Updating Blender Data
+
+Save the exported CPU and GPU data as `data/new/Blender Benchmark_CPU.json` and `data/new/Blender Benchmark_GPU.json`, then run:
+
+```sh
+node scripts/update-blender.mjs
+```
+
+The script aggregates the highest CPU median per chip, keeps every GPU core configuration, and updates the page data and version label.
+
 ## Deployment
 
 Pushing to `main` triggers the GitHub Actions workflow in `.github/workflows/pages.yml`.

@@ -152,6 +152,24 @@ try {
       tops[label] = topRow();
     }
     clickSub('单核');
+    const clickPrimary = (label) => {
+      const button = [...document.querySelectorAll('#metricModes button')].find((item) => item.textContent.trim() === label);
+      if (!button) throw new Error('Primary metric not found: ' + label);
+      button.click();
+    };
+    const clickBlenderMode = (label) => {
+      const button = [...document.querySelectorAll('#blenderModes button')].find((item) => item.textContent.trim() === label);
+      if (!button) throw new Error('Blender mode not found: ' + label);
+      button.click();
+    };
+    clickPrimary('Blender');
+    clickBlenderMode('CPU');
+    tops['Blender CPU'] = topRow();
+    clickBlenderMode('GPU');
+    tops['Blender GPU'] = topRow();
+    clickBlenderMode('CPU');
+    clickPrimary('Geekbench');
+    clickSub('单核');
 
     const targetRow = [...document.querySelectorAll('#rankBody tr.data-row')].find((row) => {
       return row.querySelector('.device')?.textContent.trim() === 'Apple M4 Max';
@@ -177,8 +195,12 @@ try {
       competitionRank(ROWS.map((row) => row.blender?.[blenderMode]?.score), selected.blender?.[blenderMode]?.score)
     ];
     const rows = [...document.querySelectorAll('#cmpBody .cmp-row')];
+    const actual = rows.map((row) => {
+      const rank = row.querySelector('.cmp-rank')?.textContent.trim();
+      return rank === '—' ? null : Number(rank.replace('#', ''));
+    });
     return {
-      actual: rows.map((row) => Number(row.querySelector('.cmp-rank')?.textContent.replace('#', ''))),
+      actual,
       expected,
       labels: rows.map((row) => row.querySelector('.cmp-label span:last-child')?.textContent.trim()),
       tops
@@ -189,11 +211,13 @@ try {
     单核: { chip: 'Apple M6', score: '4,005' },
     多核: { chip: 'Apple M5 Ultra', score: '51,808' },
     OpenCL: { chip: 'Apple M5 Ultra', score: '218,058' },
-    Metal: { chip: 'Apple M5 Ultra', score: '344,173' }
+    Metal: { chip: 'Apple M5 Ultra', score: '344,173' },
+    'Blender CPU': { chip: 'Apple M5 Ultra', score: '934.6' },
+    'Blender GPU': { chip: 'Apple M5 Ultra', score: '15,326.2' }
   });
   assert.deepEqual(result.labels, ['单核', '多核', 'OpenCL', 'Metal', 'AI 单精度 · GPU', 'MLX · MLX GPU', 'Blender CPU']);
   assert.deepEqual(result.actual, result.expected);
-  assert.ok(new Set(result.actual).size > 1, `Expected distinct ranks, received ${result.actual.join(', ')}`);
+  assert.ok(new Set(result.actual.filter((rank) => rank != null)).size > 1, `Expected distinct ranks, received ${result.actual.join(', ')}`);
   assert.deepEqual(cdp.errors, []);
 
   console.log(JSON.stringify({ ranks: Object.fromEntries(result.labels.map((label, index) => [label, result.actual[index]])) }, null, 2));

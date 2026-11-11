@@ -78,6 +78,16 @@ node scripts/update-geekbench.mjs
 
 脚本会更新规范数据与页面内嵌的 Geekbench 字段，并保留 AI、MLX、Blender 数据。
 
+### 更新 Blender 数据
+
+将导出的 CPU、GPU 数据保存为 `data/new/Blender Benchmark_CPU.json` 和 `data/new/Blender Benchmark_GPU.json`，然后执行：
+
+```sh
+node scripts/update-blender.mjs
+```
+
+脚本会按芯片聚合 CPU 最高中位分、保留各 GPU 核心配置，并同步更新页面数据与版本标注。
+
 ## 部署
 
 推送到 `main` 会触发 `.github/workflows/pages.yml` 中的 GitHub Actions 工作流。
