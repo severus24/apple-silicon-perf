@@ -68,6 +68,16 @@ HTML 文件是自包含的，CSS 和 JavaScript 都已内嵌，唯一的本地�
 
 不同基准的数值只应在同一个基准内部比较，不应跨基准换算或直接比较。
 
+### 更新 Geekbench 数据
+
+将导出的 Geekbench 列表保存为 `data/new/geekbench.txt`，然后执行：
+
+```sh
+node scripts/update-geekbench.mjs
+```
+
+脚本会更新规范数据与页面内嵌的 Geekbench 字段，并保留 AI、MLX、Blender 数据。
+
 ## 部署
 
 推送到 `main` 会触发 `.github/workflows/pages.yml` 中的 GitHub Actions 工作流。

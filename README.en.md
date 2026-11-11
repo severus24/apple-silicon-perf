@@ -66,6 +66,16 @@ The raw data is committed for reproducibility and future updates:
 
 Benchmark values are only comparable within the same benchmark. They should not be converted or compared across different benchmarks.
 
+### Updating Geekbench Data
+
+Save the exported Geekbench list as `data/new/geekbench.txt`, then run:
+
+```sh
+node scripts/update-geekbench.mjs
+```
+
+The script updates the canonical data and embedded Geekbench fields while preserving AI, MLX, and Blender data.
+
 ## Deployment
 
 Pushing to `main` triggers the GitHub Actions workflow in `.github/workflows/pages.yml`.
